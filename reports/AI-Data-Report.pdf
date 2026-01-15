@@ -1,0 +1,11 @@
+TVI Sample Report — AI & Data
+Scenario: MNIST vs. ImageNet vs. LLaMA
+
+Highlights:
+- MNIST: High TVS and SRC; foundation dataset status despite age and small size.
+- ImageNet: Paradigm-shift benchmark; strong TVS; still dominant transfer backbone.
+- LLaMA (model): High CSI, pending TVS; flagged as “validation in progress.”
+
+Notes:
+This is a sample TVI industry report. Real reports include analysis, charts, and recommendations.
+

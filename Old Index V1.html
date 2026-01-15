@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GSRF Demo — Bounded Filtering vs EMA</title>
+  <meta name="description" content="Interactive demo comparing GSRF (bounded, non-overshooting behavior) vs EMA on synthetic signals." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#101a2e;
+      --panel2:#0f172a;
+      --text:#e7eefc;
+      --muted:#9fb1d1;
+      --line:#223253;
+      --accent:#7dd3fc;
+      --accent2:#a78bfa;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 900px at 20% 10%, #18264a 0%, transparent 55%),
+                  radial-gradient(1000px 900px at 80% 20%, #2a1b4b 0%, transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    header{
+      padding:28px 18px 10px;
+      max-width:1120px;
+      margin:0 auto;
+    }
+    .title{
+      display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;
+    }
+    h1{
+      font-size: clamp(22px, 3vw, 34px);
+      margin:0;
+      letter-spacing:.2px;
+    }
+    .badge{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(125,211,252,.25);
+      background: rgba(125,211,252,.08);
+      padding:6px 10px;
+      border-radius: 999px;
+    }
+    .sub{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.5;
+      max-width:80ch;
+      font-size:14px;
+    }
+    main{
+      max-width:1120px;
+      margin:0 auto;
+      padding:18px;
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap:16px;
+    }
+    @media (max-width: 980px){
+      main{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      background: rgba(16,26,46,.55);
+    }
+    .card .hd h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.3px;
+      color:#dbe7ff;
+    }
+    .card .bd{padding:14px}
+    label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin: 12px 0 6px;
+    }
+    select, input[type="range"], input[type="number"]{
+      width:100%;
+      padding:10px 10px;
+      border-radius:12px;
+      background: rgba(15,23,42,.85);
+      border:1px solid rgba(255,255,255,.10);
+      color: var(--text);
+      outline:none;
+    }
+    input[type="range"]{padding:0;height:36px}
+    .row{display:grid;grid-template-columns:1fr 1fr; gap:10px}
+    .toggles{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:8px;
+    }
+    .chip{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(15,23,42,.60);
+      padding:9px 10px;
+      border-radius:999px;
+      cursor:pointer;
+      user-select:none;
+      font-size:12px;
+      color:#d6e3ff;
+      transition: transform .05s ease, border-color .15s ease, background .15s ease;
+    }
+    .chip:hover{border-color: rgba(125,211,252,.30)}
+    .chip:active{transform: translateY(1px)}
+    .chip.active{
+      border-color: rgba(125,211,252,.55);
+      background: rgba(125,211,252,.10);
+      box-shadow: 0 0 0 4px rgba(125,211,252,.06);
+    }
+    .btns{display:flex;gap:10px; margin-top:14px; flex-wrap:wrap}
+    button{
+      border:none;
+      background: linear-gradient(180deg, rgba(125,211,252,.24) 0%, rgba(125,211,252,.12) 100%);
+      color: var(--text);
+      border:1px solid rgba(125,211,252,.30);
+      padding:10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:13px;
+    }
+    button.secondary{
+      background: rgba(15,23,42,.6);
+      border:1px solid rgba(255,255,255,.12);
+      color:#dbe7ff;
+      font-weight:600;
+    }
+    .hint{
+      margin-top:12px;
+      font-size:12px;
+      line-height:1.5;
+      color: var(--muted);
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:12px;
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .kpi{
+      padding:10px 10px;
+      border-radius:14px;
+      background: rgba(15,23,42,.55);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .kpi .v{font-size:16px;font-weight:700}
+    .kpi .l{font-size:11px;color:var(--muted);margin-top:2px}
+    canvas{display:block;width:100% !important; height:420px !important}
+    .foot{
+      max-width:1120px;
+      margin:0 auto;
+      padding: 0 18px 26px;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+    a{color:var(--accent)}
+    code{
+      background: rgba(255,255,255,.06);
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.08);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">
+      <h1>GSRF Demo</h1>
+      <div class="badge">Bounded vs EMA • Synthetic Signals</div>
+    </div>
+    <p class="sub">
+      Minimal, defensible visualization: a bounded-by-construction filter (GSRF) compared to EMA on controlled synthetic signals.
+      This demo is intentionally conservative — it demonstrates behavior, not domain claims.
+    </p>
+  </header>
+
+  <main>
+    <!-- Controls -->
+    <section class="card">
+      <div class="hd">
+        <h2>Controls</h2>
+        <span class="badge" id="seedBadge">seed: 2026</span>
+      </div>
+      <div class="bd">
+        <label for="signalType">Signal type</label>
+        <select id="signalType">
+          <option value="step">Step</option>
+          <option value="ramp">Ramp</option>
+          <option value="sine">Noisy sine</option>
+        </select>
+
+        <label>Filter</label>
+        <div class="toggles" id="filterToggles">
+          <div class="chip active" data-filter="gsrf">GSRF</div>
+          <div class="chip" data-filter="ema_slow">EMA (α=0.10)</div>
+          <div class="chip" data-filter="ema_fast">EMA (α=0.50)</div>
+          <div class="chip" data-filter="all">Show all</div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="noise">Noise (σ)</label>
+            <input id="noise" type="range" min="0" max="1" step="0.01" value="0.15" />
+          </div>
+          <div>
+            <label for="noiseVal">σ value</label>
+            <input id="noiseVal" type="number" min="0" max="1" step="0.01" value="0.15" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="band">Target band (±)</label>
+            <input id="band" type="number" min="0.01" max="2" step="0.01" value="0.15" />
+          </div>
+          <div>
+            <label for="target">Target center</label>
+            <input id="target" type="number" min="-5" max="5" step="0.01" value="1.00" />
+          </div>
+        </div>
+
+        <label>GSRF parameters (simple defaults)</label>
+        <div class="row">
+          <div>
+            <label for="beta">β (0–1]</label>
+            <input id="beta" type="number" min="0.01" max="1" step="0.01" value="0.30" />
+          </div>
+          <div>
+            <label for="kreturn">k_return (&gt;0)</label>
+            <input id="kreturn" type="number" min="0.01" max="5" step="0.01" value="1.00" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="mem">mem [0–0.5]</label>
+            <input id="mem" type="number" min="0" max="0.5" step="0.01" value="0.20" />
+          </div>
+          <div>
+            <label for="baseline">b (|b|&lt;2)</label>
+            <input id="baseline" type="number" min="-1.99" max="1.99" step="0.01" value="0.00" />
+          </div>
+        </div>
+
+        <div class="btns">
+          <button id="regen">Regenerate</button>
+          <button class="secondary" id="stepOnce">Step once</button>
+          <button class="secondary" id="run">Run 300 steps</button>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi">
+            <div class="v" id="kpiOvershoot">—</div>
+            <div class="l">Max overshoot (selected)</div>
+          </div>
+          <div class="kpi">
+            <div class="v" id="kpiCross">—</div>
+            <div class="l">Band crossings (selected)</div>
+          </div>
+        </div>
+
+        <div class="hint">
+          Tip: start with <code>Step</code> + <code>EMA (α=0.50)</code> to see overshoot, then switch to <code>GSRF</code>.
+          “Show all” overlays all filters on the same signal.
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart -->
+    <section class="card">
+      <div class="hd">
+        <h2>Signal + Filter Output</h2>
+        <span class="badge" id="modeBadge">mode: show all</span>
+      </div>
+      <div class="bd">
+        <canvas id="chart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <div class="foot">
+    <div>
+      Notes: Synthetic-only. This demo visualizes boundedness behavior and overshoot suppression — it does not claim clinical / industrial efficacy.
+      Parameter envelopes are enforced in code. Repository reference: <code>boonmind/GSRF</code>.
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // ---------------------------
+    // Utilities (seeded RNG)
+    // ---------------------------
+    function mulberry32(seed){
+      let a = seed >>> 0;
+      return function(){
+        a |= 0; a = a + 0x6D2B79F5 | 0;
+        let t = Math.imul(a ^ a >>> 15, 1 | a);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      }
+    }
+    function randn(rng){
+      // Box-Muller
+      let u = 0, v = 0;
+      while(u === 0) u = rng();
+      while(v === 0) v = rng();
+      return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    }
+    function clamp(x, lo, hi){ return Math.max(lo, Math.min(hi, x)); }
+
+    // ---------------------------
+    // Signal generators
+    // ---------------------------
+    function generateSignal({type, n, target, noiseSigma, rng}){
+      const y = new Array(n);
+      for(let i=0;i<n;i++){
+        let base = target;
+        if(type === "step"){
+          // one step at t=100
+          base = (i < 100) ? (target - 0.8) : (target + 0.8);
+        } else if(type === "ramp"){
+          // gentle ramp across window
+          base = (target - 0.7) + (1.4 * i/(n-1));
+        } else if(type === "sine"){
+          // noisy sine around target
+          const w = 2 * Math.PI * (i / 60);
+          base = target + 0.55 * Math.sin(w);
+        }
+        const noisy = base + noiseSigma * randn(rng);
+        y[i] = noisy;
+      }
+      return y;
+    }
+
+    // ---------------------------
+    // Filters
+    // ---------------------------
+    function emaFilter(y, alpha){
+      const out = new Array(y.length);
+      let s = y[0];
+      out[0] = s;
+      for(let i=1;i<y.length;i++){
+        s = alpha*y[i] + (1-alpha)*s;
+        out[i] = s;
+      }
+      return out;
+    }
+
+    // GSRF in original-space (E_t can be any real here; for demo we keep it >0 via shift)
+    // We'll operate in log-space so require positive observation. We'll shift signal upward safely.
+    function gsrfFilter(y, params, rng){
+      const {target, beta, k_return, mem, baseline, delta} = params;
+
+      // Envelope enforcement (conservative)
+      const β = clamp(beta, 0.01, 1.0);
+      const k = Math.max(0.01, k_return);
+      const m = clamp(mem, 0.0, 0.5);
+      const b = clamp(baseline, -1.99, 1.99);
+      const δ = Math.max(0, delta);
+
+      // Shift to keep positive for log
+      const minY = Math.min(...y);
+      const shift = (minY <= 0) ? (1.0 - minY) : 0.0;
+
+      const out = new Array(y.length);
+      let x_star = Math.log(Math.max(target + shift, 1e-9));
+
+      let x_prev = null;
+      let x = x_star;
+
+      for(let i=0;i<y.length;i++){
+        const obs = Math.max(y[i] + shift, 1e-9);
+        const x_obs = Math.log(obs);
+
+        if(x_prev === null) x_prev = x_obs;
+
+        const G = -(x - x_star);                 // gradient term
+        const R = Math.tanh(x - x_prev);         // bounded memory
+        const eta = (δ > 0) ? ( (rng()*2 - 1) * δ ) : 0;  // bounded disturbance
+
+        const update = b + k*G + m*R;
+        const x_new = x + β * update + eta;
+
+        // advance
+        x_prev = x;
+        x = x_new;
+
+        out[i] = Math.exp(x) - shift;
+      }
+      return out;
+    }
+
+    // ---------------------------
+    // Metrics
+    // ---------------------------
+    function calcMetrics(series, target, band){
+      let maxOvershoot = 0;
+      let crossings = 0;
+      let prevInside = null;
+      for(let i=0;i<series.length;i++){
+        const v = series[i];
+        const overshoot = Math.max(0, Math.abs(v - target) - band);
+        if(overshoot > maxOvershoot) maxOvershoot = overshoot;
+
+        const inside = Math.abs(v - target) <= band;
+        if(prevInside !== null && inside !== prevInside) crossings++;
+        prevInside = inside;
+      }
+      return {maxOvershoot, crossings};
+    }
+
+    // ---------------------------
+    // UI + Chart
+    // ---------------------------
+    const els = {
+      signalType: document.getElementById("signalType"),
+      noise: document.getElementById("noise"),
+      noiseVal: document.getElementById("noiseVal"),
+      band: document.getElementById("band"),
+      target: document.getElementById("target"),
+      beta: document.getElementById("beta"),
+      kreturn: document.getElementById("kreturn"),
+      mem: document.getElementById("mem"),
+      baseline: document.getElementById("baseline"),
+      regen: document.getElementById("regen"),
+      stepOnce: document.getElementById("stepOnce"),
+      run: document.getElementById("run"),
+      kpiOvershoot: document.getElementById("kpiOvershoot"),
+      kpiCross: document.getElementById("kpiCross"),
+      filterToggles: document.getElementById("filterToggles"),
+      modeBadge: document.getElementById("modeBadge"),
+      seedBadge: document.getElementById("seedBadge"),
+    };
+
+    let seed = 2026;
+    els.seedBadge.textContent = "seed: " + seed;
+
+    let mode = "all"; // gsrf | ema_slow | ema_fast | all
+    function setMode(newMode){
+      mode = newMode;
+      [...els.filterToggles.querySelectorAll(".chip")].forEach(ch => {
+        ch.classList.toggle("active", ch.dataset.filter === newMode);
+      });
+      els.modeBadge.textContent = "mode: " + (mode === "all" ? "show all" : mode);
+      render();
+    }
+
+    els.filterToggles.addEventListener("click", (e) => {
+      const chip = e.target.closest(".chip");
+      if(!chip) return;
+      setMode(chip.dataset.filter);
+    });
+
+    // keep noise slider + number in sync
+    function syncNoise(from){
+      if(from === "range") els.noiseVal.value = els.noise.value;
+      if(from === "num") els.noise.value = els.noiseVal.value;
+      render();
+    }
+    els.noise.addEventListener("input", () => syncNoise("range"));
+    els.noiseVal.addEventListener("input", () => syncNoise("num"));
+
+    // other controls
+    ["signalType","band","target","beta","kreturn","mem","baseline"].forEach(id=>{
+      els[id].addEventListener("input", render);
+    });
+
+    els.regen.addEventListener("click", ()=>{
+      seed = (seed + 1) >>> 0;
+      els.seedBadge.textContent = "seed: " + seed;
+      render();
+    });
+
+    // chart
+    const ctx = document.getElementById("chart");
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: []
+      },
+      options: {
+        animation: false,
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { labels: { color: "#cfe0ff" } },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          x: { ticks: { color: "#9fb1d1" }, grid: { color: "rgba(255,255,255,.06)" } },
+          y: { ticks: { color: "#9fb1d1" }, grid: { color: "rgba(255,255,255,.06)" } }
+        },
+        elements: {
+          point: { radius: 0 },
+          line: { tension: 0.15, borderWidth: 2 }
+        }
+      }
+    });
+
+    // run controls (optional; keeps it minimal)
+    let N = 300;
+    let cached = null; // store generated signal + outputs to allow step
+    function computeAll(){
+      const rng = mulberry32(seed);
+
+      const type = els.signalType.value;
+      const target = parseFloat(els.target.value);
+      const band = parseFloat(els.band.value);
+      const noiseSigma = parseFloat(els.noise.value);
+
+      const y = generateSignal({type, n:N, target, noiseSigma, rng});
+
+      const emaSlow = emaFilter(y, 0.10);
+      const emaFast = emaFilter(y, 0.50);
+
+      const gsrfParams = {
+        target,
+        beta: parseFloat(els.beta.value),
+        k_return: parseFloat(els.kreturn.value),
+        mem: parseFloat(els.mem.value),
+        baseline: parseFloat(els.baseline.value),
+        delta: 0.0 // keep demo deterministic by default (set >0 if you want)
+      };
+
+      // use separate rng for gsrf disturbance if delta > 0
+      const rng2 = mulberry32(seed ^ 0xA5A5A5A5);
+      const gsrf = gsrfFilter(y, gsrfParams, rng2);
+
+      cached = { y, emaSlow, emaFast, gsrf, target, band };
+      return cached;
+    }
+
+    function render(){
+      const { y, emaSlow, emaFast, gsrf, target, band } = computeAll();
+
+      const labels = Array.from({length: y.length}, (_,i)=>i);
+
+      const bandTop = y.map(()=>target + band);
+      const bandBot = y.map(()=>target - band);
+      const targetLine = y.map(()=>target);
+
+      const datasets = [];
+
+      // raw
+      datasets.push({
+        label: "Raw (synthetic)",
+        data: y,
+        borderColor: "rgba(231,238,252,.55)",
+        borderWidth: 1.5
+      });
+
+      // target + band
+      datasets.push({
+        label: "Target",
+        data: targetLine,
+        borderColor: "rgba(52,211,153,.55)",
+        borderDash: [6,6],
+        borderWidth: 2
+      });
+      datasets.push({
+        label: "Band +",
+        data: bandTop,
+        borderColor: "rgba(251,191,36,.35)",
+        borderDash: [4,6],
+        borderWidth: 1.5
+      });
+      datasets.push({
+        label: "Band -",
+        data: bandBot,
+        borderColor: "rgba(251,191,36,.35)",
+        borderDash: [4,6],
+        borderWidth: 1.5
+      });
+
+      // filters
+      const show = (m) => mode === "all" || mode === m;
+
+      if(show("gsrf")){
+        datasets.push({
+          label: "GSRF",
+          data: gsrf,
+          borderColor: "rgba(125,211,252,.95)",
+          borderWidth: 2.5
+        });
+      }
+      if(show("ema_slow")){
+        datasets.push({
+          label: "EMA α=0.10",
+          data: emaSlow,
+          borderColor: "rgba(167,139,250,.85)",
+          borderWidth: 2
+        });
+      }
+      if(show("ema_fast")){
+        datasets.push({
+          label: "EMA α=0.50",
+          data: emaFast,
+          borderColor: "rgba(251,113,133,.85)",
+          borderWidth: 2
+        });
+      }
+
+      chart.data.labels = labels;
+      chart.data.datasets = datasets;
+      chart.update();
+
+      // KPI based on selected
+      let selectedSeries = gsrf;
+      if(mode === "ema_slow") selectedSeries = emaSlow;
+      if(mode === "ema_fast") selectedSeries = emaFast;
+      if(mode === "all") selectedSeries = gsrf; // default metric focus
+
+      const m = calcMetrics(selectedSeries, target, band);
+      els.kpiOvershoot.textContent = m.maxOvershoot.toFixed(3);
+      els.kpiCross.textContent = String(m.crossings);
+    }
+
+    // step/run buttons (keep simple)
+    els.stepOnce.addEventListener("click", ()=>{
+      // For simplicity, just re-render; "step" is mostly psychological here.
+      // If you want true stepping, we can refactor into incremental state.
+      render();
+    });
+
+    els.run.addEventListener("click", ()=>{
+      render();
+    });
+
+    // init
+    render();
+  </script>
+</body>
+</html>

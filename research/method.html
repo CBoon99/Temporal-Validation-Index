@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology • TVI Research</title>
+  <meta name="description" content="TVI formula specification: S × log₁₀(V + 1) × R. Observer Temporal Signature model and domain variants (TVI-B, TDIS, ISPS).">
+  <link rel="icon" href="/assets/icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg0:#05070d;--bg1:#070b16;--bg2:#0a1024;--surface:rgba(255,255,255,0.04);--surface-2:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.10);--border-subtle:rgba(255,255,255,0.08);--text:#ffffff;--text-2:rgba(255,255,255,0.78);--text-3:rgba(255,255,255,0.52);--accent:#2ce0ff;--accent-dim:rgba(44,224,255,0.10);--success:#34d399;--error:#fb7185;--radius:16px;--radius-sm:12px;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(1200px 800px at 20% -10%,rgba(44,224,255,0.10),transparent 60%),radial-gradient(900px 700px at 100% 10%,rgba(167,139,250,0.08),transparent 55%),linear-gradient(180deg,var(--bg0),var(--bg1) 55%,var(--bg2));color:var(--text);line-height:1.6;min-height:100vh;}
+    .container{max-width:900px;margin:0 auto;padding:60px 32px;}
+    header{margin-bottom:40px;}
+    h1{font-family:'Inter Tight';font-size:42px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;}
+    .subtitle{font-size:15px;color:var(--text-2);}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:32px;margin-bottom:24px;box-shadow:0 20px 40px rgba(0,0,0,0.5);}
+    h2{font-family:'Inter Tight';font-size:28px;font-weight:700;margin:32px 0 16px;color:var(--accent);}
+    h3{font-size:20px;font-weight:700;margin:24px 0 12px;}
+    p{margin-bottom:16px;color:var(--text-2);font-size:15px;line-height:1.7;}
+    .formula{font-family:'Space Mono',monospace;font-size:18px;background:var(--bg1);padding:20px;border-radius:var(--radius-sm);color:var(--accent);margin:20px 0;text-align:center;border:1px solid var(--border);}
+    .highlight{background:var(--accent-dim);border-left:3px solid var(--accent);padding:20px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:24px 0;}
+    .highlight p{margin:0;}
+    ul{margin:16px 0 16px 24px;color:var(--text-2);}
+    li{margin-bottom:10px;}
+    strong{color:var(--text);}
+    table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+    th{background:var(--surface-2);padding:12px;text-align:left;border:1px solid var(--border);font-weight:700;color:var(--text);}
+    td{padding:12px;border:1px solid var(--border-subtle);color:var(--text-2);}
+    tr:hover{background:var(--surface);}
+    .btn{padding:12px 24px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;transition:0.15s;}
+    .btn-secondary{background:transparent;border:1px solid var(--border);color:var(--text);}
+    .btn-secondary:hover{border-color:var(--accent);}
+    footer{text-align:center;margin-top:60px;padding-top:24px;border-top:1px solid var(--border-subtle);color:var(--text-3);font-size:13px;}
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    @media (max-width:600px){
+      .container{padding:40px 20px;}
+      h1{font-size:32px;}
+      .card{padding:20px;}
+      table{font-size:12px;}
+      th,td{padding:8px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Methodology</h1>
+      <p class="subtitle">Technical specification of the Temporal Validation Impact framework</p>
+    </header>
+
+    <div class="highlight">
+      <p><strong>The Observer Visibility Gap:</strong></p>
+      <p style="margin-top:8px;font-size:16px;line-height:1.6;">"An observer with a 3-month validation horizon cannot perceive 87% of foundational value. This is not disagreement — it is perceptual limitation."</p>
+    </div>
+
+    <div class="card">
+      <h2>Core Formula</h2>
+      
+      <div class="formula">TVI = S × log₁₀(V + 1) × R</div>
+
+      <h3>S (Saturation)</h3>
+      <p>Context-normalized reach accounting for era-specific conditions:</p>
+      <div class="formula" style="font-size:15px;">S = (Raw Reach / Account Factor) / Available Audience × Cross-Platform Multiplier</div>
+      
+      <p><strong>Components:</strong></p>
+      <ul>
+        <li><strong>Raw Reach:</strong> Total impressions, views, or usage instances</li>
+        <li><strong>Account Factor:</strong> Corrects for multi-account inflation over time (1.0 pre-2005, up to 2.5 for long-lived content)</li>
+        <li><strong>Available Audience:</strong> Platform user base at moment of initial virality (not current size)</li>
+        <li><strong>Cross-Platform Multiplier:</strong> 1.0 = single platform, up to 3.5 = universal cultural reference</li>
+      </ul>
+
+      <h3>V (Validation)</h3>
+      <p>Time-validated persistence combining three dimensions:</p>
+      <div class="formula" style="font-size:15px;">V = Persistence × Resurfacing Rate × Legacy Level</div>
+      
+      <p><strong>Components:</strong></p>
+      <ul>
+        <li><strong>Persistence:</strong> Months of continued relevance (capped at 180 months = 15 years for normalization)</li>
+        <li><strong>Resurfacing Rate:</strong> Frequency of renewed attention, measured by documented events per year</li>
+        <li><strong>Legacy Level:</strong> 1.0 = baseline, 1.5 = meme format, 2.0 = cultural lexicon, 2.5 = academic study, 3.0 = historical artifact</li>
+      </ul>
+
+      <h3>R (Resistance)</h3>
+      <p>Era-based Structural Resistance Coefficient acknowledging that identical metrics represent different achievements across technological/competitive eras:</p>
+      
+      <table>
+        <tr><th>Era</th><th>Years</th><th>R Value</th><th>Characteristics</th></tr>
+        <tr><td>Pre-Platform</td><td>≤2004</td><td>3.0</td><td>No hosting infrastructure, manual sharing</td></tr>
+        <tr><td>Early Platform</td><td>2005-2009</td><td>2.5</td><td>Limited users, human-driven discovery</td></tr>
+        <tr><td>Mass Adoption</td><td>2010-2013</td><td>2.0</td><td>Growing platforms, early algorithms</td></tr>
+        <tr><td>Fragmentation</td><td>2014-2017</td><td>1.5</td><td>Multiple platforms, algorithm-assisted</td></tr>
+        <tr><td>Algorithm Dominance</td><td>2018+</td><td>1.0</td><td>Massive scale, fully algorithmic distribution</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Mathematical Properties</h2>
+      
+      <h3>Logarithmic Scaling</h3>
+      <p>The log₁₀(V + 1) term serves two purposes:</p>
+      <ul>
+        <li><strong>Diminishing returns:</strong> The difference between 1 and 12 months is more meaningful than between 120 and 131 months</li>
+        <li><strong>Zero-handling:</strong> The +1 ensures log₁₀(1) = 0 for zero validation, producing TVI = 0</li>
+      </ul>
+
+      <h3>Multiplicative Structure</h3>
+      <p>Deficiency in any component substantially reduces overall score:</p>
+      <ul>
+        <li>High reach + zero persistence → TVI = 0</li>
+        <li>High persistence + zero reach → TVI = 0</li>
+        <li>Both required for cultural impact</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Domain-Specific Variants</h2>
+      
+      <h3>TVI-B (Business Methodologies)</h3>
+      <p><strong>Saturation:</strong> Adoption rate and years in use, cross-industry spread</p>
+      <p><strong>Validation:</strong> Sustained implementation, MBA curriculum inclusion, management canon status</p>
+      
+      <h3>TDIS (Training Data Impact Score)</h3>
+      <p><strong>Saturation:</strong> Citations, active usage in curricula, framework implementations</p>
+      <p><strong>Validation:</strong> Cross-framework adoption, pedagogical embedding, benchmark persistence</p>
+      
+      <h3>ISPS (Investment Staying Power Score)</h3>
+      <p><strong>Saturation:</strong> Brand awareness, market position, era-adjusted founding difficulty</p>
+      <p><strong>Validation:</strong> Crisis survival, leadership continuity, category dominance duration</p>
+    </div>
+
+    <div class="card">
+      <h2>Observer Temporal Signature (τ)</h2>
+      <p>Different observers systematically disagree about importance when evaluating identical evidence. We model this through:</p>
+      
+      <div class="formula" style="font-size:16px;">τₒ = (Hₒ, Lₒ, Cₒ, Vₒ)</div>
+
+      <p><strong>Where:</strong></p>
+      <ul>
+        <li><strong>H (Skill Half-Life):</strong> Years until the observer's skills depreciate 50%</li>
+        <li><strong>L (Legacy Depth):</strong> Stake horizon (1=self, 2=family, 3=community, 4=civilization)</li>
+        <li><strong>C (Crisis Anchor):</strong> Set of crises calibrating the observer's risk model</li>
+        <li><strong>V (Validation Horizon):</strong> Default timeframe for judging success (months to decades)</li>
+      </ul>
+
+      <div class="highlight">
+        <p><strong>Key Insight:</strong> An observer with V=3 months weights psychological time (engagement now). An observer with V=25 years weights cultural time (what persists). This is not preference—it's a perceptual filter.</p>
+        <p style="margin-top:12px;">Observers with short validation horizons <strong>literally cannot see</strong> value in entities whose peak validation lies outside their horizon.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin:40px 0;">
+      <a href="/research/paper.html"><button class="btn btn-secondary">Read Full Paper →</button></a>
+    </div>
+
+    <footer>
+      <p><a href="/research/index.html">← Back to Research</a> • <a href="/Universal-Impact-Calculator-v1.0.1.html">Calculator</a></p>
+    </footer>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation • TVI Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #05070d; 
+      color: #fff; 
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    h2 { font-size: 24px; font-weight: 700; margin: 40px 0 16px; color: #2ce0ff; }
+    h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; }
+    p { margin-bottom: 16px; color: rgba(255,255,255,0.78); }
+    code { 
+      font-family: 'Space Mono', monospace; 
+      background: rgba(255,255,255,0.06); 
+      padding: 2px 6px; 
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    pre { 
+      background: rgba(255,255,255,0.04); 
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; 
+      padding: 20px; 
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    pre code { background: none; padding: 0; }
+    .endpoint { 
+      background: rgba(44,224,255,0.1); 
+      border-left: 3px solid #2ce0ff; 
+      padding: 16px; 
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .method { 
+      display: inline-block;
+      padding: 4px 8px;
+      background: #2ce0ff;
+      color: #000;
+      font-weight: 700;
+      font-size: 12px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TVI API Documentation</h1>
+    <p>The TVI API allows you to programmatically calculate Temporal Validation Index scores for any domain.</p>
+
+    <h2>Authentication</h2>
+    <p>All API requests require an API key. Generate your key from the <a href="/dashboard.html" style="color:#2ce0ff;">dashboard</a>.</p>
+    <p>Include your API key in the <code>X-API-Key</code> header:</p>
+    <pre><code>X-API-Key: tvi_your_api_key_here</code></pre>
+
+    <h2>Rate Limits</h2>
+    <ul style="margin-left:20px;color:rgba(255,255,255,0.78);">
+      <li><strong>Free Plan:</strong> 100 requests per day</li>
+      <li><strong>Pro Plan:</strong> 1,000 requests per day</li>
+      <li><strong>Enterprise:</strong> Custom limits (contact us)</li>
+    </ul>
+
+    <h2>Endpoints</h2>
+
+    <div class="endpoint">
+      <span class="method">POST</span>
+      <code>/api/tvi</code>
+      <h3>Calculate TVI Score</h3>
+      <p>Compute TVI for any domain with custom inputs.</p>
+      
+      <h4>Request Body</h4>
+      <pre><code>{
+  "domain": "viral",
+  "inputs": {
+    "year": 2007,
+    "views": 880000000,
+    "users": 200000000,
+    "c": 3.0,
+    "p": 180,
+    "r": 0.5,
+    "legacy": 2.5
+  }
+}</code></pre>
+
+      <h4>Response</h4>
+      <pre><code>{
+  "score": 63.4,
+  "type": "TVI",
+  "classification": "Historical Phenomenon",
+  "components": [
+    { "label": "CSI", "value": "10.56" },
+    { "label": "TVS", "value": "252.0" },
+    { "label": "SRC", "value": 2.5 }
+  ],
+  "timestamp": "2026-01-15T12:00:00.000Z"
+}</code></pre>
+    </div>
+
+    <h3>Domains</h3>
+    <ul style="margin-left:20px;color:rgba(255,255,255,0.78);">
+      <li><code>viral</code> - Cultural media (requires: year, views, users, c, p, r, legacy)</li>
+      <li><code>datasets</code> - AI datasets (requires: year, usage, researchers, c, p, r, legacy)</li>
+      <li><code>business</code> - Business methods (requires: year, adoption, market, c, p, r, legacy)</li>
+      <li><code>invest</code> - Investments (requires: year, brand, position, era, sus, crisis, leadership)</li>
+    </ul>
+
+    <h2>Example: cURL</h2>
+    <pre><code>curl -X POST https://tvi.boonmind.com/api/tvi \\
+  -H "Content-Type: application/json" \\
+  -H "X-API-Key: tvi_your_api_key" \\
+  -d '{
+    "domain": "datasets",
+    "inputs": {
+      "year": 1998,
+      "usage": 50000000,
+      "researchers": 10000,
+      "c": 3.5,
+      "p": 180,
+      "r": 0.9,
+      "legacy": 3
+    }
+  }'</code></pre>
+
+    <h2>Support</h2>
+    <p>Questions? Contact <a href="mailto:api@boonmind.com" style="color:#2ce0ff;">api@boonmind.com</a></p>
+
+    <div style="text-align:center;margin-top:60px;">
+      <a href="/dashboard.html" style="color:#2ce0ff;text-decoration:none;">← Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>
+

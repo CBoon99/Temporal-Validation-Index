@@ -1,0 +1,577 @@
+﻿Business Methodology Evaluator
+Product Specification v1.0
+Powered by the TVI Cultural Lens
+Tagline: "Separate methodologies that stick from fads that fade"
+________________
+
+
+EXECUTIVE SUMMARY
+The Problem
+Management consultants, executives, and strategy teams face a critical question daily: "Should we implement this methodology?" Current decision-making relies on:
+* Consultant recommendations (biased by what they sell)
+* Hype cycle positioning (Gartner, trend reports)
+* Peer adoption (FOMO-driven)
+* Gut feeling (no data backing)
+Result: Companies waste millions implementing fads (Holacracy, Radical Candor) that fade within 2-3 years while proven methodologies (Agile, Lean, SMART Goals) continue delivering value for decades.
+The Solution
+Business Methodology Evaluator: Data-driven tool that scores methodologies by True Viral Impact (TVI) - their actual staying power and cultural adoption across industries.
+Key Innovation: First tool to measure methodology longevity using cultural saturation framework, revealing:
+* Which methodologies endure vs fade
+* 99% staying power decline in modern methodologies
+* Predictive indicators of lasting value
+The Market
+Primary: Management consultants ($250B global market) Secondary: Strategy executives, innovation teams, HR leaders Pain Point: Avoid implementing fads, focus resources on proven frameworks
+Revenue Model
+* Pro Tier: $149/month per user (methodology database access)
+* Enterprise: $2,500/month per organization (unlimited users + API)
+* Consulting: $15K-$25K custom methodology evaluation
+* Year 1 Target: 100 Pro users + 10 Enterprise = $250K ARR
+________________
+
+
+PRODUCT OVERVIEW
+What It Does
+Core Function: Input: Business methodology name (e.g., "Holacracy", "OKRs", "Six Sigma") Output: TVI score + staying power analysis + implementation recommendation
+Key Outputs:
+1. TVI Score (0-100+): Quantified staying power
+2. Classification: Industry Standard / Transformative / Influential / Noticed / Ephemeral
+3. Staying Power Prediction: Will it endure 5+ years?
+4. Benchmark Comparison: vs established methodologies
+5. Implementation Risk Assessment: High/Medium/Low fade risk
+6. ROI Timeline: When methodology pays off (if it sticks)
+How It Works
+Step 1: User Input
+* Methodology name
+* Optional: Industry context, implementation timeline
+Step 2: TVI Calculation
+* Retrieve pre-calculated TVI from database
+* OR calculate on-the-fly for new/emerging methodologies
+* Apply industry-specific adjustments if needed
+Step 3: Analysis Generation
+* TVI score interpretation
+* Comparison to benchmarks (Agile TVI 66.6, SMART Goals TVI 74.2)
+* Risk assessment based on staying power data
+* Implementation recommendations
+Step 4: Report Delivery
+* Interactive dashboard
+* PDF export for client presentations
+* Benchmark charts
+* Historical adoption curve
+________________
+
+
+CORE DATABASE
+Methodologies to Include (Phase 1: 50+)
+Proven Standards (TVI >30):
+1. SMART Goals (1981) - TVI 74.2
+2. Agile/Scrum (2001) - TVI 66.6
+3. Lean Manufacturing (1990) - TVI 32.6
+4. Six Sigma (1986) - TVI 30.6
+5. Kanban (1950s/2000s revival)
+6. Design Thinking (2008) - TVI 12.5
+7. Critical Path Method (1950s)
+8. PDCA Cycle (1950s)
+9. 5S Methodology (1960s)
+10. Kaizen (1980s)
+Popular But Unproven (TVI 5-15): 11. OKRs (2013) - TVI 3.8 12. Growth Hacking (2010) - TVI 3.6 13. Lean Startup (2011) 14. Design Sprint (2010) 15. Jobs to Be Done (2005) 16. Blue Ocean Strategy (2005) 17. Balanced Scorecard (1992) 18. Business Model Canvas (2008) 19. Value Stream Mapping (1990s) 20. Theory of Constraints (1984)
+Recent Fads (TVI <5): 21. Holacracy (2015) - TVI 0.3 22. Radical Candor (2017) - TVI 0.4 23. Teal Organizations (2014) 24. Agile HR (2015) 25. Spotify Model (2012) 26. SAFe (Scaled Agile) (2011) 27. Management 3.0 (2010) 28. Lean Six Sigma (2000s) 29. Beyond Budgeting (2000s) 30. Open Book Management (1990s)
+Emerging (TVI TBD - Recent): 31. Shape Up (Basecamp method, 2019) 32. No Code Movement (2020) 33. Remote-First Frameworks (2020+) 34. AI-Augmented Development (2023+) 35. Async-First Work (2021+)
+By Domain:
+Software/Tech:
+* Agile, Scrum, Kanban, XP, DevOps, CI/CD, Microservices
+Manufacturing/Operations:
+* Lean, Six Sigma, TQM, 5S, Kaizen, TPM, JIT
+Strategy/Business:
+* OKRs, Blue Ocean, SMART Goals, Balanced Scorecard, BCG Matrix
+Product/Design:
+* Design Thinking, Design Sprint, Jobs to Be Done, Lean Startup
+Management/Leadership:
+* Radical Candor, Servant Leadership, Holacracy, Teal Orgs
+HR/People:
+* Agile HR, Performance Management frameworks, Continuous Feedback
+________________
+
+
+PRODUCT FEATURES
+Phase 1 (MVP - 3 months)
+Core Functionality:
+1. Methodology Search
+   * Searchable database of 50+ methodologies
+   * Autocomplete
+   * Category filters (Strategy, Operations, Tech, etc.)
+2. TVI Score Display
+   * Visual score (0-100+)
+   * Classification badge (Industry Standard, Transformative, etc.)
+   * Historical trend graph
+3. Comparison Tool
+   * Compare up to 3 methodologies side-by-side
+   * Benchmark against category leaders
+   * "Better alternatives" suggestions
+4. Risk Assessment
+   * Fade risk indicator (High/Medium/Low)
+   * Implementation timeline recommendation
+   * ROI projection
+5. Report Generation
+   * PDF export
+   * Client-ready formatting
+   * Charts and visualizations
+User Experience:
+* Clean, professional interface (think Stripe/Linear quality)
+* Mobile-responsive
+* Fast (<2 sec load times)
+________________
+
+
+Phase 2 (6 months)
+Advanced Features: 6. Custom Methodology Evaluation
+* User submits new/emerging methodology
+* System calculates preliminary TVI
+* Manual review + validation
+* Added to database
+7. Industry-Specific Filters
+   * Tech vs Healthcare vs Manufacturing
+   * Adjust TVI for sector-specific adoption patterns
+   * Industry benchmarks
+8. AI Insights
+   * "Methodologies similar to X"
+   * "If you liked Agile, try..."
+   * Trend predictions
+9. Team Collaboration
+   * Share evaluations with team
+   * Comment on methodologies
+   * Organization-level methodology tracking
+10. API Access
+   * Integrate into consulting workflows
+   * Programmatic TVI retrieval
+   * Bulk analysis
+________________
+
+
+Phase 3 (12 months)
+Platform Features: 11. Methodology Tracker - Track methodologies your company uses - Monitor adoption success - Alert when methodologies show fade signals
+12. Community Features
+   * User ratings/reviews
+   * Implementation case studies
+   * "What worked/didn't work" insights
+13. Consulting Marketplace
+   * Connect with methodology experts
+   * Implementation partners
+   * Training providers
+14. Predictive Model
+   * Early fade detection
+   * "This methodology is losing steam"
+   * Replacement recommendations
+________________
+
+
+TECHNICAL ARCHITECTURE
+Stack
+Frontend:
+* React + Next.js (fast, SEO-friendly)
+* Tailwind CSS (professional design)
+* Recharts (visualizations)
+Backend:
+* Node.js + Express (API)
+* PostgreSQL (methodology database)
+* Redis (caching for speed)
+Infrastructure:
+* Vercel (frontend hosting)
+* Railway/Render (backend)
+* Cloudflare (CDN)
+Analytics:
+* PostHog (product analytics)
+* Stripe (payments)
+Database Schema
+sql
+-- Methodologies table
+CREATE TABLE methodologies (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  year INTEGER NOT NULL,
+  category VARCHAR(100),
+  description TEXT,
+  
+  -- TVI calculation inputs
+  impressions BIGINT,
+  addressable_market BIGINT,
+  cross_industry_factor DECIMAL(3,2),
+  persistence_months INTEGER,
+  resurfacing_frequency DECIMAL(3,2),
+  legacy_coefficient DECIMAL(3,2),
+  structural_resistance DECIMAL(3,2),
+  
+  -- Calculated outputs
+  csi DECIMAL(10,3),
+  tvs DECIMAL(10,1),
+  tvi DECIMAL(10,1),
+  classification VARCHAR(50),
+  
+  -- Metadata
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+
+-- User evaluations (custom submissions)
+CREATE TABLE user_evaluations (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  methodology_name VARCHAR(200),
+  custom_inputs JSONB,
+  calculated_tvi DECIMAL(10,1),
+  status VARCHAR(50), -- pending, validated, rejected
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+
+-- Usage tracking
+CREATE TABLE methodology_searches (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  methodology_id INTEGER REFERENCES methodologies(id),
+  action VARCHAR(50), -- search, compare, export
+  created_at TIMESTAMP DEFAULT NOW()
+);
+________________
+
+
+PRICING STRATEGY
+Tier 1: Free (Lead Generation)
+Price: $0 Limits:
+* 5 methodology lookups per month
+* Basic TVI scores only
+* No PDF exports
+* No comparisons
+Purpose: Hook users, demonstrate value, convert to Pro
+________________
+
+
+Tier 2: Pro (Individual Consultants)
+Price: $149/month or $1,490/year (save $298) Features:
+* Unlimited methodology lookups
+* Full TVI analysis + risk assessment
+* PDF report exports (unlimited)
+* Comparison tool (up to 3 methodologies)
+* Email support
+* Access to full database (100+ methodologies)
+Target: Independent consultants, strategy managers
+Volume Pricing:
+* 1 user: $149/month
+* 3 users: $399/month ($133/user)
+* 5 users: $599/month ($120/user)
+________________
+
+
+Tier 3: Enterprise (Organizations)
+Price: $2,500/month (annual contract) Features:
+* Everything in Pro
+* Unlimited users
+* API access (10K calls/month)
+* Custom methodology evaluation (2 per quarter)
+* Team collaboration features
+* Priority support
+* Quarterly business review
+* White-label reports (company branding)
+Target: Consulting firms, large corporations, strategy teams
+Add-ons:
+* Additional custom evaluations: $5K each
+* API overage: $0.10 per call
+* Dedicated account manager: +$1K/month
+________________
+
+
+Tier 4: Custom Consulting
+Price: $15K-$25K per engagement Deliverable:
+* Deep-dive TVI analysis of specific methodology
+* Industry-specific assessment
+* Implementation risk analysis
+* Competitive alternatives evaluation
+* Executive presentation
+* 2-week turnaround
+Target: C-suite making major methodology investment decisions
+________________
+
+
+GO-TO-MARKET STRATEGY
+Phase 1: Launch (Months 1-3)
+Build Audience:
+1. Content Marketing
+   * Publish TVI white paper
+   * Medium article: "99% of Modern Business Methodologies Fade - Here's Why"
+   * LinkedIn posts with data insights
+   * X thread: Top 10 methodologies by staying power
+2. SEO Foundation
+   * Target keywords: "business methodology evaluation", "agile vs lean", "OKRs effectiveness"
+   * Landing pages for top 20 methodologies
+   * Comparison pages ("Agile vs Waterfall TVI")
+3. Community Building
+   * Post in r/consulting, r/agile, r/ProductManagement
+   * Engage in methodology debates with data
+   * "Here's the TVI analysis of that methodology you're discussing"
+Get First Users: 4. Direct Outreach
+* LinkedIn DMs to management consultants
+* "I built a tool that shows which methodologies stick - want early access?"
+* Target: 50 beta users
+5. Product Hunt Launch
+   * "Business Methodology Evaluator - Know What Sticks Before You Invest"
+   * Demo video showing Holacracy TVI 0.3 vs Agile TVI 66.6
+   * Goal: Top 5 product of the day
+________________
+
+
+Phase 2: Growth (Months 4-6)
+Paid Acquisition: 6. Google Ads
+* Target: "agile methodology", "business frameworks", "management consulting tools"
+* Budget: $2K/month
+* Goal: 20 Pro conversions/month (CAC: $100, LTV: $1,788)
+7. LinkedIn Ads
+   * Target: Management consultants, strategy directors
+   * Carousel ads showing TVI rankings
+   * Budget: $1K/month
+Partnerships: 8. Consulting Firm Trials
+* Offer 3-month free Enterprise to top 10 consulting firms
+* Get testimonials + case studies
+* Convert to paid after trial
+9. Integration Partners
+   * Partner with project management tools (Jira, Asana)
+   * "Methodology recommendations powered by TVI"
+________________
+
+
+Phase 3: Scale (Months 7-12)
+Enterprise Sales: 10. Outbound Sales - Hire SDR - Target Fortune 500 strategy teams - Custom demos with their specific methodologies
+11. Conference Presence
+   * Speak at consulting/strategy conferences
+   * "The Data Behind Methodology Staying Power"
+   * Booth at major events
+Platform Expansion: 12. API Marketplace - List on RapidAPI, AWS Marketplace - "Methodology TVI API" - Developers build on top
+________________
+
+
+REVENUE PROJECTIONS
+Year 1 (Conservative)
+Month 1-3 (Build + Launch):
+* Revenue: $0
+* Users: 50 beta (free)
+Month 4-6 (Initial Traction):
+* 30 Pro users × $149 = $4,470/month
+* 2 Enterprise × $2,500 = $5,000/month
+* Monthly Revenue: $9,470
+* Q2 Total: $28,410
+Month 7-9 (Growth):
+* 60 Pro users × $149 = $8,940/month
+* 5 Enterprise × $2,500 = $12,500/month
+* 1 Custom consulting = $20,000 (one-time)
+* Monthly Revenue: $21,440 + $20K one-time
+* Q3 Total: $84,320
+Month 10-12 (Acceleration):
+* 100 Pro users × $149 = $14,900/month
+* 10 Enterprise × $2,500 = $25,000/month
+* 2 Custom consulting = $40,000 (one-time)
+* Monthly Revenue: $39,900 + $40K one-time
+* Q4 Total: $159,700
+Year 1 Total Revenue: $272,430
+Costs:
+* Development: $30K (your time valued)
+* Infrastructure: $3K/year
+* Marketing: $36K/year ($3K/month avg)
+* Tools/Software: $5K/year
+Year 1 Profit: ~$200K
+________________
+
+
+Year 2 (Growth)
+Targets:
+* 300 Pro users × $149 = $44,700/month
+* 25 Enterprise × $2,500 = $62,500/month
+* 10 Custom consulting × $20K = $200K/year
+Year 2 Revenue: $1.5M
+With team:
+* 1 Developer: $100K
+* 1 Sales/Marketing: $80K + commission
+* Operating costs: $100K
+Year 2 Profit: ~$1M+
+________________
+
+
+SUCCESS METRICS
+Product Metrics
+* Activation: User completes first methodology lookup
+* Engagement: 3+ lookups per week (Pro users)
+* Retention: 80%+ monthly retention (Pro)
+* Conversion: 15%+ free → Pro conversion
+Business Metrics
+* MRR Growth: 20%+ month-over-month (first 6 months)
+* CAC: <$150 (with LTV $1,788 = 12x LTV:CAC)
+* Churn: <5% monthly (Pro), <2% monthly (Enterprise)
+* NPS: 50+ (very good for B2B SaaS)
+________________
+
+
+COMPETITIVE ANALYSIS
+Current "Competitors" (Not Really)
+Gartner Hype Cycle:
+* What they do: Position technologies on hype curve
+* Limitation: Qualitative, expensive ($15K+ reports), tech-only
+* Our advantage: Quantitative TVI, affordable, all business methodologies
+McKinsey/BCG Reports:
+* What they do: Strategy consulting, trend reports
+* Limitation: Generic, expensive consulting, no tool
+* Our advantage: Self-service tool, data-driven, immediate access
+Books/Blogs:
+* What they do: Methodology descriptions, opinions
+* Limitation: No comparison data, no staying power analysis
+* Our advantage: Objective scores, cross-methodology comparison
+Reality: No direct competitor exists.
+We're creating a new category: Business Methodology Intelligence
+________________
+
+
+RISKS & MITIGATION
+Risk 1: "TVI scores are subjective"
+Mitigation:
+* Publish methodology transparently
+* Show calculation inputs
+* Invite validation/challenges
+* Update scores based on new data
+Risk 2: "Database too small initially"
+Mitigation:
+* Start with top 50 most-searched methodologies
+* Add 5-10 new ones monthly
+* Crowdsource requests (users vote on additions)
+* Custom evaluation service fills gaps
+Risk 3: "Consultants might resist"
+Mitigation:
+* Position as tool FOR consultants, not against
+* "Impress clients with data-backed recommendations"
+* Testimonials from early adopter consultants
+* Commission/referral program
+Risk 4: "Low initial traffic"
+Mitigation:
+* Content marketing (viral TVI insights)
+* Direct outreach to consultants
+* Product Hunt launch
+* Speaking at conferences
+________________
+
+
+ROADMAP
+Months 1-3: Build MVP
+* Database: Top 50 methodologies with TVI scores
+* Core functionality: Search, score display, PDF export
+* Landing page + simple marketing site
+* Payment integration (Stripe)
+* Beta program (50 users)
+Months 4-6: Launch & Iterate
+* Product Hunt launch
+* First paid users (target: 30 Pro)
+* Comparison tool
+* SEO content (methodology pages)
+* First Enterprise customer
+Months 7-9: Growth
+* Expand database to 100+ methodologies
+* Custom evaluation service
+* API (Enterprise feature)
+* Google Ads campaign
+* Partnership with consulting firm
+Months 10-12: Scale
+* Team collaboration features
+* White-label reports
+* Conference speaking (2-3 events)
+* Industry-specific versions
+* Hit $40K MRR
+________________
+
+
+MINIMUM VIABLE PRODUCT (MVP) SCOPE
+What to build FIRST (4-6 weeks):
+1. Database (Google Sheet → PostgreSQL)
+   * 30 core methodologies with TVI scores
+   * Essential fields: Name, Year, Category, TVI, Classification
+2. Simple Web App
+   * Search bar
+   * Methodology detail page showing:
+      * TVI score (big number)
+      * Classification badge
+      * Simple description
+      * 2-3 benchmark comparisons
+   * Clean, professional design
+3. PDF Export
+   * One-page summary
+   * TVI score + interpretation
+   * Logo/branding
+   * "Generated by Business Methodology Evaluator"
+4. Landing Page
+   * Hero: "Separate Methodologies That Stick from Fads That Fade"
+   * Demo video/screenshots
+   * Top 10 methodologies ranked
+   * Pricing
+   * Email signup
+5. Payment
+   * Stripe integration
+   * Free (5 lookups) → Pro ($149/month)
+   * Simple dashboard
+What to SKIP for now:
+* ❌ Custom evaluations (manual service initially)
+* ❌ API (Enterprise feature for later)
+* ❌ Comparison tool (Phase 2)
+* ❌ Team features (Phase 2)
+* ❌ Complex visualizations (start simple)
+Tech Stack for MVP:
+* Next.js (frontend + backend)
+* PostgreSQL (Supabase for easy setup)
+* Tailwind CSS
+* Stripe
+* Deploy on Vercel
+MVP Timeline:
+* Week 1-2: Database + basic UI
+* Week 3: PDF generation + polish
+* Week 4: Landing page + payment
+* Week 5-6: Beta testing + iteration
+Goal: Ship working product in 6 weeks, get first paid user in 8 weeks.
+________________
+
+
+LAUNCH CHECKLIST
+Pre-Launch (1 week before):
+* 50 beta users signed up
+* Database with 30+ methodologies complete
+* All core features working
+* Payment tested
+* Landing page live
+* Medium article drafted
+* Product Hunt submission ready
+Launch Week:
+* Product Hunt launch (Tuesday)
+* Medium article published
+* LinkedIn post with data insights
+* X thread: "I analyzed 30 business methodologies - here's what sticks"
+* Reddit posts (r/consulting, r/agile, etc.)
+* Email beta users: "We're live!"
+Post-Launch (Week 2+):
+* Collect feedback
+* First paid conversions
+* SEO content (methodology pages)
+* Outreach to consultants
+* Iterate based on usage data
+________________
+
+
+SUCCESS DEFINITION
+Month 3: 10 paying Pro users ($1,490/month MRR) Month 6: 30 paying Pro users + 2 Enterprise ($9,470/month MRR) Month 12: 100 Pro + 10 Enterprise ($40K/month MRR = $480K ARR)
+If we hit these numbers:
+* Product-market fit validated ✅
+* Profitable business ✅
+* Scale to Year 2 targets ✅
+________________
+
+
+WHY THIS WILL WORK
+1. Real Pain Point: Consultants/executives waste millions on fads
+2. Novel Data: Nobody has TVI scores for methodologies
+3. Clear Value: "Don't implement Holacracy (TVI 0.3), use Agile (TVI 66.6)"
+4. Immediate Use: Use in client presentation tomorrow
+5. High Willingness to Pay: B2B, saves millions in bad decisions
+6. Defensible: First mover, building canonical database
+7. Scalable: SaaS model, API, consulting services
+8. You Can Build It: Code skills + domain knowledge + speed

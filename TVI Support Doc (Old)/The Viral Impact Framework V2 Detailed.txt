@@ -1,0 +1,1027 @@
+﻿The Viral Impact Framework
+Version 2.0 — Part I: Core Definitions & Normalization Logic
+A Multi-Dimensional Measurement System for Cultural Saturation
+________________
+
+
+EXECUTIVE SUMMARY
+The Viral Impact Framework is a measurement system designed to quantify true cultural impact, not popularity. It introduces three complementary metrics that correct for platform inflation, account multiplication, algorithmic distortion, and temporal bias.
+Core thesis:
+ Culture is not a spike; it is a filter.
+ Time does not erase meaning — it selects it.
+The framework separates attention (views, reach, velocity) from impact (saturation, memory, validation), allowing viral content to be evaluated across eras with structural fairness.
+The Three Metrics
+1. Cultural Saturation Index (CSI) — Was it unavoidable at the time?
+
+2. Temporal Validation Score (TVS) — Did time prove it mattered?
+
+3. True Viral Impact (TVI) — How important was it really?
+
+This is not a single “viral score.” It is a dimensional system that explains why raw view counts mislead, and why cultural memory does not.
+________________
+
+
+THE CORE PROBLEM
+The Paradox
+   * Modern videos: 50 million views, forgotten in weeks
+
+   * Older videos: 1 million views, remembered for decades
+
+Why do fewer views sometimes produce more cultural impact?
+The Misconception
+Virality is commonly assumed to be a function of:
+Views × Speed × Platform Luck
+The Reality
+This framework demonstrates that virality is governed by:
+      * Saturation, not scale
+
+      * Validation, not velocity
+
+      * Memory, not metrics
+
+Platform growth, account churn, algorithmic fragmentation, and time-based compounding distort raw view counts while obscuring the true variable: cultural saturation over time.
+Why This Framework Exists Now
+This analysis could not have been written in 2012, 2018, or even 2022. It requires:
+         * Sufficient temporal distance to observe what genuinely persisted
+
+         * Enough platform evolution to see metrics diverge from memory
+
+         * Algorithmic dominance severe enough to reveal cultural erosion
+
+The framework emerges precisely when the paradox becomes unavoidable.
+________________
+
+
+METRIC 1: CULTURAL SATURATION INDEX (CSI)
+Definition
+Platform-adjusted reach, accounting for:
+            * Platform growth
+
+            * Account multiplication
+
+            * Cross-platform cultural escape
+
+CSI measures how unavoidable a piece of content was relative to the human audience available at the time it broke out.
+Formula
+CSI=VA×U×C\textbf{CSI} = \frac{V}{A \times U} \times CCSI=A×UV​×C
+Where:
+               * V = Total lifetime views
+
+               * A = Account multiplication factor (lifespan-based)
+
+               * U = Effective audience pool at moment of initial virality
+
+               * C = Cross-platform coefficient
+
+________________
+
+
+VARIABLE SPECIFICATIONS
+V — Total Views
+Cumulative views across the content’s lifespan.
+Data sources:
+ Platform analytics (YouTube, TikTok, historical archives)
+________________
+
+
+A — Account Multiplication Factor (CRITICAL: LIFESPAN-BASED)
+Corrects for duplicate human exposure caused by:
+                  * Multiple accounts per person
+
+                  * Device switching
+
+                  * Platform churn over time
+
+A-Factor Calculation Principle (V2.0 Fix)
+A is determined by a video’s lifespan (years since upload), not by static upload-era bands.
+ Account churn accumulates over time: a 2007 upload evaluated in 2026 has had 19 years for viewers to cycle accounts and devices.
+Representative calibration values (pending survey validation):
+                     * <1 year old: 1.1 (insufficient time for significant churn)
+
+                     * 1–5 years: ~1.5 (mobile + multi-device exposure begins accumulating)
+
+                     * 5–10 years: ~2.0 (multi-account behavior becomes common)
+
+                     * 10–15 years: ~2.25 (high churn saturation)
+
+                     * 15+ years: 2.5 (maximum churn assumption)
+
+Note: These values are presented for interpretability. The reproducible implementation uses a lifespan-based function (see calculator/implementation section). The key requirement is monotonic increase with age until a capped maximum.
+Pre-Platform Exception (Pre-2005) — CRITICAL
+Content that spread before platform accounts existed (forums, email chains, Flash sites) uses:
+A=1.0regardless of ageA = 1.0 \quad \textbf{regardless of age}A=1.0regardless of age
+Rationale:
+                        * No platform accounts existed to churn
+
+                        * “View counts” are typically impression estimates, not platform-tracked views
+
+                        * Account duplication is not the inflation mechanism in this era
+
+Examples:
+                           * All Your Base Are Belong To Us (2000)
+
+                           * Numa Numa (2004)
+
+V2.0 Presentation Rule (Uncertainty Handling)
+                              * Main tables: Single headline TVI using midpoint AmidA_{mid}Amid​
+
+                              * Appendix: TVI ranges using AlowA_{low}Alow​ and AhighA_{high}Ahigh​
+
+                              * Flag: † Calibrated pending empirical A-factor validation
+
+This makes uncertainty explicit without collapsing usability.
+________________
+
+
+U — Effective Audience Pool
+The number of humans realistically reachable at the moment of initial virality.
+Key principle:
+ U is not the largest platform MAU available.
+U is the correct denominator for how the content actually spread.
+Initial Virality Window (V2.0 Precision)
+The “moment of initial virality” is the first sustained breakout window when mentions, shares, and view velocity accelerate beyond baseline.
+                                 * Platform-native content: typically 7–30 days
+
+                                 * Pre-platform content (forums/email/manual sharing): may extend 2–6 months, reflecting slower propagation through manual networks
+
+A video going viral in 2007 with 100M users available is structurally different from one going viral in 2024 with 2B users — even if both reach 2% penetration.
+________________
+
+
+V2.0 U-NORMALIZATION LOGIC
+V2.0 formalizes a hierarchy for selecting U to prevent denominator distortion.
+U Selection Order
+                                    1. Single-platform denominator
+ Used when one platform is clearly the primary propagation and view ledger.
+
+                                    2. Multi-platform ecosystem composite (NEW)
+ Used when virality spreads natively across multiple platforms and no single platform dominates.
+
+                                    3. Era baseline denominator
+ Used only when platform attribution is materially unclear.
+
+Forward reference: For pre-platform content requiring niche audience adjustment (e.g., early broadband subset), see Part II (Niche Factor Table + methodology).
+________________
+
+
+Multi-Platform Shortform Rule (V2.0 Addition)
+Some viral events are not platform-native and should not inherit a single platform’s MAU.
+Content Type: shortform_multi
+Defined as content that:
+                                       * Originates in shortform-native environments
+
+                                       * Spreads across multiple platforms (e.g., Snapchat → Twitter → Instagram)
+
+                                       * Does not rely primarily on YouTube discovery or view accumulation
+
+Example calibration (2016):
+                                          * Snapchat (~200M)
+
+                                          * Twitter (~300M)
+
+                                          * Instagram (~500M)
+
+Ushortform_multi(2016)=1,000,000,000U_{shortform\_multi}(2016) = 1{,}000{,}000{,}000Ushortform_multi​(2016)=1,000,000,000
+This prevents misclassification of shortform-native virals using YouTube’s MAU as an inappropriate denominator.
+________________
+
+
+C — Cross-Platform Coefficient
+Measures cultural escape velocity beyond the originating platform.
+Scoring rubric:
+                                             * Platform-native only: 1.0
+
+                                             * Spread to 2 platforms: 1.5
+
+                                             * Spread to 3+ platforms: 2.0
+
+                                             * Mainstream media coverage: 2.5
+
+                                             * Became cultural reference / catchphrase: 3.0+
+
+C is deliberately uncapped for extreme historical anomalies, but values above 3.0 require extraordinary justification.
+________________
+
+
+CSI INTERPRETATION
+CSI is not a probability and is not bounded by 1.
+Values above 1 indicate exposure that exceeded the platform’s available audience at the time through:
+                                                * Time
+
+                                                * Cross-platform diffusion
+
+                                                * Cultural persistence
+
+Interpretation Tiers (Modern-era baseline)
+                                                   * CSI < 0.01 — Low saturation (niche)
+
+                                                   * 0.01–0.05 — Moderate saturation
+
+                                                   * 0.05–0.10 — High saturation
+
+                                                   * 0.10–1.0 — Cultural event
+
+                                                   * 1.0–5.0 — Cultural phenomenon
+
+                                                   * 5.0+ — Historical anomaly
+
+Note for historical content (V2.0 clarification):
+ Pre-2010 virals often exceed these ranges (e.g., CSI ~7–12) due to:
+                                                      * Smaller denominators UUU
+
+                                                      * Strong cross-platform diffusion effects CCC
+
+                                                      * Structural conditions that allow saturation to exceed platform-era baselines
+
+This does not break the framework — it is exactly what CSI is designed to reveal.
+________________
+
+
+End of V2.0 — Part I (Revised)
+(Worked examples, niche factor table, TVS, TVI, and comparative tables appear in Part II)
+________________
+
+
+
+
+The Viral Impact Framework (V2.0)
+Part II — Worked Examples, Tables, and Era Calibration
+Version: 2.0 (Mathematically Verified)
+Status: Final draft for publication (Part II)
+________________
+
+
+1) Purpose of Part II
+Part I defined the framework (CSI, TVS, TVI) and the core premise:
+Culture is not a spike; it’s a filter. Time doesn’t kill meaning; it selects it.
+Part II provides:
+                                                         1. The niche factor table (used when raw “internet population” overstates reachable audience in early eras).
+
+                                                         2. The U selection hierarchy, including the multi-platform shortform composite rule.
+
+                                                         3. Canonical worked examples with calculator-ready inputs and internally consistent outputs.
+
+________________
+
+
+2) The Niche Factor Table (for early-era audience correction)
+When scoring early virals (especially pre-YouTube), using total internet users as U can overstate addressable reach. Niche factors are used only when needed (typically 1996–2009), and should be applied conservatively.
+Standardized Niche Factor Table (V2.0)
+Content Type
+	Factor
+	Typical Years
+	Rationale
+	Gaming meme (English)
+	0.35
+	1996–2004
+	English + gaming intersection (participation constraint)
+	Early viral video
+	0.25
+	2001–2004
+	Broadband-capable subset; video sharing friction was extreme
+	English meme/content
+	0.50
+	1996–2004
+	English-speaking web subset
+	Visual / universal
+	0.70
+	1996–2004
+	Language-agnostic reach (still distribution-limited)
+	Mainstream / global
+	1.00
+	All eras
+	Truly universal content with minimal constraint
+	Rule: niche factors adjust U, not V.
+________________
+
+
+3) U Selection Hierarchy (including shortform multi-platform rule)
+U is always the active user base at the moment of initial virality, not today’s platform size.
+U Hierarchy (V2.0)
+                                                            1. Platform-native virality: use that platform’s active users at breakout moment.
+
+                                                            2. Pre-platform virality (forums/email/Flash sites): use internet users at the time, then apply niche factor if required.
+
+                                                            3. Multi-platform shortform virality: use a shortform ecosystem composite U for that year.
+
+Multi-platform shortform composite (2016-era rule)
+Some virals are not “YouTube virals” even if YouTube later hosts copies. Damn Daniel is the clean example: Snapchat breakout → Twitter propagation → Instagram spread.
+Rule (2016 shortform multi-platform):
+ Snapchat (~200M) + Twitter (~300M) + Instagram (~500M) ≈ 1.0B
+ So: U_shortform_multi(2016) = 1,000,000,000
+________________
+
+
+4) Canonical Worked Examples (V2.0 verified)
+A) All Your Base Are Belong To Us (2000) — Pre-platform meme
+Inputs
+                                                               * V: 300,000,000 impressions (lifetime multi-surface estimate)
+
+                                                               * A: 1.0 (Pre-platform exception: no platform accounts existed to churn)
+
+                                                               * U: 150,000,000 (internet users × niche factor)
+
+                                                               * C: 3.5 (escaped into cultural reference + mainstream recognition)
+
+                                                               * SRC: 3.0 (Pre-YouTube structural resistance max)
+
+CSI
+                                                                  * CSI = (V / A) / U × C
+
+                                                                  * CSI = (300M / 1.0) / 150M × 3.5
+
+                                                                  * CSI = 2.0 × 3.5
+
+                                                                  * CSI = 7.0
+
+TVS Inputs
+                                                                     * P: 180 (capped)
+
+                                                                     * R: 0.52
+
+                                                                     * L: 3.0 (historical artifact status)
+
+TVS
+                                                                        * TVS = 180 × 0.52 × 3.0
+
+                                                                        * TVS = 280.8
+
+TVI
+                                                                           * TVI = CSI × log₁₀(TVS + 1) × SRC
+
+                                                                           * TVI = 7.0 × log₁₀(281.8) × 3.0
+
+                                                                           * log₁₀(281.8) ≈ 2.450
+
+                                                                           * TVI ≈ 51.45
+
+________________
+
+
+B) Numa Numa (2004) — Early viral video
+Inputs
+                                                                              * V: 700,000,000 impressions (lifetime estimate across reposts + media cycles)
+
+                                                                              * A: 1.0 (Pre-platform exception applies)
+
+                                                                              * U: 200,000,000 (internet users × early-video niche factor)
+
+                                                                              * C: 3.5 (mainstream coverage + enduring reference)
+
+                                                                              * SRC: 3.0 (Pre-YouTube)
+
+CSI
+                                                                                 * CSI = (700M / 1.0) / 200M × 3.5
+
+                                                                                 * CSI = 3.5 × 3.5
+
+                                                                                 * CSI = 12.25
+
+TVS Inputs
+                                                                                    * P: 180 (capped)
+
+                                                                                    * R: 0.75
+
+                                                                                    * L: 3.0 (historical artifact status)
+
+TVS
+                                                                                       * TVS = 180 × 0.75 × 3.0
+
+                                                                                       * TVS = 405
+
+TVI
+                                                                                          * TVI = 12.25 × log₁₀(406) × 3.0
+
+                                                                                          * log₁₀(406) ≈ 2.608
+
+                                                                                          * TVI ≈ 95.86
+
+________________
+
+
+C) Charlie Bit My Finger (2007) — Early YouTube archetype
+Inputs
+                                                                                             * V = 880,000,000
+
+                                                                                             * A = 2.5
+
+                                                                                             * U = 100,000,000
+
+                                                                                             * C = 3.0
+
+                                                                                             * P = 180 (cap)
+
+                                                                                             * R = 0.56
+
+                                                                                             * L = 2.5
+
+                                                                                             * SRC = 2.5
+
+CSI
+                                                                                                * CSI = (880M / 2.5) / 100M × 3.0
+
+                                                                                                * CSI = 10.56
+
+TVS
+                                                                                                   * TVS = 180 × 0.56 × 2.5
+
+                                                                                                   * TVS = 252
+
+TVI
+                                                                                                      * TVI = 10.56 × log₁₀(253) × 2.5
+
+                                                                                                      * log₁₀(253) ≈ 2.403
+
+                                                                                                      * TVI ≈ 63.40
+
+________________
+
+
+D) Gangnam Style (2012) — Mass Adoption era (calculated)
+Inputs (calibration-grade, publication-ready)
+                                                                                                         * V: 4,800,000,000
+
+                                                                                                         * A: 2.0 (2012 upload; long lifespan across mobile/multi-account era)
+
+                                                                                                         * U: 1,000,000,000 (approx active global platform scale at breakout moment, era-consistent baseline)
+
+                                                                                                         * C: 3.0 (cross-platform + mainstream media + global catchphrase recognition)
+
+                                                                                                         * P: 180 (cap)
+
+                                                                                                         * R: 0.40 (regular resurfacing but not constant revival culture)
+
+                                                                                                         * L: 2.5 (historical artifact status broadly accepted)
+
+                                                                                                         * SRC: 2.0 (Mass Adoption era)
+
+CSI
+                                                                                                            * CSI = (4.8B / 2.0) / 1.0B × 3.0
+
+                                                                                                            * CSI = 2.4 × 3.0
+
+                                                                                                            * CSI = 7.2
+
+TVS
+                                                                                                               * TVS = 180 × 0.40 × 2.5
+
+                                                                                                               * TVS = 180
+
+TVI
+                                                                                                                  * TVI = 7.2 × log₁₀(181) × 2.0
+
+                                                                                                                  * log₁₀(181) ≈ 2.258
+
+                                                                                                                  * TVI ≈ 32.52
+
+Classification: Cultural milestone (high saturation + validated legacy, lower SRC than early eras)
+________________
+
+
+E) Harlem Shake (2013) — Format meme spike (calculated)
+Inputs (calibration-grade, publication-ready)
+                                                                                                                     * V: 2,900,000,000
+
+                                                                                                                     * A: 2.0
+
+                                                                                                                     * U: 1,000,000,000
+
+                                                                                                                     * C: 2.5 (strong cross-platform spread + format replication, less enduring lexicon than top artifacts)
+
+                                                                                                                     * P: 60 (format meme relevance tends to decay faster)
+
+                                                                                                                     * R: 0.30 (occasional resurfacing)
+
+                                                                                                                     * L: 2.0 (meme format archetype)
+
+                                                                                                                     * SRC: 2.0 (Mass Adoption era)
+
+CSI
+                                                                                                                        * CSI = (2.9B / 2.0) / 1.0B × 2.5
+
+                                                                                                                        * CSI = 1.45 × 2.5
+
+                                                                                                                        * CSI = 3.625
+
+TVS
+                                                                                                                           * TVS = 60 × 0.30 × 2.0
+
+                                                                                                                           * TVS = 36
+
+TVI
+                                                                                                                              * TVI = 3.625 × log₁₀(37) × 2.0
+
+                                                                                                                              * log₁₀(37) ≈ 1.568
+
+                                                                                                                              * TVI ≈ 11.37
+
+Classification: Cultural event (huge moment + format replication, weaker long-run validation than milestones)
+________________
+
+
+F) Damn Daniel (2016) — Multi-platform shortform (corrected + honest)
+Inputs
+                                                                                                                                 * V: 45,000,000
+
+                                                                                                                                 * A: 1.5
+
+                                                                                                                                 * U: 1,000,000,000 (2016 shortform composite)
+
+                                                                                                                                 * C: 2.0
+
+                                                                                                                                 * P: 18
+
+                                                                                                                                 * R: 0.44
+
+                                                                                                                                 * L: 1.5
+
+                                                                                                                                 * SRC: 1.5 (Fragmentation era)
+
+CSI
+                                                                                                                                    * CSI = (45M / 1.5) / 1B × 2.0
+
+                                                                                                                                    * CSI = 0.060
+
+TVS
+                                                                                                                                       * TVS = 18 × 0.44 × 1.5
+
+                                                                                                                                       * TVS ≈ 12
+
+TVI
+                                                                                                                                          * TVI = 0.060 × log₁₀(13) × 1.5
+
+                                                                                                                                          * log₁₀(13) ≈ 1.114
+
+                                                                                                                                          * TVI ≈ 0.10
+
+Classification: Ephemeral
+________________
+
+
+G) Modern TikTok Viral (2024) — Baseline reference
+See Part I for the worked example.
+Table entry here is included as a modern-era baseline demonstrating that TVS often begins near 0 by definition until time validates persistence.
+________________
+
+
+5) Comparative Table (V2.0 corrected)
+Content
+	Year
+	V (views/impressions)
+	CSI
+	TVS
+	SRC
+	TVI
+	Classification
+	All Your Base Are Belong To Us
+	2000
+	300M
+	7.00
+	280.8
+	3.0
+	51.45
+	Historical phenomenon
+	Numa Numa
+	2004
+	700M
+	12.25
+	405.0
+	3.0
+	95.86
+	Historical phenomenon
+	Charlie Bit My Finger
+	2007
+	880M
+	10.56
+	252.0
+	2.5
+	63.40
+	Historical phenomenon
+	Gangnam Style
+	2012
+	4.8B
+	7.20
+	180.0
+	2.0
+	32.52
+	Cultural milestone
+	Harlem Shake
+	2013
+	2.9B
+	3.63
+	36.0
+	2.0
+	11.37
+	Cultural event
+	Damn Daniel
+	2016
+	45M
+	0.060
+	12.0
+	1.5
+	0.10
+	Ephemeral
+	Modern TikTok Viral
+	2024
+	50M
+	0.036
+	0.0
+	1.0
+	0.00
+	Ephemeral
+	CSI Interpretation (from Part I — modern-era baseline)
+                                                                                                                                             * < 0.01: Low saturation
+
+                                                                                                                                             * 0.01–0.05: Moderate saturation
+
+                                                                                                                                             * 0.05–0.10: High saturation
+
+                                                                                                                                             * 0.10–1.0: Cultural event
+
+                                                                                                                                             * 1.0–5.0: Cultural phenomenon
+
+                                                                                                                                             * 5.0+: Historical anomaly (pre-2010 often exceeds due to smaller denominators + structural conditions)
+
+________________
+
+
+6) Key Observations (what the table demonstrates)
+                                                                                                                                                1. Pre-platform virals (2000–2004) achieve the highest TVI despite lower absolute views because their saturation was high relative to reachable audience, and structural resistance (SRC) was maximal.
+
+                                                                                                                                                2. Temporal validation (TVS) is what modern view counts usually fail to earn.
+
+                                                                                                                                                3. Damn Daniel is correctly classified as Ephemeral despite being “remembered.”
+ Nostalgia ≠ cultural impact.
+
+                                                                                                                                                4. The framework cleanly separates attention (views) from validation (time-tested relevance).
+The Viral Impact Framework
+Version 2.0 — Part III: Robustness, Validation & Implementation
+Status: Final (Corrected & Signed Off)
+Scope: Sensitivity analysis, uncertainty management, defensibility, limitations, ethics, and deployment
+________________
+
+
+PURPOSE OF PART III
+Part I defined the framework.
+Part II demonstrated it on real historical cases.
+Part III exists to ensure the framework survives scrutiny.
+This section addresses:
+                                                                                                                                                   * Which parameters matter most — and why
+
+                                                                                                                                                   * Where uncertainty exists — and how it is handled
+
+                                                                                                                                                   * How subjective judgment is constrained
+
+                                                                                                                                                   * What the framework does not attempt to do
+
+                                                                                                                                                   * How the system can be implemented reproducibly
+
+                                                                                                                                                   * Why this framework is diagnostic, not extractive
+
+The aim is not to claim perfection.
+The aim is to be explicit, bounded, honest, and falsifiable.
+________________
+
+
+1) SENSITIVITY & UNCERTAINTY OVERVIEW
+The True Viral Impact metric is defined as:
+TVI=CSI×log⁡10(TVS+1)×SRCTVI = CSI \times \log_{10}(TVS + 1) \times SRCTVI=CSI×log10​(TVS+1)×SRC
+This structure was deliberately chosen to reflect how culture behaves over time.
+1.1 Structural Properties
+The formula has three critical properties:
+Zero-locking
+                                                                                                                                                      * If CSI = 0, then TVI = 0
+
+                                                                                                                                                      * If TVS = 0, then TVI = 0
+
+No amount of attention can compensate for zero validation, and no amount of time can compensate for zero saturation.
+Non-explosive scaling
+                                                                                                                                                         * TVS is logarithmic
+
+                                                                                                                                                         * Long persistence increases impact, but never dominates it
+
+Era fairness
+                                                                                                                                                            * Structural Resistance (SRC) amplifies difficulty without overwhelming evidence
+
+                                                                                                                                                            * Early eras are acknowledged without romantic inflation
+
+These properties ensure stability:
+small parameter changes do not cause dramatic outcome flips except near category boundaries — exactly where ambiguity should exist.
+________________
+
+
+2) PARAMETER UNCERTAINTY & IMPACT (CORRECTED)
+Not all parameters contribute equally to:
+                                                                                                                                                               * Outcome variance
+
+                                                                                                                                                               * Empirical uncertainty
+
+                                                                                                                                                               * Validation risk
+
+It is therefore incorrect to rank parameters only by where they appear in the equation.
+What matters is how much they move TVI in practice and how well they are empirically constrained.
+Parameter Uncertainty & Impact Matrix (V2.0)
+Parameter
+	Mathematical Role
+	Empirical Uncertainty
+	TVI Sensitivity
+	Validation Priority
+	A (Account multiplication)
+	CSI denominator
+	HIGH
+	HIGH (2–3× TVI variance)
+	#1 — Requires survey validation
+	CSI
+	Direct TVI multiplier
+	Medium
+	HIGH
+	#2 — Depends on A accuracy
+	SRC
+	Era coefficient
+	Low
+	Medium
+	#3 — Historically bounded
+	TVS
+	Log-scaled factor
+	Medium
+	Medium
+	#4 — Documentation-driven
+	C
+	CSI multiplier
+	Medium
+	Medium
+	#5 — Evidence-gated
+	R / L
+	TVS components
+	Low
+	LOW (<5%)
+	#6 — Curated judgment
+	Key Insight
+Although A appears only in the CSI denominator, it produces the largest TVI variance in practice and is the least empirically constrained parameter.
+This is why:
+                                                                                                                                                                  * A is treated conservatively
+
+                                                                                                                                                                  * A is presented with ranges where relevant
+
+                                                                                                                                                                  * A is the top validation priority
+
+________________
+
+
+3) A-FACTOR HANDLING & VALIDATION STRATEGY
+3.1 Why A Is Uncertain
+A reflects real-world behavior:
+                                                                                                                                                                     * Multiple accounts per person
+
+                                                                                                                                                                     * Device switching
+
+                                                                                                                                                                     * Password loss and platform churn
+
+Platforms do not publish reliable lifetime account data.
+Any framework that pretends A is exact is dishonest.
+________________
+
+
+3.2 Adopted Presentation Rule (V2.0)
+The framework therefore uses a dual-output strategy:
+                                                                                                                                                                        * Primary tables:
+
+                                                                                                                                                                           * Single headline TVI using midpoint A
+
+                                                                                                                                                                              * Appendix / footnotes:
+
+                                                                                                                                                                                 * TVI ranges showing A uncertainty (†)
+
+Example:
+Charlie Bit My Finger
+ TVI = 63.4†
+ (Range ≈ 51–80 depending on A)
+ † Pending empirical A-factor validation
+This preserves:
+                                                                                                                                                                                    * Readability
+
+                                                                                                                                                                                    * Mathematical integrity
+
+                                                                                                                                                                                    * Academic defensibility
+
+________________
+
+
+3.3 Planned Empirical Validation
+Recommended study design:
+                                                                                                                                                                                       * Sample size: ≥100 users
+
+                                                                                                                                                                                       * Stratified by age cohort
+
+                                                                                                                                                                                       * Question:
+
+
+“How many distinct accounts have you created on YouTube / TikTok in your lifetime?”
+
+
+Responses weighted by:
+                                                                                                                                                                                          * Platform intensity
+
+                                                                                                                                                                                          * Mobile adoption era
+
+                                                                                                                                                                                          * Frequency of account loss / recreation
+
+Until such data exists, A remains bounded, not guessed.
+________________
+
+
+4) SUBJECTIVE VARIABLES & CONSTRAINTS
+Some parameters require judgment.
+This is unavoidable when measuring culture.
+The framework limits subjectivity through explicit gates.
+________________
+
+
+4.1 Cross-Platform Coefficient (C)
+C may only increase when verifiable evidence exists:
+Level
+	Requirement
+	1.0
+	Platform-native only
+	1.5
+	Clear spread to ≥2 platforms
+	2.0
+	Spread to ≥3 platforms
+	2.5
+	Verified mainstream media coverage
+	3.0+
+	Entered cultural lexicon or language
+	Default behavior is downward, not upward.
+________________
+
+
+4.2 Resurfacing (R)
+R counts documented events, not impressions.
+Valid resurfacing includes:
+                                                                                                                                                                                             * News coverage
+
+                                                                                                                                                                                             * Platform-wide trend revival
+
+                                                                                                                                                                                             * Documentary or academic reference
+
+                                                                                                                                                                                             * Official anniversary features
+
+Algorithmic resurfacing alone does not count.
+________________
+
+
+4.3 Legacy (L)
+L reflects a state change, not a gradient:
+                                                                                                                                                                                                * Meme format
+
+                                                                                                                                                                                                * Lexical reference
+
+                                                                                                                                                                                                * Academic object
+
+                                                                                                                                                                                                * Historical artifact
+
+Partial credit is deliberately avoided.
+________________
+
+
+5) INTER-RATER RELIABILITY (PLANNED)
+Independent evaluators will score a shared set of canonical examples to assess:
+                                                                                                                                                                                                   * CSI agreement (expected: high — objective inputs)
+
+                                                                                                                                                                                                   * TVS agreement (expected: moderate–high)
+
+                                                                                                                                                                                                   * Classification agreement (expected: high for clear cases)
+
+Disagreement is expected primarily near category boundaries, reflecting genuine cultural ambiguity rather than model failure.
+________________
+
+
+6) LIMITATIONS (EXPLICIT)
+This framework does not:
+                                                                                                                                                                                                      * Measure artistic quality
+
+                                                                                                                                                                                                      * Predict future virality
+
+                                                                                                                                                                                                      * Optimize content creation
+
+                                                                                                                                                                                                      * Capture private or offline spread without proxies
+
+                                                                                                                                                                                                      * Apply cleanly to non-media artifacts without adaptation
+
+This framework does:
+                                                                                                                                                                                                         * Correct platform inflation
+
+                                                                                                                                                                                                         * Separate attention from impact
+
+                                                                                                                                                                                                         * Treat time as a validator, not decay
+
+                                                                                                                                                                                                         * Align outcomes with human cultural memory
+
+                                                                                                                                                                                                         * Produce reproducible, falsifiable classifications
+
+________________
+
+
+7) ETHICAL POSITIONING
+This framework is diagnostic, not competitive.
+It is not designed to:
+                                                                                                                                                                                                            * Rank creators
+
+                                                                                                                                                                                                            * Encourage virality chasing
+
+                                                                                                                                                                                                            * Feed algorithmic optimization
+
+Its purpose is:
+                                                                                                                                                                                                               * Cultural preservation
+
+                                                                                                                                                                                                               * Media history
+
+                                                                                                                                                                                                               * Analytical clarity
+
+It explains culture.
+It does not attempt to manufacture it.
+________________
+
+
+8) IMPLEMENTATION SPECIFICATION
+8.1 Required Inputs per Item
+Core Metadata
+                                                                                                                                                                                                                  * Title
+
+                                                                                                                                                                                                                  * Year of initial virality
+
+                                                                                                                                                                                                                  * Platform(s) of distribution
+
+                                                                                                                                                                                                                  * Content type (for U selection)
+
+Quantitative Metrics
+                                                                                                                                                                                                                     * V (lifetime views or impressions, with source)
+
+                                                                                                                                                                                                                     * Upload year (if different from virality year)
+
+                                                                                                                                                                                                                     * Duration of cultural persistence (months)
+
+Qualitative Evidence
+                                                                                                                                                                                                                        * Platforms crossed (for C)
+
+                                                                                                                                                                                                                        * Media references (count + sources)
+
+                                                                                                                                                                                                                        * Resurfacing events (categorized)
+
+                                                                                                                                                                                                                        * Legacy status (binary classification)
+
+All subjective inputs must be evidence-cited.
+________________
+
+
+8.2 Calculation Order
+                                                                                                                                                                                                                           1. Determine distribution class
+
+                                                                                                                                                                                                                           2. Select U (platform / composite / niche-adjusted)
+
+                                                                                                                                                                                                                           3. Compute A (lifespan-based, with pre-platform exception)
+
+                                                                                                                                                                                                                           4. Calculate CSI
+
+                                                                                                                                                                                                                           5. Score TVS (P, R, L)
+
+                                                                                                                                                                                                                           6. Apply SRC
+
+                                                                                                                                                                                                                           7. Output TVI (and optional range)
+
+________________
+
+
+9) WHY THIS FRAMEWORK COULD NOT EXIST EARLIER
+This framework required:
+                                                                                                                                                                                                                              * Enough time for validation to occur
+
+                                                                                                                                                                                                                              * Enough platform inflation for metrics to diverge from memory
+
+                                                                                                                                                                                                                              * Enough algorithmic dominance for cultural erosion to be visible
+
+Only now can we see that:
+                                                                                                                                                                                                                                 * Views inflate
+
+                                                                                                                                                                                                                                 * Memory does not
+
+________________
+
+
+FINAL CONCLUSION
+View counts inflate.
+Accounts multiply.
+Platforms fragment.
+Algorithms bury history.
+But cultural memory is stubborn.
+What people think virality is:
+Views × speed × luck
+What this framework demonstrates it actually requires:
+                                                                                                                                                                                                                                    * Saturation, not scale
+
+                                                                                                                                                                                                                                    * Validation, not velocity
+
+                                                                                                                                                                                                                                    * Memory, not metrics
+
+Culture is not a spike. It is a filter.
+ Time does not kill meaning. It selects it.

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard • TVI Platform</title>
+  <link rel="icon" href="/assets/icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg0:#05070d; --bg1:#070b16; --bg2:#0a1024;
+      --surface: rgba(255,255,255,0.04); --surface-2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.10); --border-subtle: rgba(255,255,255,0.08);
+      --text:#ffffff; --text-2: rgba(255,255,255,0.78); --text-3: rgba(255,255,255,0.52);
+      --accent:#2ce0ff; --accent-dim: rgba(44,224,255,0.10);
+      --success:#34d399; --error:#fb7185;
+      --radius:16px; --radius-sm:12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(44,224,255,0.10), transparent 60%),
+                  radial-gradient(900px 700px at 100% 10%, rgba(167,139,250,0.08), transparent 55%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1) 55%, var(--bg2));
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 32px; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-family: 'Inter Tight'; font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .subtitle { color: var(--text-2); font-size: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .card h2 { font-family: 'Inter Tight'; font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+    .stat { text-align: center; padding: 20px; }
+    .stat-value { font-family: 'Space Mono'; font-size: 48px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 12px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+    .btn {
+      padding: 10px 16px; border: none; border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(44,224,255,0.22), rgba(44,224,255,0.08));
+      border: 1px solid rgba(44,224,255,0.35);
+      color: var(--text);
+    }
+    .btn-secondary { background: var(--surface-2); border: 1px solid var(--border-subtle); color: var(--text-2); }
+    .btn:hover { transform: translateY(-1px); }
+    .list-item {
+      padding: 12px 16px; border-bottom: 1px solid var(--border-subtle);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .list-item:last-child { border-bottom: none; }
+    .list-item .name { font-weight: 600; }
+    .list-item .meta { font-size: 12px; color: var(--text-3); }
+    .badge {
+      display: inline-block; padding: 4px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      background: var(--accent-dim); color: var(--accent);
+    }
+    .badge.pro { background: rgba(52,211,153,0.15); color: var(--success); }
+    .empty { text-align: center; padding: 40px; color: var(--text-3); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Dashboard</h1>
+      <p class="subtitle">Your TVI calculations, downloads, and API access</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="stat">
+          <div class="stat-value" id="calc-count">-</div>
+          <div class="stat-label">Calculations</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="stat">
+          <div class="stat-value" id="download-count">-</div>
+          <div class="stat-label">Reports Downloaded</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="stat">
+          <div class="stat-value"><span class="badge" id="plan-badge">Free</span></div>
+          <div class="stat-label">Current Plan</div>
+          <button class="btn btn-primary" id="upgrade-btn" style="margin-top:16px;width:100%;">Upgrade to Pro</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h2>Recent Calculations</h2>
+      <div id="recent-calcs" class="empty">Loading...</div>
+    </div>
+
+    <div class="card">
+      <h2>API Access</h2>
+      <p style="color:var(--text-2);font-size:14px;margin-bottom:16px;">Generate API keys to integrate TVI into your applications.</p>
+      <div id="api-keys" class="empty">Loading...</div>
+      <button class="btn btn-secondary" onclick="generateAPIKey()" style="margin-top:16px;">Generate New Key</button>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <a href="index.html" class="btn btn-secondary">← Back to Calculator</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.3/dist/umd/supabase.min.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const SUPABASE_URL = window.SUPABASE_URL || 'https://YOUR-PROJECT.supabase.co';
+    const SUPABASE_KEY = window.SUPABASE_KEY || 'YOUR-ANON-KEY';
+    const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const stripeKey = window.STRIPE_PUBLISHABLE_KEY || 'pk_test_...';
+    const stripe = Stripe(stripeKey);
+
+    async function loadDashboard() {
+      if (!supabaseClient) return;
+      
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (!session) {
+        window.location.href = '/index.html';
+        return;
+      }
+
+      const user = session.user;
+
+      // Load profile/plan
+      const { data: profile } = await supabaseClient
+        .from('profiles')
+        .select('plan')
+        .eq('id', user.id)
+        .single();
+
+      document.getElementById('plan-badge').textContent = profile?.plan || 'Free';
+      if (profile?.plan === 'pro') {
+        document.getElementById('plan-badge').classList.add('pro');
+        document.getElementById('upgrade-btn').style.display = 'none';
+      }
+
+      // Load calculations
+      const { data: calcs } = await supabaseClient
+        .from('calculations')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      document.getElementById('calc-count').textContent = calcs?.length || 0;
+
+      if (calcs && calcs.length > 0) {
+        document.getElementById('recent-calcs').innerHTML = calcs.map(c => `
+          <div class="list-item">
+            <div>
+              <div class="name">${c.inputs.name || c.inputs.title || 'Untitled'}</div>
+              <div class="meta">${c.domain} • ${new Date(c.created_at).toLocaleDateString()}</div>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <span class="badge">${c.outputs.type}: ${c.outputs.score.toFixed(1)}</span>
+              <button class="btn btn-secondary" onclick="window.location.href='/api/report?calcId=${c.id}'">PDF</button>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        document.getElementById('recent-calcs').innerHTML = '<div class="empty">No calculations yet. <a href="index.html">Run your first TVI →</a></div>';
+      }
+
+      // Load downloads
+      const { data: downloads } = await supabaseClient
+        .from('downloads')
+        .select('id')
+        .eq('user_id', user.id);
+
+      document.getElementById('download-count').textContent = downloads?.length || 0;
+
+      // Load API keys
+      const { data: keys } = await supabaseClient
+        .from('api_keys')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('active', true);
+
+      if (keys && keys.length > 0) {
+        document.getElementById('api-keys').innerHTML = keys.map(k => `
+          <div class="list-item">
+            <div>
+              <div class="name">${k.name || 'Unnamed Key'}</div>
+              <div class="meta" style="font-family:'Space Mono';font-size:11px;">${k.key}</div>
+              <div class="meta">Used: ${k.usage_count || 0} times</div>
+            </div>
+            <button class="btn btn-secondary" onclick="revokeKey('${k.id}')">Revoke</button>
+          </div>
+        `).join('');
+      } else {
+        document.getElementById('api-keys').innerHTML = '<div class="empty">No API keys yet.</div>';
+      }
+    }
+
+    async function generateAPIKey() {
+      if (!supabaseClient) return;
+      
+      const keyName = prompt('API Key name (optional):') || 'Unnamed Key';
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      
+      // Generate key (simple version - would use stored function in production)
+      const key = 'tvi_' + Array.from(crypto.getRandomValues(new Uint8Array(24)))
+        .map(b => b.toString(16).padStart(2, '0')).join('');
+
+      const { error } = await supabaseClient
+        .from('api_keys')
+        .insert({ user_id: session.user.id, key, name: keyName });
+
+      if (error) {
+        alert('Error generating key: ' + error.message);
+      } else {
+        alert('API Key generated: ' + key);
+        loadDashboard();
+      }
+    }
+
+    async function revokeKey(id) {
+      if (!confirm('Revoke this API key?')) return;
+      
+      await supabaseClient
+        .from('api_keys')
+        .update({ active: false })
+        .eq('id', id);
+
+      loadDashboard();
+    }
+
+    document.getElementById('upgrade-btn').addEventListener('click', async () => {
+      // Create Stripe checkout session
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId: 'price_pro_monthly' })
+      });
+      
+      const { sessionId } = await response.json();
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+      
+      if (error) alert('Checkout error: ' + error.message);
+    });
+
+    loadDashboard();
+  </script>
+</body>
+</html>
+

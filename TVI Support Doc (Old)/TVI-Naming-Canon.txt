@@ -1,0 +1,22 @@
+TVI System (Canonical) — Naming Reference
+-----------------------------------------
+Core metric: TVI (Temporal Validation Index).
+
+Component metrics (apply everywhere):
+* CSI — Contextual Saturation Index (includes A-Factor + Cross-Context Coefficient C).
+* TVS — Temporal Validation Score (Persistence × Resurfacing × Legacy).
+* SRC — Structural Resistance Coefficient (era difficulty).
+* A-Factor — Audience Multiplication Factor (account churn / audience turnover).
+* C — Cross-Context Coefficient (escape velocity beyond origin).
+
+Domain variants:
+* Viral media: TVI.
+* AI datasets: TDIS (Temporal Dataset Impact Score) reuses CSI/TVS/SRC with dataset-specific inputs.
+* Business methods: TVI-B (Business TVI).
+* Investments: ISPS (Investment Staying Power Score).
+
+Mental model (one line):
+CSI shows how loud it was. TVS shows how long it lasted. SRC shows how hard the era was. TVI shows how real it is.
+
+Use this as the naming authority for all supporting docs and calculators.
+

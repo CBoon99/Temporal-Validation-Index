@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applications • TVI Research</title>
+  <meta name="description" content="TVI applications: investment analysis (ISPS), AI data curation (TDIS), content strategy, and institutional decision-making.">
+  <link rel="icon" href="/assets/icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg0:#05070d;--bg1:#070b16;--bg2:#0a1024;--surface:rgba(255,255,255,0.04);--surface-2:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.10);--border-subtle:rgba(255,255,255,0.08);--text:#ffffff;--text-2:rgba(255,255,255,0.78);--text-3:rgba(255,255,255,0.52);--accent:#2ce0ff;--accent-dim:rgba(44,224,255,0.10);--radius:16px;--radius-sm:12px;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(1200px 800px at 20% -10%,rgba(44,224,255,0.10),transparent 60%),radial-gradient(900px 700px at 100% 10%,rgba(167,139,250,0.08),transparent 55%),linear-gradient(180deg,var(--bg0),var(--bg1) 55%,var(--bg2));color:var(--text);line-height:1.6;min-height:100vh;}
+    .container{max-width:900px;margin:0 auto;padding:60px 32px;}
+    header{margin-bottom:40px;}
+    h1{font-family:'Inter Tight';font-size:42px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;}
+    .subtitle{font-size:15px;color:var(--text-2);}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:32px;margin-bottom:24px;box-shadow:0 20px 40px rgba(0,0,0,0.5);}
+    h2{font-family:'Inter Tight';font-size:28px;font-weight:700;margin:32px 0 16px;color:var(--accent);}
+    h3{font-size:20px;font-weight:700;margin:24px 0 12px;}
+    p{margin-bottom:16px;color:var(--text-2);font-size:15px;line-height:1.7;}
+    ul{margin:16px 0 16px 24px;color:var(--text-2);}
+    li{margin-bottom:10px;}
+    strong{color:var(--text);}
+    .btn{padding:12px 24px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;transition:0.15s;}
+    .btn-secondary{background:transparent;border:1px solid var(--border);color:var(--text);}
+    .btn-secondary:hover{border-color:var(--accent);}
+    footer{text-align:center;margin-top:60px;padding-top:24px;border-top:1px solid var(--border-subtle);color:var(--text-3);font-size:13px;}
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    @media (max-width:600px){
+      .container{padding:40px 20px;}
+      h1{font-size:32px;}
+      .card{padding:20px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Applications</h1>
+      <p class="subtitle">Practical uses of the Temporal Validation Impact framework</p>
+    </header>
+
+    <div class="card">
+      <h2>Investment Analysis</h2>
+      <p><strong>ISPS (Investment Staying Power Score)</strong> could complement traditional valuation metrics by quantifying staying power independent of current fundamentals.</p>
+      
+      <h3>Use Case</h3>
+      <p>Institutional investors evaluating long-term holdings could use ISPS to identify companies with structural advantages that persist through market cycles. Traditional metrics (P/E ratios, growth rates) measure current state; ISPS measures durability trajectory.</p>
+
+      <h3>Example</h3>
+      <ul>
+        <li>Apple ISPS 7,775 vs Peloton ISPS 82 — formula correctly predicted Peloton's collapse (-92%) while Apple sustained (+82%)</li>
+        <li>WeWork ISPS 8 flagged structural fragility before IPO failure and bankruptcy</li>
+        <li>Microsoft/Amazon ISPS >6,700 identified crisis-resistant foundations</li>
+      </ul>
+
+      <p><strong>Insight:</strong> High ISPS companies demonstrate crisis survival, leadership continuity, and category dominance — attributes invisible in quarterly earnings but critical for multi-decade holdings.</p>
+    </div>
+
+    <div class="card">
+      <h2>AI Training Data Curation</h2>
+      <p><strong>TDIS (Training Data Impact Score)</strong> could guide dataset selection toward temporally validated sources, reducing model brittleness.</p>
+      
+      <h3>Use Case</h3>
+      <p>AI researchers selecting training data could prioritize high-TDIS datasets (MNIST, ImageNet, Common Crawl) over low-TDIS alternatives (recent web scrapes, potentially deprecated sources). This optimizes for model longevity, not just current benchmark performance.</p>
+
+      <h3>Example</h3>
+      <ul>
+        <li>MNIST TDIS 40.21 — pedagogical standard for 26 years, cross-framework universal</li>
+        <li>ImageNet TDIS 7.97 — foundation despite age, enabled deep learning revolution</li>
+        <li>LAION-5B TDIS 0.00 — massive scale but uncertain legal/temporal validation</li>
+      </ul>
+
+      <p><strong>Insight:</strong> High-TDIS datasets demonstrate sustained adoption and cross-framework universality. Training on temporally validated data may improve model robustness and reduce retraining frequency.</p>
+    </div>
+
+    <div class="card">
+      <h2>Content Strategy</h2>
+      <p>Organizations optimizing for long-term brand building could use <strong>TVI</strong> to evaluate content durability rather than immediate engagement metrics.</p>
+      
+      <h3>Use Case</h3>
+      <p>Marketing teams could distinguish between attention-grabbing content (high views, low TVI) and brand-building content (moderate views, high TVI). This shifts strategy from viral spikes to cultural persistence.</p>
+
+      <h3>Insight</h3>
+      <p>Content with high Saturation but low Validation generates immediate attention without lasting impact. Content with moderate Saturation but high Validation builds enduring brand equity.</p>
+      
+      <p><strong>Implication:</strong> Brands should measure not just reach, but temporal validation — resurfacing rate, reference frequency, and cultural embedding.</p>
+    </div>
+
+    <div class="card">
+      <h2>Institutional Decision-Making</h2>
+      <p>The <strong>Observer Temporal Signature (τ)</strong> model could help organizations recognize when short-horizon decision-makers are systematically undervaluing long-horizon opportunities.</p>
+      
+      <h3>Use Case</h3>
+      <p>Boards evaluating strategic investments could explicitly model decision-horizon differences. A CFO with a 2-year budget cycle (V=24 months) will systematically undervalue initiatives whose payoff horizon exceeds 24 months — not due to poor judgment, but due to perceptual limitation.</p>
+
+      <h3>Framework Application</h3>
+      <ul>
+        <li>Identify decision-makers' validation horizons (V)</li>
+        <li>Flag proposals whose peak validation lies outside dominant V</li>
+        <li>Create "long-horizon advocates" to represent future value</li>
+        <li>Weight votes by temporal signature alignment with proposal timeframe</li>
+      </ul>
+
+      <p><strong>Insight:</strong> Systematic disagreement about importance often reflects temporal signature misalignment, not intelligence or values differences. Organizations that account for this can make better long-term decisions.</p>
+    </div>
+
+    <div style="text-align:center;margin:48px 0;">
+      <a href="/Universal-Impact-Calculator-v1.0.1.html"><button class="btn btn-secondary">Try the TVI Calculator →</button></a>
+    </div>
+
+    <footer>
+      <p><a href="/research/index.html">← Back to Research</a> • <a href="/research/collaborate.html">Collaborate</a></p>
+    </footer>
+  </div>
+</body>
+</html>
+

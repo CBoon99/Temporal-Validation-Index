@@ -1,0 +1,206 @@
+﻿The Viral Impact Framework
+Why some things are remembered — and most are forgotten
+The problem everyone feels (but can’t measure)
+We live in a world obsessed with spikes.
+Views. Likes. Shares. Trending charts.
+Everything is judged by how fast and how loud it gets attention.
+But deep down, everyone knows this is broken.
+Some things explode and vanish.
+Others move slowly, resurface for years, and become reference points.
+The problem is simple:
+Attention is easy to measure.
+Impact is not.
+So we’ve been using the wrong yardstick.
+________________
+
+
+A simple idea
+The Viral Impact Framework asks a different question:
+Not “How big was it?”
+But “Did it last?”
+It treats culture the way historians already do — but with structure.
+Instead of rewarding speed, it rewards:
+* saturation
+
+* survival
+
+* and resistance to forgetting
+
+In other words:
+memory beats momentum.
+________________
+
+
+The core insight (no math yet)
+For something to matter culturally, three things must be true:
+   1. People had to see it
+
+   2. It had to survive time
+
+   3. It had to break through the conditions of its era
+
+Miss any one of those, and it fades.
+The framework simply formalises this.
+________________
+
+
+The three questions the system asks
+1. How saturated was it at the time?
+This answers:
+“How much of the available audience actually encountered this?”
+Not total views.
+Not today’s platform size.
+But reach relative to what was possible then.
+Seeing 10 million people in 2003 is not the same as 10 million in 2024.
+This is called Cultural Saturation.
+________________
+
+
+2. Did it survive — or did it vanish?
+This answers:
+“Did it resurface, get referenced, or become part of the conversation later?”
+A thing that mattered:
+      * gets cited
+
+      * gets revived
+
+      * gets studied
+
+      * gets referenced years later
+
+A thing that didn’t:
+         * stays locked in the moment it trended
+
+This is called Temporal Validation.
+Time acts as the judge.
+________________
+
+
+3. How hard was it to break through back then?
+This answers:
+“What were the structural conditions of the era?”
+Before social media:
+            * distribution was harder
+
+            * sharing was manual
+
+            * audiences were fragmented
+
+Breaking through in 2001 is not the same as breaking through in 2024.
+This is called Structural Resistance.
+________________
+
+
+The philosophy underneath
+Here’s the quiet principle driving the whole system:
+Culture is not a spike.
+It’s a filter.
+Time doesn’t dilute impact.
+It reveals it.
+Most things fail the filter.
+A few pass through.
+The framework doesn’t predict culture.
+It explains why some things survived it.
+________________
+
+
+The system stack (now the math, gently)
+Under the hood, the framework has three layers.
+You don’t need to understand the equations to use the idea —
+but the math is there to keep it honest.
+________________
+
+
+Layer 1: Cultural Saturation Index (CSI)
+This measures how widely something spread relative to what was possible.
+In plain English:
+               * views (corrected for fake inflation)
+
+               * divided by the size of the audience at the time
+
+               * adjusted for how many platforms it crossed
+
+What it prevents:
+                  * modern content winning just because platforms are huge
+
+                  * old content being punished for existing early
+
+If something had nowhere to go and still went everywhere, CSI is high.
+________________
+
+
+Layer 2: Temporal Validation Score (TVS)
+This measures whether time agreed with the initial hype.
+It looks at:
+                     * how long the thing stayed alive
+
+                     * whether it resurfaced
+
+                     * whether it entered language, canon, or study
+
+If nothing ever comes back to it, the score collapses.
+This is intentional.
+No nostalgia bonuses.
+No retroactive importance.
+________________
+
+
+Layer 3: True Viral Impact (TVI)
+This is the final output.
+It only rises if:
+                        * saturation happened and
+
+                        * time validated it and
+
+                        * the era made it hard
+
+If any one of those is zero, the final score is zero.
+This “zero-locking” property is deliberate.
+No amount of views can compensate for zero memory.
+________________
+
+
+What this framework does not do (by design)
+It does not:
+                           * measure quality
+
+                           * predict future virality
+
+                           * optimise content creation
+
+                           * rank people competitively
+
+                           * tell you what should matter
+
+That’s not a flaw.
+That’s restraint.
+The framework is diagnostic, not prescriptive.
+It explains culture.
+It does not try to manufacture it.
+________________
+
+
+Why this couldn’t exist earlier
+Ironically, this framework only becomes possible after the age of metrics.
+We needed:
+                              * decades of internet history
+
+                              * platform inflation to become obvious
+
+                              * nostalgia to distort perception
+
+                              * “viral” to lose meaning
+
+Only then does the difference between attention and impact become visible.
+This is a framework born from hindsight — which is exactly what culture requires.
+________________
+
+
+The simple takeaway
+Most things trend.
+Very few things endure.
+The Viral Impact Framework gives language — and structure —
+to something people already feel:
+Some moments were loud.
+Others became landmarks.
+This system exists to tell the difference.
