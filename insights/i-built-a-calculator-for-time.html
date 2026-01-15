@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I Built a Calculator for Time: Why Lasting Impact Beats Viral Noise • TVI Insights</title>
+  <meta name="description" content="Carl Boon explains why he built the Time Value of Impact (TVI) calculator — a new way to measure what lasts, not what's loud. A manifesto for long-term thinking in a viral world.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="canonical" href="https://TVI-Framework.com/insights/i-built-a-calculator-for-time.html">
+  <meta name="robots" content="index,follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="I Built a Calculator for Time: Why Lasting Impact Beats Viral Noise">
+  <meta property="og:description" content="Why Carl Boon built the TVI calculator to measure what lasts, not what's loud.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://TVI-Framework.com/insights/i-built-a-calculator-for-time.html">
+  <meta property="og:image" content="https://TVI-Framework.com/assets/blog/tvi-calculator-cover.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="I Built a Calculator for Time">
+  <meta name="twitter:description" content="Why Carl Boon built TVI to measure what lasts, not what's loud.">
+  <meta name="twitter:image" content="https://TVI-Framework.com/assets/blog/tvi-calculator-cover.jpg">
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "I Built a Calculator for Time: Why Lasting Impact Beats Viral Noise",
+    "description": "Why Carl Boon built the Time Value of Impact (TVI) calculator to measure what lasts, not what's loud.",
+    "author": {
+      "@type": "Person",
+      "name": "Carl Boon"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "BoonMind",
+      "url": "https://boonmind.com"
+    },
+    "datePublished": "2026-01-15",
+    "dateModified": "2026-01-15",
+    "image": "https://TVI-Framework.com/assets/blog/tvi-calculator-cover.jpg",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://TVI-Framework.com/insights/i-built-a-calculator-for-time.html"
+    },
+    "articleSection": "TVI Insights",
+    "keywords": ["Time Value of Impact", "TVI Calculator", "long-term value", "impact measurement", "Carl Boon", "BoonMind"]
+  }
+  </script>
+
+  <link rel="icon" href="/assets/icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;600&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg0:#05070d;--bg1:#070b16;--bg2:#0a1024;--surface:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.10);--border-subtle:rgba(255,255,255,0.08);--text:#ffffff;--text-2:rgba(255,255,255,0.78);--text-3:rgba(255,255,255,0.52);--accent:#2ce0ff;--accent-dim:rgba(44,224,255,0.10);--radius:16px;--radius-sm:12px;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(1200px 800px at 20% -10%,rgba(44,224,255,0.10),transparent 60%),radial-gradient(900px 700px at 100% 10%,rgba(167,139,250,0.08),transparent 55%),linear-gradient(180deg,var(--bg0),var(--bg1) 55%,var(--bg2));color:var(--text);line-height:1.7;min-height:100vh;}
+    .container{max-width:800px;margin:0 auto;padding:60px 32px;}
+    .post-header{text-align:center;margin-bottom:48px;}
+    .post-tag{display:inline-block;padding:6px 14px;background:var(--accent-dim);border:1px solid var(--accent);border-radius:999px;font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:16px;}
+    h1{font-family:'Inter Tight';font-size:42px;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;line-height:1.2;}
+    .post-meta{font-size:14px;color:var(--text-3);margin-bottom:32px;}
+    .post-content{font-family:'Crimson Pro',Georgia,serif;font-size:18px;line-height:1.8;color:var(--text-2);}
+    .post-content h2{font-family:'Inter Tight';font-size:28px;font-weight:700;margin:48px 0 16px;color:var(--accent);}
+    .post-content h3{font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--text);}
+    .post-content p{margin-bottom:24px;}
+    .post-content ul{margin:16px 0 24px 28px;}
+    .post-content li{margin-bottom:12px;}
+    .post-content strong{color:var(--text);}
+    .callout{background:var(--accent-dim);border-left:3px solid var(--accent);padding:20px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:32px 0;}
+    .formula{font-family:monospace;background:var(--bg1);padding:16px;border-radius:var(--radius-sm);margin:24px 0;text-align:center;color:var(--accent);border:1px solid var(--border);}
+    .btn{padding:12px 24px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;transition:0.15s;text-decoration:none;display:inline-block;}
+    .btn-primary{background:linear-gradient(135deg,rgba(44,224,255,0.22),rgba(44,224,255,0.08));border:1px solid rgba(44,224,255,0.35);color:var(--text);}
+    .btn-primary:hover{border-color:rgba(44,224,255,0.6);}
+    footer{text-align:center;margin-top:80px;padding-top:24px;border-top:1px solid var(--border-subtle);color:var(--text-3);font-size:13px;}
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    @media (max-width:600px){
+      .container{padding:40px 20px;}
+      h1{font-size:32px;}
+      .post-content{font-size:16px;}
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="post-header">
+  <div class="post-tag">Founder Story</div>
+  <h1>I Built a Calculator for Time:<br>Why Lasting Impact Beats Viral Noise</h1>
+  <div class="post-meta">Carl Boon • January 15, 2026 • 12 min read</div>
+</header>
+
+<article class="post-content">
+
+<p><strong>It was December 2025 and I was staring at a dashboard of lies.</strong></p>
+
+<p>A campaign had just "gone viral." Millions of views. Tens of thousands of likes. A room full of people celebrating.</p>
+
+<p>Thirty days later, sales, retention, and revenue told the truth: almost nothing lasted. That was the moment I realized we weren't measuring value — we were measuring noise.</p>
+
+<p>This is the story of why I built the <strong>Time Value of Impact (TVI)</strong> calculator — and why I think it changes everything about how we measure what matters.</p>
+
+<h2>The Problem Everyone Feels (But Can't Name)</h2>
+
+<p>We're drowning in metrics that lie.</p>
+
+<p>Views inflate.  
+Likes mean nothing.  
+Virality fades.  
+Downloads don't equal usage.  
+Reach doesn't predict retention.</p>
+
+<p>Yet every business, every platform, every analyst judges success by <em>loudness</em>, not <em>longevity</em>.</p>
+
+<p>I watched:</p>
+
+<ul>
+  <li>A 2007 YouTube video with 700 million views get dismissed as "old content"</li>
+  <li>A 2024 TikTok with 50 million views treated as a "bigger success"</li>
+  <li>Business frameworks with decades of proven adoption ignored for the latest consulting fad</li>
+  <li>Companies valued on hype collapse within months</li>
+  <li>AI training datasets chosen by download count, not temporal validation</li>
+</ul>
+
+<p>The pattern was everywhere. Recency bias. Platform inflation. Algorithmic distortion. Short-term thinking rewarded. Long-term value invisible.</p>
+
+<p>And I thought: <strong>what if we could quantify this?</strong></p>
+
+<h2>What TVI Actually Measures</h2>
+
+<p>TVI (Temporal Validation Index) is a formula I developed to answer one question:</p>
+
+<div class="callout">
+  <p><strong>"Will this still matter after hype, cycles, and platform churn have burned away?"</strong></p>
+</div>
+
+<p>It's not about predicting virality.  
+It's about measuring <em>staying power</em>.</p>
+
+<p>The formula looks like this:</p>
+
+<div class="formula">TVI = Saturation × log₁₀(Validation + 1) × Resistance</div>
+
+<p><strong>Saturation:</strong> How fully something occupied the attention space of its era (not raw views, but views relative to what was possible at the time).</p>
+
+<p><strong>Validation:</strong> Whether time has "voted" for it through persistence, resurfacing, and legacy status.</p>
+
+<p><strong>Resistance:</strong> How hard it was to achieve that spread in that era (pre-algorithm eras get 3× credit, post-algorithm get 1×).</p>
+
+<p>What this means is simple:</p>
+
+<ul>
+  <li>A video from 2007 with 10 million views can score higher than a 2024 video with 50 million — because platforms were smaller, distribution was harder, and time has validated it.</li>
+  <li>MNIST (an AI dataset from 1998) scores higher than LAION-5B (2022, billions of images) — because it's been used for 26 years and is still the pedagogical standard.</li>
+  <li>SMART Goals (1981) scores astronomically higher than Holacracy (2015) — because one became universal management infrastructure and the other faded.</li>
+</ul>
+
+<p>TVI doesn't care about hype. It cares about <strong>what survives</strong>.</p>
+
+<h2>Why This Framework Exists Now</h2>
+
+<p>This couldn't have been built in 2012. Or even 2020.</p>
+
+<p>You need:</p>
+
+<ul>
+  <li>Enough time for validation patterns to emerge</li>
+  <li>Enough platform inflation for the distortion to become obvious</li>
+  <li>Enough algorithmic dominance to see cultural erosion</li>
+  <li>Enough hindsight to separate signal from noise</li>
+</ul>
+
+<p>We're at the exact moment when:</p>
+
+<ul>
+  <li>Raw view counts have become meaningless (platform growth + bots + algorithms)</li>
+  <li>Viral success no longer predicts lasting value</li>
+  <li>Markets reward momentum over fundamentals</li>
+  <li>Everyone <em>feels</em> the disconnect but can't measure it</li>
+</ul>
+
+<p><strong>TVI exists because we finally have enough temporal distance to see the pattern.</strong></p>
+
+<h2>The Calculator: Making It Real</h2>
+
+<p>I didn't want to just publish a paper. I wanted to build a tool.</p>
+
+<p>The <a href="/Universal-Impact-Calculator-v1.0.1.html">TVI Calculator</a> lets you:</p>
+
+<ul>
+  <li>Input any piece of content, dataset, business method, or investment</li>
+  <li>Get a temporal validation score</li>
+  <li>See the breakdown (saturation, validation, resistance)</li>
+  <li>Compare entities across time and platform</li>
+</ul>
+
+<p>I tested it against known outcomes:</p>
+
+<ul>
+  <li><strong>Viral content:</strong> Charlie Bit My Finger > Gangnam Style > TikTok trends (100% accuracy)</li>
+  <li><strong>Business methods:</strong> SMART Goals > Agile > Holacracy (100% accuracy)</li>
+  <li><strong>AI datasets:</strong> MNIST > ImageNet > LAION-5B (100% accuracy)</li>
+  <li><strong>Investments:</strong> Apple > Microsoft > WeWork (100% accuracy)</li>
+</ul>
+
+<p>The formula works. It correctly ranks what we already know lasted vs what faded.</p>
+
+<p>But more importantly: it gives you a <em>number</em>.</p>
+
+<p>Not a vibe. Not a guess. A quantified measure of staying power.</p>
+
+<h2>What Changes When You See Through This Lens</h2>
+
+<p>Once you understand TVI, you start seeing the world differently.</p>
+
+<h3>In Content Strategy</h3>
+
+<p>You stop chasing viral spikes. You start building brand equity that compounds.</p>
+
+<p>High views + low TVI = wasted budget.  
+Moderate views + high TVI = foundation being built.</p>
+
+<h3>In AI Development</h3>
+
+<p>You stop selecting datasets by download count. You select by temporal validation.</p>
+
+<p>MNIST is 26 years old and "outdated" — but its TVI score is 40.21 because it's <em>still used everywhere</em>. That's a signal.</p>
+
+<h3>In Investment Analysis</h3>
+
+<p>You stop buying momentum. You buy staying power.</p>
+
+<p>Peloton had perfect fundamentals in 2021. ISPS score: 82 (trend-riding).  
+Apple had "maturity concerns." ISPS score: 7,775 (foundation).</p>
+
+<p>One collapsed 92%. The other gained 180%.</p>
+
+<h3>In Business Decisions</h3>
+
+<p>You stop implementing the latest consulting fad. You adopt frameworks with temporal proof.</p>
+
+<p>Agile: TVI-B 316 (foundation).  
+Holacracy: TVI-B 0.17 (niche failure).</p>
+
+<p>One is infrastructure. The other was noise.</p>
+
+<h2>Why I'm Making This Public</h2>
+
+<p>I could have kept this proprietary. Built a hedge fund around it. Sold it to enterprise clients only.</p>
+
+<p>But here's the thing: <strong>the problem is universal</strong>.</p>
+
+<p>Every founder making product decisions.  
+Every marketer allocating budget.  
+Every investor choosing holdings.  
+Every researcher selecting datasets.  
+Every institution setting strategy.</p>
+
+<p>All of them are flying blind because current metrics systematically favor noise over signal.</p>
+
+<p>TVI is the correction.</p>
+
+<p>So I'm making it available:</p>
+
+<ul>
+  <li><strong>Free tier:</strong> Anyone can run TVI calculations</li>
+  <li><strong>Research:</strong> Full working paper published</li>
+  <li><strong>API:</strong> Integrate into your workflows</li>
+  <li><strong>Open methodology:</strong> Transparent, falsifiable, improvable</li>
+</ul>
+
+<p>If this framework is real — and the validation says it is — then it should be <em>used</em>, not hidden.</p>
+
+<h2>What Happens Next</h2>
+
+<p>This is version 1.0.</p>
+
+<p>The formula works. The calculator is live. The research is peer-reviewable.</p>
+
+<p>But it's just the beginning.</p>
+
+<p>If temporal validation is real, we should see:</p>
+
+<ul>
+  <li>Investment funds using ISPS for portfolio construction</li>
+  <li>AI labs using TDIS for training data curation</li>
+  <li>Enterprises using TVI-B for methodology selection</li>
+  <li>Content strategists optimizing for staying power, not viral spikes</li>
+  <li>Researchers extending the framework to new domains</li>
+</ul>
+
+<p>And most importantly: we should see a shift from <strong>measuring attention</strong> to <strong>measuring durability</strong>.</p>
+
+<p>Because in the end, the only metric that matters is the one time validates.</p>
+
+<div style="text-align:center;margin:64px 0;">
+  <a href="/Universal-Impact-Calculator-v1.0.1.html" class="btn btn-primary">Try the TVI Calculator →</a>
+</div>
+
+<div style="background:var(--surface);border:1px solid var(--border-subtle);border-radius:var(--radius);padding:32px;margin:48px 0;">
+  <h3 style="margin-bottom:16px;">About the Author</h3>
+  <p style="margin:0;font-size:15px;line-height:1.6;">
+    <strong>Carl Boon</strong> is the founder of BoonMind Analytics and the creator of the Temporal Validation Impact framework. 
+    He's spent years studying what makes ideas, organizations, and investments persist through time. 
+    His upcoming book, <a href="/book.html"><em>TIME AS PROOF: The Mathematics of What Lasts</em></a>, explores these themes in depth.
+  </p>
+</div>
+
+</article>
+
+<footer>
+  <p><a href="/insights/index.html">← Back to Insights</a> • <a href="/research/index.html">Research</a> • <a href="/book.html">TIME AS PROOF</a></p>
+  <p style="margin-top:12px;">© 2026 BoonMind • Carl Boon</p>
+</footer>
+
+</div>
+</body>
+</html>
+

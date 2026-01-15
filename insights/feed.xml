@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TVI Insights</title>
+    <description>Research, case studies, and analysis on temporal validation and staying power</description>
+    <link>https://TVI-Framework.com/insights/</link>
+    <atom:link href="https://TVI-Framework.com/insights/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Jan 2026 00:00:00 GMT</lastBuildDate>
+    <managingEditor>carl@boonmind.com (Carl Boon)</managingEditor>
+    <webMaster>carl@boonmind.com (Carl Boon)</webMaster>
+    <copyright>Copyright 2026 BoonMind Analytics</copyright>
+    <category>Research</category>
+    <category>Technology</category>
+    <category>Business</category>
+    <image>
+      <url>https://TVI-Framework.com/assets/icons/tvi-mark.svg</url>
+      <title>TVI Insights</title>
+      <link>https://TVI-Framework.com/insights/</link>
+    </image>
+    
+    <!-- Post 1: I Built a Calculator for Time -->
+    <item>
+      <title>I Built a Calculator for Time: Why Lasting Impact Beats Viral Noise</title>
+      <link>https://TVI-Framework.com/insights/i-built-a-calculator-for-time.html</link>
+      <guid isPermaLink="true">https://TVI-Framework.com/insights/i-built-a-calculator-for-time.html</guid>
+      <description>Carl Boon explains why he built the Time Value of Impact (TVI) calculator — a new way to measure what lasts, not what's loud. A manifesto for long-term thinking in a viral world.</description>
+      <pubDate>Wed, 15 Jan 2026 00:00:00 GMT</pubDate>
+      <author>carl@boonmind.com (Carl Boon)</author>
+      <category>Founder Story</category>
+      <enclosure url="https://TVI-Framework.com/assets/blog/tvi-calculator-cover.jpg" type="image/jpeg" length="0"/>
+    </item>
+    
+    <!-- Add new posts here as <item> elements -->
+    
+  </channel>
+</rss>
+

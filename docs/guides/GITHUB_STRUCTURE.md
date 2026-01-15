@@ -14,6 +14,7 @@ tvi-platform/
 │
 ├── Universal-Impact-Calculator-v1.0.1.html       # Main calculator app
 ├── dashboard.html                                # User dashboard
+├── book.html                                     # Book pre-order page
 ├── terms.html                                    # Terms of Service
 │
 ├── /api/                                         # Backend serverless functions
@@ -87,10 +88,11 @@ tvi-platform/
 
 ## Essential Files (Must Include)
 
-### Core Application (3 files)
+### Core Application (4 files)
 ```
 Universal-Impact-Calculator-v1.0.1.html
 dashboard.html
+book.html
 terms.html
 ```
 
@@ -205,7 +207,7 @@ These are already in `.gitignore` — verify it's working.
 
 | Category | Files | Total Lines |
 |----------|-------|-------------|
-| HTML (app) | 3 | ~2,300 |
+| HTML (app) | 4 | ~2,500 |
 | HTML (research) | 7 | ~1,150 |
 | API endpoints | 7 | ~1,000 |
 | SQL migrations | 3 | ~250 |
@@ -213,7 +215,7 @@ These are already in `.gitignore` — verify it's working.
 | PDF reports | 4 | Binary |
 | Config files | 4 | ~100 |
 | Documentation | 12 | ~6,000 |
-| **TOTAL** | **54** | **~11,500** |
+| **TOTAL** | **55** | **~11,700** |
 
 ---
 

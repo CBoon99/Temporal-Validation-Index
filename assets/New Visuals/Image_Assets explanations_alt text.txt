@@ -1,0 +1,53 @@
+﻿1. The Dissonance (Volume vs. Density)
+File: Gemini_Generated_Image_bnefh8bnefh8bnef.jpg
+* Book Context: Found in the Introduction. It serves as the "hook" to explain why modern metrics (raw views) are often a hollow measurement of true value.
+* Website Explanation: A comparison of "The Noise" vs. "The Signal." It highlights that virality is a 24-hour phenomenon (wide but thin), while cultural legacy is built on density (narrow but deep).
+* Alt Text: A tactical HUD diagram titled "Time Audits Everything." On the left, a large blue box representing "The Noise" (50 million views on 2024 TikTok) is labeled "Low Signal Density." On the right, a solid gold pillar representing "The Signal" (1 million views on 2007 YouTube) is labeled "High Signal Density."
+________________
+
+
+2. The Survival Equation (TVI Engine)
+File: Gemini_Generated_Image_2iw1t62iw1t62iw1.jpg
+* Book Context: Found in Chapter 3. This introduces the formal mathematics of the Temporal Validation Index (TVI).
+* Website Explanation: The central engine of the framework. It visualizes the equation $TVI = S \times \log_{10}(TVS + 1) \times SRC$, breaking down how Saturation, Temporal Validation, and Structural Resistance create a "Volume of Persistence."
+* Alt Text: A technical HUD displaying the TVI formula at the top. Three glowing cyan cylinders below represent the variables: Saturation, TVS (Temporal Validation Score), and SRC (Structural Resistance Coefficient). A data table on the right side compares different eras.
+________________
+
+
+3. The Knowledge Stack (Half-Life Pyramid)
+File: Gemini_Generated_Image_et7xcnet7xcnet7x.jpg
+* Book Context: Found in Chapter 6. This is the personal audit tool for how individuals consume information.
+* Website Explanation: A hierarchy of learning. Most people live at the "Ephemeral" tip of the pyramid. The goal is to shift energy toward the "Timeless" base (Philosophy, Math, Human Nature) where knowledge compounds for centuries rather than days.
+* Alt Text: A four-tiered pyramid labeled "The Knowledge Stack." The gold base is "Timeless (Centuries+)"; the middle layers are "Foundational" and "Relevant"; the cyan tip is "Ephemeral (Days/Weeks)." An arrow on the left indicates "Stability Increases" toward the base.
+________________
+
+
+4. The Temporal Org Chart (70/20/10 Rule)
+File: Gemini_Generated_Image_l9qxczl9qxczl9qx.jpg
+* Book Context: Found in Chapter 5. This addresses organizational design and resource allocation.
+* Website Explanation: Replacing the traditional org chart with a "Horizon Map." It visualizes the 70/20/10 rule: 70% of resources must be anchored in the "Foundational" core (Institutional Memory) to survive market volatility.
+* Alt Text: A concentric circle diagram titled "The Temporal Org Chart." A small cyan center represents "Immediate (10%)," a middle white ring represents "Strategic (20%)," and a massive outer gold ring represents "Foundational/Institutional (70%)."
+________________
+
+
+5. The Dark Forest Path (The Stealth Phase)
+File: Gemini_Generated_Image_pxewo5pxewo5pxew.jpg
+* Book Context: Found in Chapter 6. This explains the "Invisibility Advantage" of building a durable foundation.
+* Website Explanation: The path of the unkillable. Organizations must descend into the "Dark Forest" to build deep roots (Structural Resistance) while being ignored or misunderstood by the chaotic "Surface Noise."
+* Alt Text: A vertical cross-section of a forest. The top "Surface Noise" is a chaotic web of cyan lines. A massive golden tree trunk extends from deep, intricate roots in the dark earth, labeled "The Dark Forest." Text at the bottom reads: "Build until your foundation is its own defense."
+________________
+
+
+6. The Breakthrough (Crisis-Proof Infrastructure)
+File: Gemini_Generated_Image_evydm3evydm3evyd.jpg
+* Book Context: Found at the end of Chapter 6. This is the result of surviving the Dark Forest.
+* Website Explanation: Once an entity achieves a certain TVI density, it becomes "Invulnerable." It is no longer a guest in the market; it is part of the infrastructure.
+* Alt Text: A cinematic 3D perspective of a massive, glowing golden pillar (The Breakthrough) rising from a grid-lined, tech-infused forest floor. Glowing cyan circuitry flows into the base, labeled "Invulnerable Crisis-Proof Infrastructure."
+________________
+
+
+7. The Four-Generation Decision Framework
+File: Gemini_Generated_Image_pmuawqpmuawqpmua.jpg
+* Book Context: Found in Chapter 8. This is the ultimate tool for "Temporal Intelligence" and legacy building.
+* Website Explanation: A tool to combat "Immediate Bias." By layering Ancestral Wisdom (75 years ago) with the Legacy Horizon (75 years forward), we ensure our current decisions are anchored in reality, not hype.
+* Alt Text: A HUD featuring four vertical pillars labeled "Time Echoes." They represent Ancestral Wisdom (75y ago), Immediate Bias (Now), Inherited World (+25y), and Legacy Horizon (+75y). Gold and cyan lines connect the pillars, symbolizing data streams across time.

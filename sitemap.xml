@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Main Calculator -->
+  <url>
+    <loc>https://TVI-Framework.com/Universal-Impact-Calculator-v1.0.1.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Dashboard -->
+  <url>
+    <loc>https://TVI-Framework.com/dashboard.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Book Page -->
+  <url>
+    <loc>https://TVI-Framework.com/book.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Research Hub -->
+  <url>
+    <loc>https://TVI-Framework.com/research/index.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Research: Working Paper -->
+  <url>
+    <loc>https://TVI-Framework.com/research/paper.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Research: Methodology -->
+  <url>
+    <loc>https://TVI-Framework.com/research/method.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Research: Validation -->
+  <url>
+    <loc>https://TVI-Framework.com/research/validation.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Research: Applications -->
+  <url>
+    <loc>https://TVI-Framework.com/research/applications.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Research: Collaborate -->
+  <url>
+    <loc>https://TVI-Framework.com/research/collaborate.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Research: Speculative -->
+  <url>
+    <loc>https://TVI-Framework.com/research/speculative.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Terms -->
+  <url>
+    <loc>https://TVI-Framework.com/terms.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- API Documentation -->
+  <url>
+    <loc>https://TVI-Framework.com/api/docs.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Insights Hub -->
+  <url>
+    <loc>https://TVI-Framework.com/insights/index.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Blog: I Built a Calculator for Time -->
+  <url>
+    <loc>https://TVI-Framework.com/insights/i-built-a-calculator-for-time.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Lexicon -->
+  <url>
+    <loc>https://TVI-Framework.com/lexicon.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>
+

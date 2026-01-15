@@ -5,10 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Universal Impact Calculator • TVI System</title>
   <meta name="description" content="TVI (Temporal Validation Index) with canonical components: CSI, TVS, SRC, A-Factor, and C.">
+  <link rel="canonical" href="https://TVI-Framework.com/Universal-Impact-Calculator-v1.0.1.html">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="TVI Platform - Temporal Validation Index">
+  <meta property="og:description" content="Measure what will last. Quantify staying power across culture, data, and economics.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://TVI-Framework.com">
+  <meta property="og:image" content="https://TVI-Framework.com/assets/tvi-social-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TVI Platform - Measure What Will Last">
+  <meta name="twitter:description" content="Quantify staying power with 100% validated formula. Server-side engine, research-backed.">
+  <meta name="twitter:image" content="https://TVI-Framework.com/assets/tvi-social-card.jpg">
+  
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TVI Platform",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Temporal Validation Index - measure what survives across culture, data, and economics"
+  }
+  </script>
+  
   <link rel="icon" href="/assets/icons/favicon.svg">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#05070d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -736,6 +768,7 @@
       <button class="btn btn-secondary" style="width:auto;padding:10px 14px;" onclick="document.getElementById('sec-calc').scrollIntoView({behavior:'smooth'})">Run TVI</button>
       <button class="btn btn-secondary" style="width:auto;padding:10px 14px;" onclick="document.getElementById('sec-about').scrollIntoView({behavior:'smooth'})">How it works</button>
       <button class="btn btn-secondary" style="width:auto;padding:10px 14px;" onclick="window.location.href='/research/index.html'">Research</button>
+      <button class="btn btn-secondary" style="width:auto;padding:10px 14px;" onclick="window.location.href='/book.html'">Book</button>
     </div>
 
     <!-- Landing Pages System -->
@@ -1310,14 +1343,43 @@
       <p>Universal Impact Calculator • <a href="#">BoonMind</a></p>
       <p style="margin-top:12px;font-size:11px;">
         <a href="/research/index.html">Research</a> • 
-        <a href="/terms.html">Terms of Service</a> • 
-        <a href="/privacy.html">Privacy Policy</a> • 
+        <a href="/insights/index.html">Insights</a> • 
+        <a href="/lexicon.html">Lexicon</a> • 
+        <a href="/book.html">Book</a> • 
+        <a href="/terms.html">Terms</a> • 
+        <a href="/privacy.html">Privacy</a> • 
         <a href="/dashboard.html">Dashboard</a>
       </p>
+      <p style="margin-top:16px;font-size:12px;color:var(--text-3);font-style:italic;">
+        Read the full framework in <a href="/book.html" style="color:var(--accent);">TIME AS PROOF</a> — The Mathematics of What Lasts
+      </p>
+      
+      <!-- Newsletter Signup (Netlify-friendly) -->
+      <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top:32px;max-width:500px;margin-left:auto;margin-right:auto;" onsubmit="return handleNewsletterSubmit(event)">
+        <input type="hidden" name="form-name" value="newsletter">
+        <p style="display:none"><label>Don't fill: <input name="bot-field"></label></p>
+        <p style="font-size:13px;color:var(--text-2);margin-bottom:12px;">Get TVI insights, research updates, and staying power analysis:</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <input type="email" name="email" placeholder="your@email.com" required style="flex:1;min-width:200px;padding:10px 12px;background:var(--surface);border:1px solid var(--border-subtle);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:14px;">
+          <button type="submit" style="padding:10px 20px;background:var(--accent-dim);border:1px solid var(--accent);border-radius:var(--radius-sm);color:var(--accent);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;">Subscribe</button>
+        </div>
+        <p id="newsletter-success" style="display:none;margin-top:12px;font-size:12px;color:var(--accent);">✓ Subscribed! Check your email.</p>
+      </form>
     </footer>
   </div>
 
   <div class="toast" id="toast"></div>
+
+  <!-- Analytics (PostHog) - Replace with your project API key -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('YOUR-POSTHOG-API-KEY',{api_host:'https://app.posthog.com', loaded: function(posthog) {
+      // Track page views
+      posthog.capture('$pageview');
+      // Set up event tracking
+      window.trackEvent = (event, properties) => posthog.capture(event, properties);
+    }})
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.3/dist/umd/supabase.min.js"></script>
   <script>
@@ -1607,6 +1669,11 @@
         };
       }
 
+      // Track calculation event
+      if (window.trackEvent) {
+        window.trackEvent('tvi_calculation_started', { domain, authenticated: isLoggedIn() });
+      }
+      
       // Call backend API
       await callTVIAPI(domain, inputs, name, year);
     }
@@ -1899,6 +1966,7 @@
         closeLoginModal();
         toast('✅ Signed in as ' + email);
         updateUIForAuth();
+        if (window.trackEvent) window.trackEvent('user_login', { email });
       } else {
         document.getElementById('login-error').style.display = 'block';
       }
@@ -1919,6 +1987,7 @@
       closeLoginModal();
       toast('✅ Account created. Welcome!');
       updateUIForAuth();
+      if (window.trackEvent) window.trackEvent('user_signup', { email });
     }
     async function logout() {
       if (supabaseClient) await supabaseClient.auth.signOut();
@@ -2018,6 +2087,16 @@
         document.querySelectorAll('.login-btn').forEach(b => b.style.display = 'inline-block');
       }
     })();
+    
+    // Newsletter signup handler
+    function handleNewsletterSubmit(e) {
+      // Let Netlify handle it, but show success message
+      setTimeout(() => {
+        const successMsg = document.getElementById('newsletter-success');
+        if (successMsg) successMsg.style.display = 'block';
+      }, 100);
+      return true; // Allow form to submit to Netlify
+    }
   </script>
 
   <!-- Login Modal -->

@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIME AS PROOF — Interactive Book</title>
+  <meta name="description" content="TIME AS PROOF by Carl Boon - An interactive digital reading experience with highlights, notes, and social sharing.">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="TIME AS PROOF — The Mathematics of What Lasts">
+  <meta property="og:description" content="Interactive digital book by Carl Boon. Read with highlights, notes, and share quotes instantly.">
+  <meta property="og:type" content="book">
+  <meta property="og:url" content="https://TVI-Framework.com/flipbook/TIME_AS_PROOF.html">
+  <meta property="og:image" content="https://TVI-Framework.com/Book/digi book/Boon_Front.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TIME AS PROOF — Interactive Book">
+  <meta name="twitter:description" content="The Mathematics of What Lasts by Carl Boon">
+  <meta name="twitter:image" content="https://TVI-Framework.com/Book/digi book/Boon_Front.png">
+  
+  <!-- Schema.org Book Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "TIME AS PROOF: The Mathematics of What Lasts",
+    "author": {
+      "@type": "Person",
+      "name": "Carl Boon"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "BoonMindX Series"
+    },
+    "bookFormat": "EBook",
+    "inLanguage": "en",
+    "description": "A journey through philosophy, foundational science, and the mathematics that govern reality."
+  }
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter+Tight:wght@700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg0: #05070d;
+      --bg1: #070b16;
+      --bg2: #0a1024;
+      --surface: rgba(255,255,255,0.04);
+      --surface-2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.10);
+      --text: #ffffff;
+      --text-2: rgba(255,255,255,0.78);
+      --text-3: rgba(255,255,255,0.52);
+      --accent: #2ce0ff;
+      --accent-dim: rgba(44,224,255,0.10);
+      --highlight: rgba(255,230,100,0.4);
+      --note-bg: rgba(167,139,250,0.15);
+      --page-bg: #faf9f7;
+      --page-text: #1a1a1a;
+      --page-text-2: #4a4a4a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(ellipse at 20% 0%, rgba(44,224,255,0.08), transparent 50%),
+                  radial-gradient(ellipse at 80% 100%, rgba(167,139,250,0.06), transparent 50%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1), var(--bg2));
+      min-height: 100vh;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,7,13,0.9);
+      backdrop-filter: blur(12px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .app-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-title span {
+      color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
+    .btn.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Progress bar */
+    .progress-container {
+      position: fixed;
+      top: 65px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--surface);
+      z-index: 999;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* Main container */
+    .main-container {
+      display: flex;
+      padding-top: 80px;
+      min-height: 100vh;
+    }
+
+    /* Sidebar TOC */
+    .sidebar {
+      width: 280px;
+      background: rgba(7,11,22,0.95);
+      border-right: 1px solid var(--border);
+      padding: 24px;
+      position: fixed;
+      top: 68px;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 998;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar h3 {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+
+    .toc-item {
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 4px;
+    }
+
+    .toc-item:hover {
+      background: var(--surface);
+    }
+
+    .toc-item.active {
+      background: var(--accent-dim);
+      border-left: 3px solid var(--accent);
+    }
+
+    .toc-item .chapter-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .toc-item .chapter-title {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* Book container */
+    .book-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: calc(100vh - 80px);
+    }
+
+    .book-container {
+      perspective: 2500px;
+      margin-bottom: 32px;
+    }
+
+    .book {
+      position: relative;
+      width: 800px;
+      height: 550px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+      will-change: transform;
+    }
+
+    .book.show-cover {
+      transform: rotateY(-30deg);
+    }
+
+    /* Book covers using actual images */
+    .book-cover-front,
+    .book-cover-back {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .book-cover-front {
+      right: 0;
+      background-image: url('Boon_Front.png');
+      transform-origin: left center;
+      z-index: 100;
+      cursor: pointer;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .book-cover-front.opened {
+      transform: rotateY(-160deg);
+      z-index: 1;
+    }
+
+    .book-cover-back {
+      left: 0;
+      background-image: url('Book_Back.png');
+      border-radius: 8px 0 0 8px;
+      z-index: 0;
+    }
+
+    /* Spine */
+    .book-spine {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 30px;
+      height: 100%;
+      background-image: url('Book_Spine.png');
+      background-size: cover;
+      transform: translateX(-50%) rotateY(90deg) translateZ(15px);
+      z-index: 50;
+    }
+
+    /* Pages */
+    .pages-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .pages-container.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .page {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: var(--page-bg);
+      overflow: hidden;
+      transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+
+    .page.left {
+      left: 0;
+      border-radius: 8px 0 0 8px;
+      transform-origin: right center;
+      box-shadow: inset -15px 0 30px rgba(0,0,0,0.08);
+    }
+
+    .page.right {
+      right: 0;
+      border-radius: 0 8px 8px 0;
+      transform-origin: left center;
+      box-shadow: inset 15px 0 30px rgba(0,0,0,0.08);
+    }
+
+    .page.flipping-left {
+      transform: rotateY(-180deg);
+      z-index: 100;
+    }
+
+    .page.flipping-right {
+      transform: rotateY(180deg);
+      z-index: 100;
+    }
+
+    .page-content {
+      padding: 40px;
+      height: 100%;
+      overflow-y: auto;
+      color: var(--page-text);
+      position: relative;
+      user-select: text;
+    }
+
+    .page-content::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .page-content::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.15);
+      border-radius: 2px;
+    }
+
+    /* Page typography */
+    .page-content h1 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--page-text);
+      line-height: 1.2;
+    }
+
+    .page-content h2 {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--page-text-2);
+      margin-bottom: 20px;
+    }
+
+    .page-content h3 {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: var(--page-text);
+    }
+
+    .page-content p {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 15px;
+      line-height: 1.85;
+      margin-bottom: 14px;
+      color: var(--page-text);
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .page-content ul {
+      margin: 14px 0;
+      padding-left: 20px;
+    }
+
+    .page-content li {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+
+    .page-content .formula {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      background: rgba(44,224,255,0.08);
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin: 18px 0;
+      text-align: center;
+      border-left: 3px solid #2ce0ff;
+    }
+
+    .page-content .callout {
+      background: rgba(44,224,255,0.06);
+      border-left: 3px solid #2ce0ff;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 20px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--page-text-2);
+    }
+
+    .page.left .page-number { left: 40px; }
+    .page.right .page-number { right: 40px; }
+
+    /* Highlighting */
+    .highlight-mode .page-content {
+      cursor: text;
+    }
+
+    .highlighted {
+      background: var(--highlight);
+      padding: 1px 0;
+      border-radius: 2px;
+    }
+
+    /* Notes */
+    .note-marker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      background: #a78bfa;
+      color: white;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 4px;
+      vertical-align: super;
+      transition: transform 0.2s;
+    }
+
+    .note-marker:hover {
+      transform: scale(1.2);
+    }
+
+    /* Notes panel */
+    .notes-panel {
+      position: fixed;
+      top: 68px;
+      right: 0;
+      bottom: 0;
+      width: 320px;
+      background: rgba(7,11,22,0.98);
+      border-left: 1px solid var(--border);
+      padding: 24px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 998;
+    }
+
+    .notes-panel.open {
+      transform: translateX(0);
+    }
+
+    .notes-panel h3 {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+
+    .note-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .note-item .note-page {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .note-item .note-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .note-item .note-quote {
+      font-style: italic;
+      font-size: 12px;
+      color: var(--text-3);
+      border-left: 2px solid var(--accent);
+      padding-left: 12px;
+      margin-bottom: 8px;
+    }
+
+    .note-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      resize: none;
+      margin-top: 8px;
+    }
+
+    .note-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Navigation */
+    .nav-controls {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .page-indicator {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      color: var(--text-2);
+      min-width: 120px;
+      text-align: center;
+    }
+
+    /* Click zones */
+    .click-zone {
+      position: absolute;
+      top: 0;
+      width: 25%;
+      height: 100%;
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    .click-zone.left { left: 0; }
+    .click-zone.right { right: 0; }
+
+    .click-zone:hover {
+      background: rgba(44,224,255,0.02);
+    }
+
+    /* Hint */
+    .hint {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-3);
+      margin-top: 16px;
+    }
+
+    .hint kbd {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+    }
+
+    /* Selection popup (share/note) */
+    .selection-popup {
+      position: fixed;
+      background: var(--bg1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      z-index: 2000;
+      display: none;
+      flex-direction: row;
+      gap: 8px;
+    }
+
+    .selection-popup.visible {
+      display: flex;
+    }
+
+    .selection-popup button {
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .selection-popup button:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .selection-popup button[title]::after {
+      content: attr(title);
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    /* Note popup */
+    .note-popup {
+      position: fixed;
+      background: var(--bg1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      width: 300px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      z-index: 2000;
+      display: none;
+    }
+
+    .note-popup.visible {
+      display: block;
+    }
+
+    /* Bookmark indicator */
+    .bookmark-indicator {
+      position: absolute;
+      top: 0;
+      right: 20px;
+      width: 24px;
+      height: 40px;
+      background: #e74c3c;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+      z-index: 30;
+      cursor: pointer;
+      transition: transform 0.2s;
+      display: none;
+    }
+
+    .bookmark-indicator.visible {
+      display: block;
+    }
+
+    .bookmark-indicator:hover {
+      transform: translateY(4px);
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg1);
+      border: 1px solid var(--accent);
+      padding: 12px 24px;
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Fullscreen mode */
+    body.fullscreen .app-header,
+    body.fullscreen .progress-container,
+    body.fullscreen .hint {
+      display: none;
+    }
+
+    body.fullscreen .main-container {
+      padding-top: 0;
+    }
+
+    body.fullscreen .book-wrapper {
+      min-height: 100vh;
+    }
+    
+    /* Keyboard shortcuts modal */
+    .shortcuts-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 500px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+      z-index: 3000;
+      display: none;
+    }
+    
+    .shortcuts-modal.visible {
+      display: block;
+    }
+    
+    .shortcuts-modal h3 {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    
+    .shortcuts-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .shortcut-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .shortcut-item:last-child {
+      border-bottom: none;
+    }
+    
+    .shortcut-key {
+      font-family: 'Space Mono', monospace;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--accent);
+    }
+    
+    .shortcut-action {
+      font-size: 14px;
+      color: var(--text-2);
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2999;
+      display: none;
+    }
+    
+    .modal-overlay.visible {
+      display: block;
+    }
+
+    .note-popup textarea {
+      width: 100%;
+      height: 80px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      resize: none;
+      margin-bottom: 12px;
+    }
+
+    .note-popup textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .note-popup-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .book {
+        width: 100%;
+        max-width: 400px;
+        height: 550px;
+      }
+
+      .page { width: 100%; }
+      .page.left { display: none; }
+      .book-cover-back { display: none; }
+      .book-cover-front { width: 100%; border-radius: 8px; }
+      .book-spine { display: none; }
+
+      .sidebar { width: 100%; }
+      .notes-panel { width: 100%; }
+
+      .page-content { padding: 24px; }
+    }
+
+    /* Cover page styling */
+    .cover-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      background: linear-gradient(135deg, #0a1024 0%, #070b16 100%);
+      color: white;
+      border-radius: 8px 0 0 8px;
+    }
+
+    .cover-content .series {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #2ce0ff;
+      margin-bottom: 24px;
+    }
+
+    .cover-content h1 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 32px;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .cover-content .subtitle {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 32px;
+    }
+
+    .cover-content .author {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="app-title">
+      <span>📖</span> TIME AS PROOF
+    </div>
+    <div class="header-actions">
+      <button class="btn" id="toc-btn" aria-label="Toggle table of contents">☰ Contents</button>
+      <button class="btn" id="highlight-btn" aria-label="Toggle highlight mode">🖍️ Highlight</button>
+      <button class="btn" id="bookmark-btn" aria-label="Bookmark current page">🔖 Bookmark</button>
+      <button class="btn" id="notes-btn" aria-label="View your notes">📝 Notes</button>
+      <button class="btn" id="export-btn" aria-label="Export annotations">📥 Export</button>
+      <button class="btn" id="shortcuts-btn" aria-label="Keyboard shortcuts">?</button>
+      <button class="btn" id="fullscreen-btn" aria-label="Toggle fullscreen">⛶</button>
+    </div>
+  </header>
+
+  <!-- Progress bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Sidebar TOC -->
+  <aside class="sidebar" id="sidebar">
+    <h3>Table of Contents</h3>
+    <div id="toc-list"></div>
+  </aside>
+
+  <!-- Notes panel -->
+  <aside class="notes-panel" id="notes-panel">
+    <h3>Your Notes</h3>
+    <div id="notes-list"></div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-container">
+    <div class="book-wrapper">
+      <div class="book-container">
+        <div class="book" id="book">
+          <!-- Covers -->
+          <div class="book-cover-back"></div>
+          <div class="book-spine"></div>
+          <div class="book-cover-front" id="cover-front"></div>
+
+          <!-- Pages -->
+          <div class="pages-container" id="pages-container">
+            <div class="click-zone left" id="click-prev"></div>
+            <div class="click-zone right" id="click-next"></div>
+            <div class="bookmark-indicator" id="bookmark-indicator"></div>
+            <div class="page left" id="left-page"></div>
+            <div class="page right" id="right-page"></div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-controls">
+        <button class="btn nav-btn" id="prev-btn">←</button>
+        <span class="page-indicator" id="page-indicator">Click cover to open</span>
+        <button class="btn nav-btn" id="next-btn">→</button>
+      </nav>
+
+      <p class="hint">
+        <kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>B</kbd> bookmark · <kbd>F</kbd> fullscreen · Select text to share
+      </p>
+    </div>
+  </main>
+
+  <!-- Note popup -->
+  <div class="note-popup" id="note-popup">
+    <div class="note-quote" id="note-quote"></div>
+    <textarea id="note-input" placeholder="Add your note..."></textarea>
+    <div class="note-popup-actions">
+      <button class="btn" id="cancel-note">Cancel</button>
+      <button class="btn" id="save-note" style="background:var(--accent-dim);border-color:var(--accent);">Save Note</button>
+    </div>
+  </div>
+
+  <!-- Selection popup (share/highlight/note) -->
+  <div class="selection-popup" id="selection-popup">
+    <button id="share-twitter" title="Twitter">🐦</button>
+    <button id="share-linkedin" title="LinkedIn">💼</button>
+    <button id="copy-quote" title="Copy">📋</button>
+    <button id="add-note-btn" title="Note">📝</button>
+    <button id="highlight-selection" title="Highlight">🖍️</button>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+  
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="modal-overlay" id="shortcuts-overlay"></div>
+  <div class="shortcuts-modal" id="shortcuts-modal">
+    <h3>⌨️ Keyboard Shortcuts</h3>
+    <div class="shortcuts-list">
+      <div class="shortcut-item">
+        <span class="shortcut-key">← →</span>
+        <span class="shortcut-action">Navigate pages</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">B</span>
+        <span class="shortcut-action">Toggle bookmark</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">F</span>
+        <span class="shortcut-action">Toggle fullscreen</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">H</span>
+        <span class="shortcut-action">Toggle highlight mode</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-key">ESC</span>
+        <span class="shortcut-action">Close panels/modals</span>
+      </div>
+    </div>
+    <button class="btn" onclick="closeShortcutsModal()" style="width:100%;margin-top:16px;justify-content:center;">Got it</button>
+  </div>
+
+  <script>
+    // Book content
+    const chapters = [
+      {
+        id: 'cover',
+        title: 'Cover',
+        spreads: [[
+          { content: `<div class="cover-content"><div class="series">BoonMindX Series</div><h1>TIME AS PROOF</h1><div class="subtitle">The Mathematics of What Lasts</div><div class="author">Carl Boon</div></div>` },
+          { content: `<div class="page-content"><h2>Contents</h2><ul class="toc-list" style="list-style:none;padding:0;font-size:13px;"><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Temporal Validation Manifesto</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 0</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Observation</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 1</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Great Measurement Lie</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 2</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Mathematics of What Lasts</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 3</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>Your Domain's Blind Spot</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 4</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Time-Aware Organization</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 5</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Temporal Individual</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 6</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Time-Aware Society</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 7</span></li><li style="padding:8px 0;border-bottom:1px dotted rgba(0,0,0,0.1);display:flex;justify-content:space-between;"><span>The Future of Time</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">Ch 8</span></li><li style="padding:8px 0;display:flex;justify-content:space-between;"><span>Lexicon</span><span style="font-family:'Space Mono';font-size:10px;color:#666;">—</span></li></ul><p style="margin-top:16px;font-style:italic;font-size:12px;color:#666;">"We've built a civilization that can measure everything except what survives."</p><span class="page-number">i</span></div>` }
+        ]]
+      },
+      {
+        id: 'ch0',
+        title: 'The Temporal Validation Manifesto',
+        num: 'Chapter 0',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 0</h2><h1>The Temporal Validation Manifesto</h1><h3>I FELT IT BEFORE I COULD NAME IT</h3><p>The internet remembers everything—except what actually mattered.</p><p>I was staring at two numbers: 50 million views on a TikTok from last month—already forgotten. 1 million views on a YouTube video from 2007—still referenced daily.</p><p>The metrics said the TikTok won. My gut screamed they were lying.</p><p>That dissonance became an obsession. That obsession became a formula. The formula changed how I measure everything.</p><span class="page-number">1</span></div>` },
+            { content: `<div class="page-content"><h3>THE BLIND SPOT</h3><p>We've built a civilization that can measure everything except what survives.</p><p>Every industry is optimizing for the wrong thing:</p><ul><li><strong>Media:</strong> Chasing clicks instead of culture</li><li><strong>Business:</strong> Rewarding speed instead of stability</li><li><strong>Finance:</strong> Valuing hype instead of durability</li><li><strong>Technology:</strong> Building features instead of foundations</li></ul><p>The cost? Likely hundreds of billions in misallocated capital over time. Countless careers built on skills that won't last.</p><div class="callout">Virality is what happens when noise outruns memory.</div><span class="page-number">2</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>TIME AUDITS EVERYTHING</h3><p>Here's the brutal truth nobody wants to say:</p><p>If something only matters today and leaves no residue, time will erase it.</p><p>Time doesn't care what went viral. Time only cares what stayed. History is a graveyard of things that once had incredible engagement.</p><p>Once you see the pattern, it appears everywhere:</p><ul><li><strong>Viral content:</strong> Charlie Bit My Finger (2007) vs. a 2024 TikTok</li><li><strong>Business methods:</strong> SMART Goals (1981) vs. Holacracy (2015)</li><li><strong>AI datasets:</strong> MNIST (1998) vs. LAION-5B (2022)</li><li><strong>Companies:</strong> Apple (1976) vs. WeWork (collapsed under stress)</li></ul><span class="page-number">3</span></div>` },
+            { content: `<div class="page-content"><p>The same math worked every time. The same truth emerged:</p><div class="callout">Scale without persistence is just expensive disappearing.</div><h3>THE FORMULA THAT PREDICTS WHAT LASTS</h3><p>This is not a growth equation. It's a survival equation:</p><div class="formula">TVI = Saturation × log₁₀(TVS + 1) × SRC</div><p>Where:</p><ul><li><strong>Saturation:</strong> How unavoidable was this in its moment?</li><li><strong>TVS:</strong> Has time proven it matters?</li><li><strong>SRC:</strong> How hard was achievement then vs. now?</li></ul><p>TVI doesn't measure how far something travels.</p><p><strong>It measures how long it refuses to die.</strong></p><span class="page-number">4</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch1',
+        title: 'The Observation',
+        num: 'Chapter 1',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 1</h2><h1>The Observation</h1><h3>THE WHITEBOARD MOMENT</h3><p>The internet was supposed to be a memory machine.</p><p>Instead, it became an amnesia factory.</p><p>I was staring at a YouTube analytics dashboard when it hit me:</p><p>We weren't measuring impact. We were measuring acceleration.</p><p>We weren't tracking what mattered. We were tracking what moved.</p><div class="callout">Why does old content feel heavier than new content?</div><p>Not metaphorically. Literally. In your bones.</p><span class="page-number">5</span></div>` },
+            { content: `<div class="page-content"><p>A 2007 YouTube video with 1 million views carries more cultural weight than a 2024 TikTok with 50 million.</p><p>You can feel it. You've always felt it.</p><p>The metrics just never acknowledged it.</p><h3>THE FIRST EQUATION</h3><p>It appeared on the whiteboard fully formed:</p><div class="formula">Cultural Impact ≠ Views</div><p>Then the dangerous part:</p><div class="formula">Impact = (V / A) / U × C × log₁₀(TVS + 1) × SRC</div><p>The insight wasn't in the variables.</p><p>The insight was that this formula wasn't about YouTube.</p><p>It was about <em>time's judgment</em>.</p><span class="page-number">6</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch2',
+        title: 'The Great Measurement Lie',
+        num: 'Chapter 2',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 2</h2><h1>The Great Measurement Lie</h1><h3>THE PELOTON PARADOX</h3><p>Peloton's metrics were perfect:</p><ul><li>Revenue growth: +140% year-over-year</li><li>Gross margin: 42%</li><li>Subscriber growth: +135%</li><li>Market cap: $50 billion</li></ul><p>Every dashboard was green. Every investor deck showed hockey-stick curves.</p><p>Then the world reopened.</p><p><strong>And Peloton lost ~85% of its value in 12 months.</strong></p><span class="page-number">7</span></div>` },
+            { content: `<div class="page-content"><p>What they measured: Current metrics during an unnatural boom.</p><p>What they missed: Temporal validation. Crisis survival. Era context.</p><p>The framework could see it early:</p><ul><li>Peloton: Score 10.5 → Trend Riding</li><li>Prediction: Collapse at first real stress-test</li><li>Reality: -85%</li></ul><div class="callout">The lie wasn't in the numbers.<br>The lie was in what the numbers represented.</div><h3>THE FOUR MEASUREMENT LIES</h3><ul><li><strong>#1:</strong> Absolute Scale Over Relative Saturation</li><li><strong>#2:</strong> Velocity Over Validation</li><li><strong>#3:</strong> Recency Over Resilience</li><li><strong>#4:</strong> Volume Over Density</li></ul><span class="page-number">8</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'preview-lock',
+        title: 'Preview Lock',
+        num: '',
+        spreads: [
+          [
+            { content: `<div class="page-content" style="display:flex;align-items:center;justify-content:center;height:100%;text-align:center;background:linear-gradient(135deg, rgba(44,224,255,0.05), rgba(167,139,250,0.05));">
+              <div style="max-width:400px;">
+                <h2 style="font-family:'Inter Tight';font-size:28px;margin-bottom:20px;color:var(--page-text);">Preview Ends Here</h2>
+                <p style="font-size:16px;margin-bottom:32px;color:var(--page-text-2);">You've experienced the manifesto and seen the framework in action.</p>
+                <p style="font-size:15px;margin-bottom:32px;color:var(--page-text-2);">Want the complete book with all chapters, case studies, and frameworks?</p>
+                <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+                  <a href="../../book.html#lottery-section" style="display:block;padding:14px 24px;background:#2ce0ff;color:#000;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;">🎁 Enter Lottery (10 FREE copies)</a>
+                  <a href="../../book.html#founding-section" style="display:block;padding:14px 24px;background:rgba(44,224,255,0.1);border:2px solid #2ce0ff;color:#2ce0ff;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;">📖 Buy Founding Edition ($19.95)</a>
+                </div>
+                <p style="font-size:12px;color:var(--page-text-2);">First 100 buyers get numbered copies • Includes PDF + EPUB</p>
+              </div>
+            </div>` },
+            { content: `<div class="page-content" style="display:flex;align-items:center;justify-content:center;height:100%;text-align:center;">
+              <div style="max-width:450px;">
+                <h3 style="margin-bottom:20px;font-size:20px;color:var(--page-text);">What's in the Full Book</h3>
+                <ul style="text-align:left;font-size:14px;line-height:2;color:var(--page-text-2);">
+                  <li>Chapter 3: The Mathematics of What Lasts (complete formulas)</li>
+                  <li>Chapter 4: Your Domain's Blind Spot (healthcare, education, personal)</li>
+                  <li>Chapter 5: The Time-Aware Organization (70/20/10 rule, temporal KPIs)</li>
+                  <li>Chapter 6: The Temporal Individual (skill half-lives, career capital)</li>
+                  <li>Chapter 7: The Time-Aware Society (seven-generation principle)</li>
+                  <li>Chapter 8: The Future of Time (what won't change)</li>
+                  <li>Complete Lexicon (all terms + mantras)</li>
+                </ul>
+                <p style="margin-top:32px;font-size:14px;font-style:italic;color:var(--page-text-2);">Plus: Access to TVI Calculator and founding reader community</p>
+              </div>
+            </div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch3',
+        title: 'The Mathematics of What Lasts',
+        num: 'Chapter 3',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 3</h2><h1>The Mathematics of What Lasts</h1><h3>FROM PATTERN TO FORMULA</h3><p>We've seen the problem. We've felt the disconnect. Now we build the solution.</p><p>The universal equation emerged not from theory, but from repeated observation across domains:</p><div class="formula">TVI = Saturation × log₁₀(TVS + 1) × SRC</div><p>We'll call these:</p><ul><li><strong>S</strong> = Saturation Index</li><li><strong>TVS</strong> = Temporal Validation Score</li><li><strong>SRC</strong> = Structural Resistance Coefficient</li></ul><p>Three components. One outcome: <strong>What survives.</strong></p><span class="page-number">9</span></div>` },
+            { content: `<div class="page-content"><h3>COMPONENT 1: SATURATION (S)</h3><p>Not: "How big is it?"</p><p>But: <strong>"How unavoidable was it in its moment?"</strong></p><div class="formula">S = (V / A) / U × C</div><p>Where:</p><ul><li><strong>V</strong> = Volume (views, users, adoption, citations)</li><li><strong>A</strong> = Account/Entity Multiplication</li><li><strong>U</strong> = Addressable universe at the time</li><li><strong>C</strong> = Cross-context coefficient</li></ul><p>Charlie Bit My Finger (2007): Massive views in a much smaller ecosystem. High penetration relative to that era.</p><p>A modern viral hit: Bigger number, smaller penetration. Less cultural density.</p><div class="callout">Absolute numbers lie. Penetration doesn't.</div><span class="page-number">10</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>COMPONENT 2: TEMPORAL VALIDATION (TVS)</h3><p>Not: "Is it still around?"</p><p>But: <strong>"Does it keep resurfacing?"</strong></p><div class="formula">TVS = min(P, 180) × RR × L</div><p>Where:</p><ul><li><strong>P</strong> = Persistence in months (capped at 180 = 15 years)</li><li><strong>RR</strong> = Resurfacing rate (weighted events per year)</li><li><strong>L</strong> = Legacy coefficient (1.0 to 3.0+)</li></ul><p>A thing isn't validated just by existing. <strong>It's validated by repeatedly mattering.</strong></p><p>Weighted resurfacing events:</p><ul><li>News coverage: 1.0</li><li>Platform trend revival: 1.5</li><li>Academic reference: 2.0</li><li>Cultural lexicon entry: 2.5</li><li>Historical artifact status: 3.0</li></ul><span class="page-number">11</span></div>` },
+            { content: `<div class="page-content"><h3>COMPONENT 3: STRUCTURAL RESISTANCE (SRC)</h3><p>Not: "How impressive is it?"</p><p>But: <strong>"How hard was it then versus now?"</strong></p><p><strong>Era Adjustment Table:</strong></p><ul><li>Pre-VC/Internet (&lt;1980): SRC = 3.0</li><li>Early VC (1980–1994): SRC = 2.5</li><li>Dot-com (1995–2000): SRC = 2.0</li><li>Post-crash (2001–2010): SRC = 2.0</li><li>Mobile/Cloud (2011–2018): SRC = 1.5</li><li>Late-stage abundance (2019–2022): SRC = 1.0</li><li>Current (2023+): SRC = 1.2</li></ul><p>This isn't "old is better." This is: <strong>achievement difficulty shifts with time.</strong></p><span class="page-number">12</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>THE LOGARITHMIC INSIGHT</h3><p>Why log₁₀(TVS + 1)?</p><p>Because validation has diminishing returns:</p><ul><li>TVS = 10 → log₁₀(11) ≈ 1.04</li><li>TVS = 100 → log₁₀(101) ≈ 2.00</li><li>TVS = 1000 → log₁₀(1001) ≈ 3.00</li></ul><div class="callout">10× more validation ≈ 2× multiplier.<br>The first decade of proof matters most.</div><h3>ZERO-LOCKING PROPERTY</h3><p>Critical design feature:</p><ul><li>If Saturation = 0 → TVI = 0</li><li>If TVS = 0 → log₁₀(1) = 0 → TVI = 0</li></ul><p>No amount of views compensates for zero temporal validation. No amount of time validates zero saturation. <strong>Both are required.</strong></p><span class="page-number">13</span></div>` },
+            { content: `<div class="page-content"><h3>CLASSIFICATION TIERS</h3><p><strong>Content/Business:</strong></p><ul><li>&lt; 1.0: Ephemeral</li><li>1.0–5.0: Viral Moment / Useful Resource</li><li>5.0–15.0: Cultural Event / Important Benchmark</li><li>15.0–30.0: Cultural Milestone / Field Standard</li><li>30.0–50.0: Foundation</li><li>50.0+: Historical Phenomenon</li></ul><p><strong>Investments:</strong></p><ul><li>5.0–15.0: Trend Riding</li><li>15.0–30.0: Validated Position</li><li>30.0–50.0: Foundation Investment</li><li>50.0+: Superfoundation</li></ul><h3>HYPE DETECTION</h3><p>Pattern: High Saturation + Low TVS = hype.</p><p>The formula corrects today's inflated size with time's proof.</p><span class="page-number">14</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch4',
+        title: "Your Domain's Blind Spot",
+        num: 'Chapter 4',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 4</h2><h1>Your Domain's Blind Spot</h1><h3>THE PATTERN THAT WON'T DIE</h3><p>Once you see it, you can't unsee it.</p><p>The framework works for content, business, AI, and finance because it's not about those domains.</p><p><strong>It's about time's judgment.</strong></p><p>And time judges everything.</p><h3>HEALTHCARE: THE TREATMENT TRAP</h3><p>What gets measured:</p><ul><li>Efficacy in trials</li><li>Adoption rate</li><li>Revenue growth</li></ul><p>What gets missed:</p><ul><li>Long-term adherence</li><li>Real-world durability</li><li>Side-effect persistence</li></ul><span class="page-number">15</span></div>` },
+            { content: `<div class="page-content"><h3>EDUCATION: THE KNOWLEDGE DECAY PROBLEM</h3><p>What gets measured:</p><ul><li>Test scores</li><li>Completion rates</li><li>Student satisfaction</li></ul><p>What gets missed:</p><ul><li>Retention over years</li><li>Real-world transfer</li><li>Pedagogical staying power</li></ul><div class="callout">We teach what's current.<br>We under-teach what lasts.</div><h3>THE UNIVERSAL PATTERN</h3><p>Every domain has:</p><ul><li>Novelty bias vs. proven durability</li><li>Complexity worship vs. resilient simplicity</li><li>Short timeframes vs. long systems</li><li>No era adjustment</li></ul><p>The variables change. The structure doesn't.</p><span class="page-number">16</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>THE MOST DANGEROUS BLIND SPOT</h3><p>Your personal blind spot is your own career and knowledge investments.</p><p>What you measure:</p><ul><li>Salary</li><li>Title</li><li>Promotions</li></ul><p>What you miss:</p><ul><li>Skill durability</li><li>Knowledge persistence</li><li>Network resilience</li></ul><div class="callout">Most people optimize for immediate status over lasting value.<br>Temporal thinking reverses that.</div><span class="page-number">17</span></div>` },
+            { content: `<div class="page-content"><h3>YOUR AUDIT</h3><p>Right now, ask:</p><ul><li>What are you optimizing that time will prove wrong?</li><li>What has proof versus hype?</li><li>What in your life compounds versus decays?</li></ul><p>In your work:</p><ul><li>What metrics are you rewarded for?</li><li>Do they measure staying power or current activity?</li></ul><p>In your consumption:</p><ul><li>What "important" content from 3 years ago do you still remember?</li><li>What "viral" content from last month have you already forgotten?</li></ul><p>The gap between your answers reveals your personal measurement lie.</p><span class="page-number">18</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch5',
+        title: 'The Time-Aware Organization',
+        num: 'Chapter 5',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 5</h2><h1>The Time-Aware Organization</h1><h3>THE BANK THAT SURVIVED</h3><p>In 2007, as every financial institution chased mortgage-backed securities, one regional bank's CEO asked his team: <em>"What happens to this when housing prices fall 20%?"</em></p><p>They modeled the scenario. The results were catastrophic.</p><p>While competitors were reporting record quarterly profits, this bank quietly:</p><ul><li>Reduced mortgage exposure by 40%</li><li>Increased cash reserves</li><li>Developed a small business lending program</li></ul><p>Their stock underperformed for 18 months. Analysts called them "cautious," "old-fashioned."</p><span class="page-number">19</span></div>` },
+            { content: `<div class="page-content"><p>Then 2008 happened.</p><p>Every competitor needed bailouts. This bank didn't just survive—they acquired failing competitors at 10 cents on the dollar.</p><div class="callout">They weren't smarter. They were time-aware.</div><h3>THE CORPORATE TEMPORAL DISORDER</h3><p>Most organizations are time-blind. They live in:</p><ul><li>Quarterly earnings</li><li>Annual reviews</li><li>Plans that collapse under the first cycle change</li></ul><p><strong>Temporal maturity means building for horizons that outlast attention.</strong></p><span class="page-number">20</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>THE TEMPORAL BALANCE SHEET</h3><p>Every organization has two balance sheets:</p><p><strong>Temporal Assets (what compounds):</strong></p><ul><li>Institutional knowledge retained through turnover</li><li>Customer relationships surviving product cycles</li><li>Brand trust accumulated across crises</li><li>Processes that work in boom and bust</li></ul><p><strong>Temporal Liabilities (what decays):</strong></p><ul><li>Skills dependent on a single platform</li><li>Revenue concentrated in one cyclical product</li><li>Leadership unable to navigate paradigm shifts</li><li>Knowledge trapped in soon-to-retire employees</li></ul><span class="page-number">21</span></div>` },
+            { content: `<div class="page-content"><h3>THE 70/20/10 RULE</h3><p>Traditional allocation: 70% immediate, 20% strategic, 10% foundational.</p><p><strong>Temporal allocation: Invert it.</strong></p><ul><li><strong>70% Foundation</strong> (5+ year horizon): Building ecosystems, certifications, documented knowledge, crisis playbooks</li><li><strong>20% Strategic</strong> (1-5 years): Adjacent markets, next-gen features, partnerships</li><li><strong>10% Immediate</strong> (0-1 year): Quarterly releases, marketing, sales targets</li></ul><div class="callout">Result: When markets collapse, your foundation layer sustains you while competitors who allocated 90% to immediate features go bankrupt.</div><span class="page-number">22</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>TEMPORAL KPIs (tKPIs)</h3><p>Replace fragile metrics with durable ones:</p><ul><li><strong>Monthly Active Users →</strong> Decade-Active Users</li><li><strong>Quarterly Revenue →</strong> Crisis-Proof Revenue</li><li><strong>Employee Turnover →</strong> Knowledge Retention Rate</li><li><strong>Customer Acquisition Cost →</strong> Lifetime Value Durability</li><li><strong>Stock Price →</strong> Temporal Moat Score</li></ul><p>These measure what survives, not what spikes.</p><span class="page-number">23</span></div>` },
+            { content: `<div class="page-content"><h3>THE DARK FOREST PERIOD</h3><p>Every temporal organization goes through what founders call "the dark forest":</p><ul><li>Seeing patterns earlier than the market</li><li>Building quietly while others chase hype</li><li>Being misunderstood ("slow," "conservative")</li><li>Outlasting the noise</li></ul><div class="callout">This period isn't failure—it's validation.<br>If everyone understands your temporal strategy immediately, you're probably optimizing for consensus, not durability.</div><span class="page-number">24</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch6',
+        title: 'The Temporal Individual',
+        num: 'Chapter 6',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 6</h2><h1>The Temporal Individual</h1><h3>THE MORTALITY METRIC</h3><p>At 28, I calculated my remaining heartbeats: approximately 2.2 billion, assuming 80 years.</p><p>The number was meaningless until I divided it by how I was spending them:</p><ul><li>30% on work that wouldn't matter in 5 years</li><li>20% on relationships that wouldn't survive distance</li><li>15% consuming content I'd already forgotten</li><li>35% on sleep, maintenance, transit</li></ul><p>The shock wasn't the total. It was the allocation.</p><div class="callout">We measure ourselves in days.<br>We build our lives in decades.<br>That mismatch is the hidden source of modern anxiety.</div><span class="page-number">25</span></div>` },
+            { content: `<div class="page-content"><h3>THE KNOWLEDGE STACK</h3><p>Not all knowledge is created equal. It exists in four tiers:</p><ul><li><strong>Ephemeral (10%):</strong> Breaking news, trends, temporary changes</li><li><strong>Relevant (30%):</strong> Current best practices, industry standards</li><li><strong>Foundational (40%):</strong> Core principles, fundamental science</li><li><strong>Timeless (20%):</strong> Human nature, mathematics, philosophy</li></ul><p>Most learning diets: 70% ephemeral, 25% relevant, 5% foundational, 0% timeless.</p><h3>THE DISTANCE TEST</h3><p>A temporal relationship isn't measured by frequency of contact. It's measured by what survives absence.</p><div class="callout">Relationships that require constant maintenance are temporal liabilities.<br>Relationships that survive distance are temporal assets.</div><span class="page-number">26</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>TEMPORAL CAREER CAPITAL (TCC)</h3><p>Your career isn't a ladder. It's a portfolio of assets with different half-lives.</p><p><strong>High Half-Life (10+ years):</strong></p><ul><li>Deep domain expertise</li><li>Cross-disciplinary synthesis</li><li>Network of trust relationships</li><li>Teaching/mentoring skill</li><li>Systems thinking</li></ul><p><strong>Medium Half-Life (3-7 years):</strong></p><ul><li>Platform-specific expertise</li><li>Industry knowledge</li><li>Management frameworks</li></ul><p><strong>Low Half-Life (&lt;2 years):</strong></p><ul><li>API familiarity</li><li>Trends and buzzwords</li><li>Platform-algorithm optimization</li></ul><span class="page-number">27</span></div>` },
+            { content: `<div class="page-content"><h3>SKILL HALF-LIFE CALCULATION</h3><div class="formula">Half-Life = B × R × M</div><p>Where:</p><ul><li><strong>B</strong> = Base half-life of skill category</li><li><strong>R</strong> = Resilience multiplier (0.5-2.0)</li><li><strong>M</strong> = Market multiplier (0.5-2.0)</li></ul><p><strong>Example: React development (2024)</strong></p><ul><li>B = 2.5 years, R = 0.7, M = 0.6</li><li>HL = 2.5 × 0.7 × 0.6 = <strong>1.05 years</strong></li></ul><p><strong>Example: Systems thinking + writing</strong></p><ul><li>B = 10 years, R = 1.8, M = 1.5</li><li>HL = 10 × 1.8 × 1.5 = <strong>27 years</strong></li></ul><div class="callout">Stop counting skills. Start weighing them.</div><span class="page-number">28</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch7',
+        title: 'The Time-Aware Society',
+        num: 'Chapter 7',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 7</h2><h1>The Time-Aware Society</h1><h3>THE BRIDGE THAT OUTLIVED ITS BUILDERS</h3><p>In 1350, a master bridge builder in Prague was asked: <em>"How long should the Charles Bridge last?"</em></p><p>His answer: <strong>"Until they forget why it matters."</strong></p><p>He built it to survive floods he'd never see, using techniques that assumed future maintainers would be less skilled. The foundation stones were laid 9 feet deep—twice what was needed.</p><p>For 670 years, it has survived:</p><ul><li>27 major floods</li><li>4 wars</li><li>3 regime changes</li><li>Countless repair crews</li></ul><span class="page-number">29</span></div>` },
+            { content: `<div class="page-content"><div class="callout">The bridge builder wasn't just constructing stone.<br>He was encoding temporal intelligence into physical form.</div><h3>THE SYSTEMIC TEMPORAL DISORDER</h3><p>Our societal systems operate on century timescales:</p><ul><li>Climate cycles: 30-100 years</li><li>Infrastructure decay: 50-100 years</li><li>Cultural memory: 100-300 years</li></ul><p>Our incentives operate on:</p><ul><li>Political cycles: 2-6 years</li><li>Market cycles: 1-10 years</li><li>News cycles: 1-7 days</li><li>Social media: 1-24 hours</li></ul><p>This mismatch creates cultural volatility, political short-termism, and knowledge decay.</p><span class="page-number">30</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>THE TEMPORAL CURRICULUM</h3><p>Education is currently 90% ephemeral/relevant, 10% foundational/timeless.</p><p><strong>A temporal society inverts this:</strong></p><ul><li><strong>10% Ephemeral:</strong> Current events, latest tools</li><li><strong>30% Decadal:</strong> Skills for coming decade</li><li><strong>40% Centennial:</strong> Core knowledge that persists</li><li><strong>20% Timeless:</strong> Universal human wisdom</li></ul><p>Currently: We teach Shakespeare as "historical artifact" rather than "training in human nature that survives translation across 400 years."</p><span class="page-number">31</span></div>` },
+            { content: `<div class="page-content"><h3>THE FOUR-GENERATION FRAMEWORK</h3><p>Before major societal decisions, ask:</p><ul><li><strong>Past Generation (75 years ago):</strong> What did they know that we've forgotten?</li><li><strong>Present Generation:</strong> What are our immediate needs and biases?</li><li><strong>Children Generation (25 years forward):</strong> What will they need that we're not building?</li><li><strong>Deep Future (100+ years):</strong> What survives us?</li></ul><div class="callout">Most decisions: 95% present generation, 5% children, 0% past/deep future.</div><span class="page-number">32</span></div>` }
+          ],
+          [
+            { content: `<div class="page-content"><h3>THE SEVEN-GENERATION PRINCIPLE</h3><p>From Iroquois philosophy: Consider impact seven generations forward (approximately 150 years).</p><p>Temporal thinking expands this: <strong>3 back, now, 3 forward, +1 unknown.</strong></p><ul><li><strong>3 Back:</strong> What did they build that still serves us?</li><li><strong>Now:</strong> What are our true needs (not wants)?</li><li><strong>3 Forward:</strong> What will they need from our choices?</li><li><strong>+1 Unknown:</strong> What unexpected consequence emerges?</li></ul><span class="page-number">33</span></div>` },
+            { content: `<div class="page-content"><h3>THE DARK FOREST PERIOD (SOCIETAL)</h3><p>Societies have dark forest periods too:</p><ul><li>Recognizing a slow-moving crisis before it's visible</li><li>Building infrastructure for futures others deny</li><li>Being called "alarmist," "pessimistic"</li><li>Outlasting the denial</li></ul><p>These periods test a society's temporal intelligence.</p><div class="callout">A society that thinks in weeks builds trends.<br>A society that thinks in centuries builds civilization.</div><span class="page-number">34</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'ch8',
+        title: 'The Future of Time',
+        num: 'Chapter 8',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Chapter 8</h2><h1>The Future of Time</h1><h3>THE PARADOX</h3><p>The ultimate temporal insight is this:</p><p>To build for the future, you must be fully present.</p><p>To plan for decades, you must attend to today.</p><p>To create what lasts, you must love what's temporary.</p><div class="callout">The future isn't abandoning the present.<br>It's being present across multiple timescales at once.</div><h3>WHAT WON'T CHANGE</h3><ul><li>Love still requires presence</li><li>Beauty still arrests time</li><li>Crisis still reveals truth</li><li>Death still gives life meaning</li></ul><span class="page-number">35</span></div>` },
+            { content: `<div class="page-content" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;"><p style="font-size:20px;font-style:italic;margin-bottom:24px;">Time audits everything.</p><p>Now you know how to pass the audit.</p><div style="margin:32px 0;"><p style="font-family:'Space Mono';font-size:13px;color:#666;">The calculator is at<br><strong style="color:#1a1a1a;">TVI-Framework.com</strong></p></div><p style="font-size:15px;">The future belongs to those who think in decades.</p><p style="font-size:17px;font-weight:600;margin-top:12px;">You're one of them now.</p><p style="margin-top:32px;font-style:italic;">— Carl Boon</p><span class="page-number">36</span></div>` }
+          ]
+        ]
+      },
+      {
+        id: 'lexicon',
+        title: 'Lexicon: The Temporal Dictionary',
+        num: '',
+        spreads: [
+          [
+            { content: `<div class="page-content"><h2>Reference</h2><h1>Lexicon</h1><h3>CORE TERMS</h3><ul><li><strong>Temporal Validation:</strong> Time's judgment on what matters.</li><li><strong>Contextual Saturation:</strong> How unavoidable something was relative to its moment.</li><li><strong>SRC:</strong> Structural Resistance Coefficient — era-adjusted difficulty multiplier.</li><li><strong>TVS:</strong> Temporal Validation Score = min(P, 180) × RR × L</li><li><strong>Half-Life:</strong> Time until 50% of value decays.</li><li><strong>Zero-Locking:</strong> If saturation = 0 or TVS = 0, then TVI = 0.</li></ul><h3>DOMAIN METRICS</h3><ul><li><strong>TVI:</strong> Temporal Validation Index</li><li><strong>CSI:</strong> Cultural Saturation Index</li><li><strong>BSI:</strong> Business Saturation Index</li><li><strong>ISPS:</strong> Investment Staying Power Score</li></ul><span class="page-number">37</span></div>` },
+            { content: `<div class="page-content"><h3>PATTERNS & PHENOMENA</h3><ul><li><strong>Scale Illusion:</strong> Mistaking absolute size for impact.</li><li><strong>Temporal Decay:</strong> Natural erosion of value over time.</li><li><strong>Signal Density:</strong> Meaning per unit of attention.</li><li><strong>Noise:</strong> Attention without residue.</li><li><strong>Crisis Immunity:</strong> Ability to survive shocks.</li><li><strong>Dark Forest Period:</strong> Seeing patterns early; building quietly.</li></ul><h3>MANTRAS</h3><ul><li><em>Time audits everything.</em></li><li><em>Density over volume.</em></li><li><em>Foundations compound. Features depreciate.</em></li><li><em>Crisis reveals truth.</em></li><li><em>Noise spreads fast. Signal spreads forward.</em></li><li><em>Scale without persistence is just expensive disappearing.</em></li></ul><div class="callout">Now you speak the language.<br>Use it to measure what lasts.<br><strong>Welcome to the other side of time.</strong></div><span class="page-number">38</span></div>` }
+          ]
+        ]
+      }
+    ];
+
+    // State
+    let currentChapter = 0;
+    let currentSpread = 0;
+    let bookOpened = false;
+    let highlightMode = false;
+    let notes = JSON.parse(localStorage.getItem('tvi-book-notes') || '[]');
+    let bookmarks = JSON.parse(localStorage.getItem('tvi-book-bookmarks') || '[]');
+    let selectedText = '';
+    let selectionRange = null;
+
+    // Restore last position
+    const lastPosition = JSON.parse(localStorage.getItem('tvi-book-position') || 'null');
+    if (lastPosition) {
+      currentChapter = lastPosition.chapter;
+      currentSpread = lastPosition.spread;
+      bookOpened = lastPosition.opened;
+    }
+
+    // Elements
+    const coverFront = document.getElementById('cover-front');
+    const pagesContainer = document.getElementById('pages-container');
+    const leftPage = document.getElementById('left-page');
+    const rightPage = document.getElementById('right-page');
+    const pageIndicator = document.getElementById('page-indicator');
+    const progressBar = document.getElementById('progress-bar');
+    const sidebar = document.getElementById('sidebar');
+    const notesPanel = document.getElementById('notes-panel');
+    const notePopup = document.getElementById('note-popup');
+    const selectionPopup = document.getElementById('selection-popup');
+    const bookmarkIndicator = document.getElementById('bookmark-indicator');
+    const toast = document.getElementById('toast');
+
+    // Toast notification
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 2500);
+    }
+
+    // Save reading position
+    function savePosition() {
+      localStorage.setItem('tvi-book-position', JSON.stringify({
+        chapter: currentChapter,
+        spread: currentSpread,
+        opened: bookOpened
+      }));
+    }
+
+    // Build TOC
+    function buildTOC() {
+      const tocList = document.getElementById('toc-list');
+      tocList.innerHTML = chapters.map((ch, i) => `
+        <div class="toc-item ${i === currentChapter ? 'active' : ''}" data-chapter="${i}">
+          ${ch.num ? `<span class="chapter-num">${ch.num}</span>` : ''}
+          <span class="chapter-title">${ch.title}</span>
+        </div>
+      `).join('');
+
+      tocList.querySelectorAll('.toc-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const chapterIdx = parseInt(item.dataset.chapter);
+          goToChapter(chapterIdx);
+          sidebar.classList.remove('open');
+        });
+      });
+    }
+
+    // Render notes list
+    function renderNotes() {
+      const notesList = document.getElementById('notes-list');
+      if (notes.length === 0) {
+        notesList.innerHTML = '<p style="color:var(--text-3);font-size:13px;">No notes yet. Highlight text and add notes while reading.</p>';
+        return;
+      }
+
+      notesList.innerHTML = notes.map((note, i) => `
+        <div class="note-item">
+          <div class="note-page">Page ${note.page}</div>
+          <div class="note-quote">"${note.quote}"</div>
+          <div class="note-text">${note.text}</div>
+          <button class="btn" style="margin-top:8px;padding:4px 8px;font-size:11px;" onclick="deleteNote(${i})">Delete</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteNote(index) {
+      notes.splice(index, 1);
+      localStorage.setItem('tvi-book-notes', JSON.stringify(notes));
+      renderNotes();
+    }
+
+    // Calculate total pages
+    function getTotalSpreads() {
+      return chapters.reduce((sum, ch) => sum + ch.spreads.length, 0);
+    }
+
+    function getCurrentGlobalSpread() {
+      let count = 0;
+      for (let i = 0; i < currentChapter; i++) {
+        count += chapters[i].spreads.length;
+      }
+      return count + currentSpread;
+    }
+
+    // Open book
+    function openBook() {
+      if (bookOpened) return;
+      bookOpened = true;
+      coverFront.classList.add('opened');
+      setTimeout(() => {
+        pagesContainer.classList.add('visible');
+        renderSpread();
+      }, 400);
+    }
+
+    // Render current spread
+    function renderSpread() {
+      const chapter = chapters[currentChapter];
+      const spread = chapter.spreads[currentSpread];
+
+      leftPage.innerHTML = spread[0].content;
+      rightPage.innerHTML = spread[1].content;
+
+      leftPage.classList.remove('flipping-left');
+      rightPage.classList.remove('flipping-right');
+
+      savePosition();
+      updateBookmarkIndicator();
+      updateUI();
+    }
+
+    function updateUI() {
+      const globalSpread = getCurrentGlobalSpread();
+      const total = getTotalSpreads();
+
+      // Progress
+      const progress = ((globalSpread + 1) / total) * 100;
+      progressBar.style.width = `${progress}%`;
+
+      // Page indicator
+      if (currentChapter === 0 && currentSpread === 0) {
+        pageIndicator.textContent = 'Cover';
+      } else {
+        const pageNum = globalSpread * 2;
+        pageIndicator.textContent = `Pages ${pageNum - 1}-${pageNum}`;
+      }
+
+      // Update TOC active state
+      document.querySelectorAll('.toc-item').forEach((item, i) => {
+        item.classList.toggle('active', i === currentChapter);
+      });
+
+      // Button states
+      document.getElementById('prev-btn').disabled = globalSpread === 0;
+      document.getElementById('next-btn').disabled = globalSpread === total - 1;
+    }
+
+    // Navigation
+    function nextPage() {
+      if (!bookOpened) {
+        openBook();
+        return;
+      }
+
+      const chapter = chapters[currentChapter];
+      if (currentSpread < chapter.spreads.length - 1) {
+        rightPage.classList.add('flipping-right');
+        setTimeout(() => {
+          currentSpread++;
+          renderSpread();
+        }, 600);
+      } else if (currentChapter < chapters.length - 1) {
+        rightPage.classList.add('flipping-right');
+        setTimeout(() => {
+          currentChapter++;
+          currentSpread = 0;
+          renderSpread();
+        }, 600);
+      }
+    }
+
+    function prevPage() {
+      if (!bookOpened) return;
+
+      if (currentSpread > 0) {
+        leftPage.classList.add('flipping-left');
+        setTimeout(() => {
+          currentSpread--;
+          renderSpread();
+        }, 600);
+      } else if (currentChapter > 0) {
+        leftPage.classList.add('flipping-left');
+        setTimeout(() => {
+          currentChapter--;
+          currentSpread = chapters[currentChapter].spreads.length - 1;
+          renderSpread();
+        }, 600);
+      }
+    }
+
+    function goToChapter(chapterIdx) {
+      if (!bookOpened) openBook();
+      currentChapter = chapterIdx;
+      currentSpread = 0;
+      setTimeout(renderSpread, bookOpened ? 0 : 500);
+    }
+
+    // Highlighting
+    function handleTextSelection() {
+      const selection = window.getSelection();
+      selectedText = selection.toString().trim();
+
+      // Hide popup if no selection
+      if (!selectedText || selectedText.length < 3) {
+        selectionPopup.classList.remove('visible');
+        return;
+      }
+
+      // Show selection popup
+      const range = selection.getRangeAt(0);
+      selectionRange = range.cloneRange();
+      const rect = range.getBoundingClientRect();
+
+      selectionPopup.style.top = `${rect.top + window.scrollY - 50}px`;
+      selectionPopup.style.left = `${Math.max(10, Math.min(rect.left + rect.width/2 - 100, window.innerWidth - 220))}px`;
+      selectionPopup.classList.add('visible');
+    }
+
+    // Social sharing
+    const BOOK_URL = 'https://TVI-Framework.com/book';
+    const BOOK_TITLE = 'TIME AS PROOF by Carl Boon';
+
+    function shareToTwitter() {
+      const text = `"${selectedText.substring(0, 200)}${selectedText.length > 200 ? '...' : ''}"
+
+— ${BOOK_TITLE}`;
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(BOOK_URL)}`;
+      window.open(url, '_blank', 'width=550,height=420');
+      selectionPopup.classList.remove('visible');
+      showToast('Opening Twitter...');
+    }
+
+    function shareToLinkedIn() {
+      const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(BOOK_URL)}`;
+      window.open(url, '_blank', 'width=550,height=420');
+      selectionPopup.classList.remove('visible');
+      showToast('Opening LinkedIn...');
+    }
+
+    function copyQuote() {
+      const quote = `"${selectedText}"
+
+— ${BOOK_TITLE}
+${BOOK_URL}`;
+      navigator.clipboard.writeText(quote).then(() => {
+        showToast('Quote copied with attribution!');
+      });
+      selectionPopup.classList.remove('visible');
+    }
+
+    function highlightSelection() {
+      if (selectionRange) {
+        const span = document.createElement('span');
+        span.className = 'highlighted';
+        try {
+          selectionRange.surroundContents(span);
+        } catch(e) {
+          // Complex selection, just show toast
+        }
+        showToast('Text highlighted!');
+      }
+      selectionPopup.classList.remove('visible');
+    }
+
+    function showNotePopup() {
+      if (!selectedText) return;
+      
+      const rect = selectionPopup.getBoundingClientRect();
+      notePopup.style.top = `${rect.bottom + window.scrollY + 10}px`;
+      notePopup.style.left = `${Math.min(rect.left, window.innerWidth - 320)}px`;
+      document.getElementById('note-quote').textContent = `"${selectedText.substring(0, 100)}${selectedText.length > 100 ? '...' : ''}"`;
+      notePopup.classList.add('visible');
+      selectionPopup.classList.remove('visible');
+      document.getElementById('note-input').focus();
+    }
+
+    function saveNote() {
+      const noteText = document.getElementById('note-input').value.trim();
+      if (noteText && selectedText) {
+        notes.push({
+          page: getCurrentGlobalSpread() * 2,
+          quote: selectedText.substring(0, 100),
+          text: noteText,
+          chapter: currentChapter,
+          spread: currentSpread
+        });
+        localStorage.setItem('tvi-book-notes', JSON.stringify(notes));
+        renderNotes();
+        showToast('Note saved!');
+      }
+      closeNotePopup();
+    }
+
+    function closeNotePopup() {
+      notePopup.classList.remove('visible');
+      document.getElementById('note-input').value = '';
+      selectedText = '';
+    }
+
+    // Bookmarks
+    function toggleBookmark() {
+      const key = `${currentChapter}-${currentSpread}`;
+      const idx = bookmarks.indexOf(key);
+      
+      if (idx > -1) {
+        bookmarks.splice(idx, 1);
+        showToast('Bookmark removed');
+      } else {
+        bookmarks.push(key);
+        showToast('Page bookmarked!');
+      }
+      
+      localStorage.setItem('tvi-book-bookmarks', JSON.stringify(bookmarks));
+      updateBookmarkIndicator();
+    }
+
+    function updateBookmarkIndicator() {
+      const key = `${currentChapter}-${currentSpread}`;
+      const isBookmarked = bookmarks.includes(key);
+      bookmarkIndicator.classList.toggle('visible', isBookmarked);
+      document.getElementById('bookmark-btn').classList.toggle('active', isBookmarked);
+    }
+
+    // Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        document.body.classList.add('fullscreen');
+        showToast('Press ESC to exit fullscreen');
+      } else {
+        document.exitFullscreen();
+        document.body.classList.remove('fullscreen');
+      }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        document.body.classList.remove('fullscreen');
+      }
+    });
+
+    // Event listeners
+    coverFront.addEventListener('click', openBook);
+
+    document.getElementById('click-prev').addEventListener('click', prevPage);
+    document.getElementById('click-next').addEventListener('click', nextPage);
+    document.getElementById('prev-btn').addEventListener('click', prevPage);
+    document.getElementById('next-btn').addEventListener('click', nextPage);
+
+    document.getElementById('toc-btn').addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      notesPanel.classList.remove('open');
+    });
+
+    document.getElementById('notes-btn').addEventListener('click', () => {
+      notesPanel.classList.toggle('open');
+      sidebar.classList.remove('open');
+    });
+
+    document.getElementById('highlight-btn').addEventListener('click', () => {
+      highlightMode = !highlightMode;
+      document.getElementById('highlight-btn').classList.toggle('active', highlightMode);
+      document.body.classList.toggle('highlight-mode', highlightMode);
+      showToast(highlightMode ? 'Highlight mode ON' : 'Highlight mode OFF');
+    });
+
+    document.getElementById('bookmark-btn').addEventListener('click', toggleBookmark);
+    document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+    
+    // Export annotations
+    document.getElementById('export-btn').addEventListener('click', exportAnnotations);
+    
+    // Keyboard shortcuts modal
+    document.getElementById('shortcuts-btn').addEventListener('click', showShortcutsModal);
+    document.getElementById('shortcuts-overlay').addEventListener('click', closeShortcutsModal);
+    
+    function showShortcutsModal() {
+      document.getElementById('shortcuts-modal').classList.add('visible');
+      document.getElementById('shortcuts-overlay').classList.add('visible');
+    }
+    
+    function closeShortcutsModal() {
+      document.getElementById('shortcuts-modal').classList.remove('visible');
+      document.getElementById('shortcuts-overlay').classList.remove('visible');
+    }
+    
+    function exportAnnotations() {
+      const data = {
+        book: 'TIME AS PROOF',
+        author: 'Carl Boon',
+        notes: notes,
+        bookmarks: bookmarks.map(key => {
+          const [chapter, spread] = key.split('-');
+          return {
+            chapter: parseInt(chapter),
+            spread: parseInt(spread),
+            chapterTitle: chapters[chapter]?.title || 'Unknown'
+          };
+        }),
+        exportDate: new Date().toISOString(),
+        totalPages: getCurrentGlobalSpread() * 2
+      };
+      
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `TIME_AS_PROOF_annotations_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      showToast('✓ Annotations exported!');
+    }
+
+    // Selection popup buttons
+    document.getElementById('share-twitter').addEventListener('click', shareToTwitter);
+    document.getElementById('share-linkedin').addEventListener('click', shareToLinkedIn);
+    document.getElementById('copy-quote').addEventListener('click', copyQuote);
+    document.getElementById('add-note-btn').addEventListener('click', showNotePopup);
+    document.getElementById('highlight-selection').addEventListener('click', highlightSelection);
+
+    document.addEventListener('mouseup', (e) => {
+      // Don't trigger if clicking on popup buttons
+      if (e.target.closest('.selection-popup') || e.target.closest('.note-popup')) return;
+      setTimeout(handleTextSelection, 10);
+    });
+
+    document.getElementById('save-note').addEventListener('click', saveNote);
+    document.getElementById('cancel-note').addEventListener('click', closeNotePopup);
+
+    // Hide popup when clicking elsewhere
+    document.addEventListener('mousedown', (e) => {
+      if (!e.target.closest('.selection-popup') && !e.target.closest('.page-content')) {
+        selectionPopup.classList.remove('visible');
+      }
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextPage();
+      if (e.key === 'ArrowLeft') prevPage();
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      if (e.key === 'b' || e.key === 'B') toggleBookmark();
+      if (e.key === 'h' || e.key === 'H') {
+        highlightMode = !highlightMode;
+        document.getElementById('highlight-btn').classList.toggle('active', highlightMode);
+        document.body.classList.toggle('highlight-mode', highlightMode);
+        showToast(highlightMode ? 'Highlight mode ON' : 'Highlight mode OFF');
+      }
+      if (e.key === '?') showShortcutsModal();
+      if (e.key === 'Escape') {
+        sidebar.classList.remove('open');
+        notesPanel.classList.remove('open');
+        closeNotePopup();
+        closeShortcutsModal();
+        selectionPopup.classList.remove('visible');
+      }
+    });
+
+    // Touch/swipe
+    let touchStartX = 0;
+    document.getElementById('book').addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    document.getElementById('book').addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextPage();
+        else prevPage();
+      }
+    });
+
+    // Initialize
+    buildTOC();
+    renderNotes();
+    updateUI();
+    
+    // Restore previous position if book was opened
+    if (lastPosition && lastPosition.opened) {
+      bookOpened = true;
+      coverFront.classList.add('opened');
+      pagesContainer.classList.add('visible');
+      renderSpread();
+    }
+  </script>
+</body>
+</html>

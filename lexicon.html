@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lexicon • TVI Framework</title>
+  <meta name="description" content="Complete glossary of Temporal Validation Index (TVI) terms, metrics, and methodology.">
+  <link rel="icon" href="/assets/icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg0:#05070d;--bg1:#070b16;--bg2:#0a1024;--surface:rgba(255,255,255,0.04);--surface-2:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.10);--border-subtle:rgba(255,255,255,0.08);--text:#ffffff;--text-2:rgba(255,255,255,0.78);--text-3:rgba(255,255,255,0.52);--accent:#2ce0ff;--accent-dim:rgba(44,224,255,0.10);--radius:16px;--radius-sm:12px;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(1200px 800px at 20% -10%,rgba(44,224,255,0.10),transparent 60%),radial-gradient(900px 700px at 100% 10%,rgba(167,139,250,0.08),transparent 55%),linear-gradient(180deg,var(--bg0),var(--bg1) 55%,var(--bg2));color:var(--text);line-height:1.6;min-height:100vh;}
+    .container{max-width:1000px;margin:0 auto;padding:60px 32px;}
+    header{text-align:center;margin-bottom:48px;}
+    h1{font-family:'Inter Tight';font-size:48px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;}
+    .subtitle{font-size:16px;color:var(--text-2);max-width:700px;margin:0 auto;}
+    .section{margin:48px 0;}
+    h2{font-family:'Inter Tight';font-size:32px;font-weight:700;margin:48px 0 24px;color:var(--accent);border-bottom:2px solid var(--border);padding-bottom:12px;}
+    h3{font-family:'Inter Tight';font-size:20px;font-weight:700;margin:32px 0 12px;color:var(--text);}
+    .term{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:0 20px 40px rgba(0,0,0,0.5);}
+    .term-name{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--accent);margin-bottom:8px;}
+    .term-aka{font-size:13px;color:var(--text-3);font-style:italic;margin-bottom:12px;}
+    .term-def{font-size:15px;color:var(--text-2);line-height:1.7;margin-bottom:12px;}
+    .term-formula{font-family:'Space Mono',monospace;background:var(--bg1);padding:12px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);margin:12px 0;font-size:14px;color:var(--accent);}
+    .term-example{font-size:14px;color:var(--text-3);padding:12px;background:var(--surface);border-radius:var(--radius-sm);margin-top:12px;}
+    .term-range{font-size:13px;color:var(--text-3);margin-top:8px;}
+    strong{color:var(--text);}
+    em{color:var(--accent);font-style:normal;}
+    .alpha-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:32px 0;position:sticky;top:20px;background:var(--bg0);padding:16px;border-radius:var(--radius);border:1px solid var(--border-subtle);z-index:10;}
+    .alpha-nav a{padding:6px 10px;background:var(--surface);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-3);font-size:13px;font-weight:600;text-decoration:none;transition:0.15s;}
+    .alpha-nav a:hover{border-color:var(--accent);color:var(--accent);}
+    footer{text-align:center;margin-top:60px;padding-top:24px;border-top:1px solid var(--border-subtle);color:var(--text-3);font-size:13px;}
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    @media (max-width:600px){
+      .container{padding:40px 20px;}
+      h1{font-size:36px;}
+      h2{font-size:24px;}
+      .term{padding:16px;}
+      .alpha-nav{position:static;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>TVI Lexicon</h1>
+      <p class="subtitle">Complete glossary of Temporal Validation Index terms, metrics, and methodology</p>
+    </header>
+
+    <div class="alpha-nav">
+      <a href="#core">Core</a>
+      <a href="#components">Components</a>
+      <a href="#domains">Domains</a>
+      <a href="#observer">Observer</a>
+      <a href="#classification">Classification</a>
+      <a href="#platform">Platform</a>
+    </div>
+
+    <div class="section" id="core">
+      <h2>Core Framework</h2>
+
+      <div class="term">
+        <div class="term-name">TVI (Temporal Validation Index)</div>
+        <div class="term-aka">Also: Time Value of Impact, Temporal Validation Impact</div>
+        <div class="term-def">The universal measure of staying power. TVI quantifies whether something is becoming a foundation or just passing through. It answers: "Will this still matter after hype, cycles, and platform churn have burned away?"</div>
+        <div class="term-formula">TVI = S × log₁₀(V + 1) × R</div>
+        <div class="term-example"><strong>Example:</strong> Charlie Bit My Finger (2007): TVI 67.52 (Foundation). Random TikTok 2024: TVI 0.00 (Ephemeral).</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Temporal Validation</div>
+        <div class="term-def">The process by which time itself acts as a validator, filtering genuinely impactful entities from temporarily popular ones. Ideas that persist through changing contexts, survive competitive pressure, and continue to resurface demonstrate a form of validation that immediate metrics cannot capture.</div>
+        <div class="term-example"><strong>Key insight:</strong> Time doesn't dilute impact — it reveals it. Most things fail the temporal filter; few pass through.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Staying Power</div>
+        <div class="term-aka">Also: Durability, Persistence, Temporal Resilience</div>
+        <div class="term-def">The ability of content, ideas, organizations, or methodologies to maintain relevance over time despite changing contexts, competitive pressure, and platform evolution.</div>
+      </div>
+    </div>
+
+    <div class="section" id="components">
+      <h2>Core Components</h2>
+
+      <div class="term">
+        <div class="term-name">CSI (Contextual Saturation Index)</div>
+        <div class="term-aka">Previously: Cultural Saturation Index</div>
+        <div class="term-def">Measures how fully something occupied the available attention space of its era. Not raw reach, but reach relative to what was possible at that time. Accounts for platform size, account multiplication (A-Factor), and cross-context escape (C).</div>
+        <div class="term-formula">CSI = (Raw Reach / A-Factor) / Available Audience × C</div>
+        <div class="term-example"><strong>Why it matters:</strong> 10 million views in 2007 ≠ 10 million views in 2024. CSI normalizes for era.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">TVS (Temporal Validation Score)</div>
+        <div class="term-def">Measures whether time has "voted" for something through sustained persistence, repeated resurfacing, and legacy status achievement.</div>
+        <div class="term-formula">TVS = Persistence × Resurfacing × Legacy</div>
+        <div class="term-range"><strong>Range:</strong> 0 (no validation) to 540 (maximum: 180 months × 3.0 resurfacing × 1.0 legacy minimum)</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">SRC (Structural Resistance Coefficient)</div>
+        <div class="term-def">Era-adjusted multiplier acknowledging that achieving persistence in earlier eras (smaller audiences, less infrastructure) indicates stronger fundamental value than achieving identical metrics in modern eras.</div>
+        <div class="term-range"><strong>Values:</strong> Pre-2005: 3.0 | 2005-2009: 2.5 | 2010-2013: 2.0 | 2014-2017: 1.5 | 2018+: 1.0</div>
+        <div class="term-example"><strong>Why it exists:</strong> Spreading pre-YouTube required overcoming exponentially more friction than post-TikTok.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">A-Factor (Audience Multiplication Factor)</div>
+        <div class="term-def">Corrects for duplicate human exposure caused by multi-account behavior over time. As platforms age, individuals create multiple accounts (password resets, device switching, platform churn), inflating view counts without expanding unique reach.</div>
+        <div class="term-range"><strong>Values:</strong> 1.0 (pre-2005, no platform accounts) → 2.5 (15+ years, maximum churn assumption)</div>
+        <div class="term-example"><strong>Why it matters:</strong> The same person viewing across 3 lost accounts = 3 views but 1 human.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">C (Cross-Context Coefficient)</div>
+        <div class="term-aka">Previously: Cross-Platform Coefficient</div>
+        <div class="term-def">Measures cultural escape velocity — did something transcend its original platform/industry/domain? Captures whether content stayed siloed or achieved broader cultural penetration.</div>
+        <div class="term-range"><strong>Values:</strong> 1.0 (platform-native only) → 3.5 (universal cultural reference)</div>
+        <div class="term-example"><strong>Example:</strong> TikTok-only trend: C=1.0. "Charlie Bit My Finger" (YouTube → memes → news → culture): C=3.0+</div>
+      </div>
+    </div>
+
+    <div class="section" id="domains">
+      <h2>Domain-Specific Indices</h2>
+
+      <div class="term">
+        <div class="term-name">TDIS (Training Data Impact Score)</div>
+        <div class="term-aka">Temporal Dataset Impact Score</div>
+        <div class="term-def">TVI applied to AI training datasets. Measures which datasets provide lasting value vs temporary utility through sustained adoption, cross-framework universality, and pedagogical embedding.</div>
+        <div class="term-formula">TDIS = DSI × log₁₀(TVS + 1) × SRC</div>
+        <div class="term-example"><strong>Example:</strong> MNIST (1998): TDIS 40.21 — pedagogical standard for 26 years. LAION-5B (2022): TDIS 0.00 — uncertain validation, legal issues.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">DSI (Dataset Saturation Index)</div>
+        <div class="term-def">Domain-specific saturation for AI datasets. Measures usage volume relative to researcher population, corrected for repository duplication and cross-framework adoption.</div>
+        <div class="term-formula">DSI = (Usage / Duplication Factor) / Researcher Population × C</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">TVI-B (Business Temporal Validation Index)</div>
+        <div class="term-def">TVI applied to business methodologies and management frameworks. Measures which practices become infrastructure vs consulting fads.</div>
+        <div class="term-formula">TVI-B = BSI × log₁₀(TVS + 1) × SRC</div>
+        <div class="term-example"><strong>Example:</strong> SMART Goals (1981): TVI-B 1,031 — universal standard. Holacracy (2015): TVI-B 0.17 — niche failure.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">BSI (Business Saturation Index)</div>
+        <div class="term-def">Domain-specific saturation for business methodologies. Measures adoption rate relative to addressable market with cross-industry multiplier.</div>
+        <div class="term-formula">BSI = (Adoption / 1.5) / Market Size × C</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">ISPS (Investment Staying Power Score)</div>
+        <div class="term-def">TVI applied to corporate entities and investments. Measures which companies demonstrate structural staying power through crisis survival, category dominance, and leadership continuity.</div>
+        <div class="term-formula">ISPS = MSI × log₁₀(TVS + 1) × SRC</div>
+        <div class="term-example"><strong>Example:</strong> Apple: ISPS 7,775 (+180% through crises). Peloton: ISPS 82 (-92% collapse).</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">MSI (Market Saturation Index)</div>
+        <div class="term-def">Domain-specific saturation for investments. Combines brand awareness, market position, era-adjusted founding difficulty, and cross-asset presence.</div>
+        <div class="term-formula">MSI = (Brand × Position) / Era Population × Cross-Asset × 100</div>
+      </div>
+    </div>
+
+    <div class="section" id="observer">
+      <h2>Observer Model</h2>
+
+      <div class="term">
+        <div class="term-name">Observer Temporal Signature (τ)</div>
+        <div class="term-def">Model explaining why different observers systematically disagree about importance when evaluating identical evidence. This disagreement stems from different temporal horizons acting as perceptual filters, not from different values or intelligence.</div>
+        <div class="term-formula">τₒ = (Hₒ, Lₒ, Cₒ, Vₒ)</div>
+        <div class="term-example"><strong>Critical insight:</strong> "An observer with a 3-month validation horizon cannot perceive 87% of foundational value. This is not disagreement — it is perceptual limitation."</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">H (Skill Half-Life)</div>
+        <div class="term-def">Years until the observer's relevant skills depreciate by 50%. Technical skills in fast-moving fields (AI, crypto) have shorter half-lives; foundational skills (mathematics, writing) have longer half-lives.</div>
+        <div class="term-range"><strong>Example:</strong> Web framework skills: H ≈ 2 years. Statistical modeling: H ≈ 15 years.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">L (Legacy Depth)</div>
+        <div class="term-def">Stake horizon level — the temporal scope of the observer's concern.</div>
+        <div class="term-range"><strong>Levels:</strong> 1 = self (career), 2 = family (generational), 3 = community (institutional), 4 = civilization (species-level)</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">C (Crisis Anchor)</div>
+        <div class="term-def">Set of crises that calibrated the observer's risk model. An investor who experienced 2008 crash vs one who started in 2020 bull market will assess risk differently.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">V (Validation Horizon)</div>
+        <div class="term-def">Default timeframe the observer uses to judge success. A venture capitalist with 7-year fund cycle has V=84 months. A university endowment with perpetual horizon has V=∞.</div>
+        <div class="term-example"><strong>Key point:</strong> Short-horizon observers literally cannot see value in entities whose peak validation lies outside their horizon.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Observer Visibility Gap</div>
+        <div class="term-def">The phenomenon where observers with short validation horizons cannot perceive long-horizon value. Estimated that a 3-month horizon observer misses 87% of foundational value that a 25-year horizon observer sees.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Component Metrics</h2>
+
+      <div class="term">
+        <div class="term-name">Persistence (P)</div>
+        <div class="term-def">Months since initial emergence that an entity remains culturally referenced or actively used. Measures continued relevance, not passive existence.</div>
+        <div class="term-range"><strong>Cap:</strong> 180 months (15 years) for normalization. Entities persisting beyond 15 years receive maximum credit.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Resurfacing Rate (R)</div>
+        <div class="term-def">Frequency of renewed attention measured by documented events per year. News coverage, trend revivals, academic citations, anniversary features, platform resurrections.</div>
+        <div class="term-range"><strong>Scale:</strong> 0 (never mentioned again) → 10+ (constant cultural presence)</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Legacy Level (L)</div>
+        <div class="term-def">Qualitative status indicating cultural/institutional entrenchment. Represents state changes from "media" to "reference."</div>
+        <div class="term-range">
+          <strong>Values:</strong><br>
+          1.0 = Baseline (exists, usable)<br>
+          1.5 = Meme Format (spawned imitations)<br>
+          2.0 = Cultural Lexicon (widely recognized reference)<br>
+          2.5 = Academic Study (subject of scholarly analysis)<br>
+          3.0 = Historical Artifact (taught as cultural history)
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Raw Reach</div>
+        <div class="term-def">Total impressions, views, downloads, or usage instances across an entity's lifetime. Uncorrected for platform inflation or audience size.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Available Audience</div>
+        <div class="term-def">Platform user base or addressable market at the moment of initial virality/adoption. Not current size — historical size when the entity first achieved breakout.</div>
+        <div class="term-example"><strong>Critical:</strong> A 2007 viral with 100M available audience ≠ 2024 viral with 2B available audience, even at same penetration %.</div>
+      </div>
+    </div>
+
+    <div class="section" id="classification">
+      <h2>Classification Tiers</h2>
+
+      <div class="term">
+        <div class="term-name">Ephemeral</div>
+        <div class="term-def">TVI < 1. No demonstrated staying power. High immediate impact followed by rapid decay. Gone within days or weeks.</div>
+        <div class="term-example"><strong>Examples:</strong> Most TikTok trends, viral memes that don't resurface, flavor-of-the-month methodologies.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Viral Moment</div>
+        <div class="term-def">TVI 1-5. Brief cultural visibility without sustained validation. Remembered by some, not broadly referenced.</div>
+        <div class="term-example"><strong>Examples:</strong> Ice Bucket Challenge (TVI 5.03), Damn Daniel (TVI 0.01 borderline).</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Cultural Event</div>
+        <div class="term-def">TVI 5-15. Significant at the time with moderate temporal validation. Still referenced occasionally.</div>
+        <div class="term-example"><strong>Examples:</strong> Harlem Shake (TVI ~11), format memes with limited longevity.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Milestone</div>
+        <div class="term-def">TVI 15-30. Remembered across years with strong temporal validation. Widely recognized reference point.</div>
+        <div class="term-example"><strong>Examples:</strong> Significant cultural moments that shaped their domain.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Foundation</div>
+        <div class="term-def">TVI 30-50 (culture) or >50 (other domains). Proven staying power. Forms lasting infrastructure in its domain. Survives paradigm shifts.</div>
+        <div class="term-example"><strong>Examples:</strong> Gangnam Style (TVI 41.76), MNIST (TDIS 40.21), Agile (TVI-B 316).</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Phenomenon</div>
+        <div class="term-def">TVI > 50 (culture). Permanent cultural significance. Historical artifact status. Studied as defining moment of an era.</div>
+        <div class="term-example"><strong>Examples:</strong> Charlie Bit My Finger (TVI 67.52), foundational works that transcend their original context.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Trend Riding</div>
+        <div class="term-def">Investment-specific classification (ISPS 5-20). Companies benefiting from temporary market enthusiasm without structural competitive advantage.</div>
+        <div class="term-example"><strong>Examples:</strong> Peloton (ISPS 82), companies that collapse at first downturn.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Technical Terms</h2>
+
+      <div class="term">
+        <div class="term-name">Era</div>
+        <div class="term-def">Technological/competitive period with distinct structural characteristics affecting how easily something can spread and persist.</div>
+        <div class="term-range">
+          <strong>Eras:</strong><br>
+          Pre-Platform (≤2004): Manual sharing, no infrastructure<br>
+          Early Platform (2005-2009): Limited users, human discovery<br>
+          Mass Adoption (2010-2013): Growing platforms, early algorithms<br>
+          Fragmentation (2014-2017): Multiple platforms, algorithm-assisted<br>
+          Algorithm Dominance (2018+): Massive scale, full algorithmic distribution
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Logarithmic Scaling</div>
+        <div class="term-def">The log₁₀(V + 1) structure in TVI formula. Reflects diminishing returns: difference between 1 and 12 months persistence is more meaningful than between 120 and 131 months. Prevents exponential age bias while rewarding longevity.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Multiplicative Structure</div>
+        <div class="term-def">TVI's S × log(V+1) × R design ensures deficiency in any component substantially reduces overall score. High reach + zero persistence = TVI of 0. High persistence + zero reach = TVI of 0. Both saturation AND validation required.</div>
+        <div class="term-example"><strong>Philosophy:</strong> Cultural impact requires both scale and durability. Viral without validation = hype. Validation without reach = obscurity.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Zero-Locking</div>
+        <div class="term-def">Property of TVI formula where zero in any critical component produces zero final score. No amount of views compensates for zero validation; no amount of time compensates for zero reach.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Temporal Uncertainty Principle</div>
+        <div class="term-def">Hypothesized fundamental tradeoff: ΔT × ΔI ≥ k. Uncertainty in timing × uncertainty in impact has a lower bound. Viral content has precise timing but unpredictable longevity. Foundational work has predictable importance but unpredictable emergence timing.</div>
+      </div>
+    </div>
+
+    <div class="section" id="platform">
+      <h2>Platform Terms</h2>
+
+      <div class="term">
+        <div class="term-name">Preview Mode</div>
+        <div class="term-def">Freemium tier allowing unauthenticated users to run limited TVI calculations (3 per IP per day). Returns classification and band only; numeric scores and component breakdown hidden. Designed for conversion funnel.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Free Tier</div>
+        <div class="term-def">Authenticated users receive 5 full TVI calculations per day with complete scores, component breakdown, PDF downloads, and JSON exports. No API access.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Pro Tier</div>
+        <div class="term-def">Paid subscription ($49/month or $490/year) providing unlimited calculations, API access (1,000 calls/day), priority PDF generation, and unlimited data retention.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Rate Limiting</div>
+        <div class="term-def">Enforcement of usage quotas to prevent abuse and protect proprietary calculation engine. Preview: 3/IP/day. Free: 5/day. Pro: Unlimited. Exceeding limits returns HTTP 429 with upgrade prompt.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Signed PDF URLs</div>
+        <div class="term-def">Security mechanism using crypto-random tokens with 5-minute expiration and single-use enforcement. Prevents PDF sharing and unauthorized access.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Server-Side Calculation</div>
+        <div class="term-def">Security architecture where all TVI formula logic, era coefficients, and classification thresholds execute on backend servers. Browser never receives proprietary methodology — only inputs go in, scores come out.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Research Terms</h2>
+
+      <div class="term">
+        <div class="term-name">Validation Against Known Outcomes</div>
+        <div class="term-def">Research methodology testing whether TVI correctly ranks entities whose relative durability we already know (retrospective validation) rather than predicting future persistence (prospective prediction).</div>
+        <div class="term-example"><strong>Result:</strong> 100% directional accuracy across viral content, business methods, AI datasets, and corporate survival.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Sensitivity Analysis</div>
+        <div class="term-def">Robustness testing varying all input parameters by ±20% to verify rankings remain stable despite parameter uncertainty. MNIST > LAION held in 100% of 125 parameter combinations tested.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Directional Accuracy</div>
+        <div class="term-def">Measure of whether formula correctly predicts relative ranking (A > B > C) independent of exact numeric values. TVI achieved 100% directional accuracy across all test domains.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Fractal Dimension (TFD)</div>
+        <div class="term-def">Speculative extension: Box-counting analysis of reference timestamps may reveal characteristic fractal dimensions for different persistence tiers. Ephemeral ≈ 1.0, Foundations ≈ 1.5-1.8. Under investigation.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Philosophical Concepts</h2>
+
+      <div class="term">
+        <div class="term-name">Time as Validator</div>
+        <div class="term-def">Core philosophical principle: Time doesn't dilute impact — it reveals it. Time acts as a selection pressure filtering signal from noise. Most entities fail the temporal filter; few pass through to become foundations.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Culture is a Filter, Not a Spike</div>
+        <div class="term-def">Central metaphor: Cultural evolution isn't about viral explosions (spikes) but about temporal selection (filtering). What matters is not what was loudest, but what survived.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">Temporal Mass</div>
+        <div class="term-def">Metaphorical concept: Entities exist in a temporal field where position = validation state, movement = persistence dynamics. Foundations are high-mass objects resisting perturbation; ephemera are low-mass particles easily displaced by attention currents.</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">The +1 Principle</div>
+        <div class="term-def">The +1 in log₁₀(V+1) represents the observer's own existence. You cannot measure from zero because zero would mean you are not present to measure. Minimum temporal mass is 1.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Acronyms & Abbreviations</h2>
+
+      <div class="term">
+        <div class="term-name">TVI</div>
+        <div class="term-def">Temporal Validation Index / Time Value of Impact / Temporal Validation Impact</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">CSI</div>
+        <div class="term-def">Contextual Saturation Index (formerly Cultural Saturation Index)</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">TVS</div>
+        <div class="term-def">Temporal Validation Score</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">SRC</div>
+        <div class="term-def">Structural Resistance Coefficient</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">TDIS</div>
+        <div class="term-def">Training Data Impact Score / Temporal Dataset Impact Score</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">TVI-B</div>
+        <div class="term-def">Business Temporal Validation Index</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">ISPS</div>
+        <div class="term-def">Investment Staying Power Score</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">DSI</div>
+        <div class="term-def">Dataset Saturation Index</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">BSI</div>
+        <div class="term-def">Business Saturation Index</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">MSI</div>
+        <div class="term-def">Market Saturation Index</div>
+      </div>
+
+      <div class="term">
+        <div class="term-name">τ (tau)</div>
+        <div class="term-def">Observer Temporal Signature</div>
+      </div>
+    </div>
+
+    <footer>
+      <p><a href="/Universal-Impact-Calculator-v1.0.1.html">← Back to TVI Platform</a> • <a href="/research/index.html">Research</a></p>
+      <p style="margin-top:12px;">TVI Framework Lexicon • BoonMind Analytics • 2026</p>
+    </footer>
+  </div>
+</body>
+</html>
+

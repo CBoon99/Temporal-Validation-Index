@@ -1,0 +1,52 @@
+{
+  "name": "TVI Platform - Temporal Validation Index",
+  "short_name": "TVI",
+  "description": "Measure what will last. Quantify staying power across culture, data, and economics.",
+  "start_url": "/Universal-Impact-Calculator-v1.0.1.html",
+  "display": "standalone",
+  "background_color": "#05070d",
+  "theme_color": "#2ce0ff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icons/tvi-mark.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["productivity", "business", "education", "finance"],
+  "shortcuts": [
+    {
+      "name": "Run TVI Calculator",
+      "url": "/Universal-Impact-Calculator-v1.0.1.html",
+      "description": "Calculate temporal validation score"
+    },
+    {
+      "name": "Research",
+      "url": "/research/index.html",
+      "description": "Read the working paper"
+    },
+    {
+      "name": "Dashboard",
+      "url": "/dashboard.html",
+      "description": "View your calculations"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/calculator.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "label": "TVI Calculator interface"
+    }
+  ]
+}
+

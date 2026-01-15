@@ -1,0 +1,44 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/blog"
+public_folder: "/assets/blog"
+
+collections:
+  - name: "insights"
+    label: "Blog Posts"
+    folder: "insights"
+    create: true
+    slug: "{{slug}}"
+    extension: "html"
+    format: "frontmatter"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Author", name: "author", widget: "string", default: "Carl Boon"}
+      - {label: "Category", name: "category", widget: "select", options: ["Research", "Case Study", "Founder Story", "Analysis", "Methodology", "Investment"]}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+      
+  - name: "research"
+    label: "Research Pages"
+    files:
+      - label: "Research Overview"
+        name: "research-index"
+        file: "research/index.html"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      
+  - name: "newsletter"
+    label: "Newsletter Subscribers"
+    folder: "_data/newsletter"
+    create: false
+    fields:
+      - {label: "Email", name: "email", widget: "string"}
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Source", name: "source", widget: "string"}
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed • TIME AS PROOF</title>
+  <link rel="icon" href="/assets/icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@400;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg0:#05070d;--bg1:#070b16;--bg2:#0a1024;--text:#ffffff;--text-2:rgba(255,255,255,0.78);--text-3:rgba(255,255,255,0.52);--accent:#2ce0ff;--accent-dim:rgba(44,224,255,0.10);--success:#34d399;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:radial-gradient(1200px 800px at 20% -10%,rgba(44,224,255,0.10),transparent 60%),radial-gradient(900px 700px at 100% 10%,rgba(167,139,250,0.08),transparent 55%),linear-gradient(180deg,var(--bg0),var(--bg1) 55%,var(--bg2));color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;}
+    .container{max-width:600px;text-align:center;background:rgba(7,11,22,0.9);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:48px;box-shadow:0 40px 80px rgba(0,0,0,0.6);}
+    h1{font-family:'Inter Tight';font-size:36px;font-weight:800;margin-bottom:16px;}
+    p{color:var(--text-2);font-size:15px;line-height:1.7;margin-bottom:16px;}
+    .copy-number{font-family:'Space Mono';font-size:48px;font-weight:700;color:var(--accent);margin:24px 0;}
+    .success-icon{font-size:64px;margin-bottom:24px;}
+    .btn{padding:14px 28px;background:linear-gradient(135deg,rgba(44,224,255,0.22),rgba(44,224,255,0.08));border:1px solid rgba(44,224,255,0.35);border-radius:12px;color:var(--text);font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;margin-top:24px;font-family:inherit;font-size:15px;}
+    .btn:hover{border-color:rgba(44,224,255,0.6);}
+    .info-box{background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:20px;margin-top:32px;text-align:left;}
+    .info-box h3{font-size:16px;margin-bottom:12px;color:var(--success);}
+    .info-box ul{list-style:none;padding:0;font-size:14px;color:var(--text-2);}
+    .info-box li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .info-box li:last-child{border-bottom:none;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="success-icon">✅</div>
+    <h1>Order Confirmed!</h1>
+    <p>Congratulations! You're now a Founding Reader.</p>
+    
+    <div class="copy-number" id="copy-number">Reader #— of 100</div>
+    
+    <div class="info-box">
+      <h3>What happens next:</h3>
+      <ul id="delivery-info">
+        <li>✓ Order confirmation sent to your email</li>
+        <li id="digital-delivery">✓ Digital files (PDF + EPUB) available now</li>
+        <li id="hardcover-delivery" style="display:none;">✓ Hardcover printing and shipping (14 days)</li>
+        <li>✓ Flipbook unlock code included</li>
+        <li>✓ Founding Reader Certificate on the way</li>
+        <li>✓ Private community invitation coming Feb 14</li>
+      </ul>
+    </div>
+    
+    <a href="/Book/digi book/TIME_AS_PROOF.html" class="btn">📖 Read Your Book Now</a>
+    
+    <p style="margin-top:32px;font-size:13px;color:var(--text-3);">
+      Questions? Email carl@boonmind.com
+    </p>
+  </div>
+  
+  <script>
+    // Get order details from URL
+    const params = new URLSearchParams(window.location.search);
+    const copyNumber = params.get('copy');
+    const edition = params.get('edition');
+    
+    if (copyNumber) {
+      document.getElementById('copy-number').textContent = `Reader #${copyNumber} of 100`;
+    }
+    
+    if (edition === 'hardcover') {
+      document.getElementById('hardcover-delivery').style.display = 'block';
+      document.getElementById('digital-delivery').innerHTML = '✓ Digital files included (instant access)';
+    }
+  </script>
+</body>
+</html>
+
