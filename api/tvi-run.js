@@ -312,3 +312,4 @@ function getInterpretation(band) {
   return interpretations[band] || 'Analysis pending.';
 }
 
+

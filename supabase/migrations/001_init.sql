@@ -31,3 +31,4 @@ create table if not exists downloads (
 create index if not exists idx_calculations_user on calculations(user_id);
 create index if not exists idx_downloads_user on downloads(user_id);
 
+

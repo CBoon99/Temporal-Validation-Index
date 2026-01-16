@@ -74,3 +74,4 @@ echo ""
 echo 'git add . && git commit -m "Initial commit: TVI Platform v1.0.1" && git remote add origin YOUR-REPO-URL && git push -u origin main'
 echo ""
 
+
