@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💀 THE DEATH SUITE — Temporal Validation Framework</title>
+    <meta name="description" content="The complete death experience: Roulette, Leaderboard, Oracle, Graveyard, and Requiem. Find out when everything dies.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="💀 THE DEATH SUITE — When Does Everything Die?">
+    <meta property="og:description" content="Roulette • Leaderboard • Oracle • Graveyard • Requiem — The complete temporal death experience.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://temporal-engine.netlify.app/death-suite">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Creepster&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood: #8b0000;
+            --critical: #ff2d55;
+            --warning: #ff9500;
+            --decay: #4a4a4a;
+            --bone: #e8e4d9;
+            --stable: #30d158;
+            --void: #000000;
+            --surface: #0a0a0a;
+            --surface-2: #111111;
+            --text: #ffffff;
+            --text-dim: #666666;
+            --border: #222222;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Fog effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139, 0, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--blood);
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-family: 'Creepster', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--critical);
+            text-shadow: 0 0 30px rgba(255, 45, 85, 0.5), 0 0 60px rgba(139, 0, 0, 0.3);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+        }
+        
+        /* NAVIGATION */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .nav-btn {
+            padding: 1rem 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-dim);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-btn:hover {
+            border-color: var(--critical);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.active {
+            background: var(--critical);
+            border-color: var(--critical);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 45, 85, 0.3);
+        }
+        
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* SECTIONS */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ==================== ROULETTE ==================== */
+        .roulette-container {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .roulette-wheel {
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto;
+            border-radius: 50%;
+            border: 4px solid var(--critical);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(255, 45, 85, 0.3), inset 0 0 60px rgba(0,0,0,0.8);
+        }
+        
+        .roulette-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 4s cubic-bezier(0.2, 0.8, 0.3, 1);
+        }
+        
+        .roulette-segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 50%;
+            top: 0;
+            transform-origin: 0% 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+            padding-left: 20%;
+        }
+        
+        .roulette-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid var(--critical);
+            z-index: 10;
+            filter: drop-shadow(0 0 10px var(--critical));
+        }
+        
+        .spin-btn {
+            padding: 1.5rem 4rem;
+            font-size: 1.2rem;
+            font-family: 'Creepster', cursive;
+            background: linear-gradient(135deg, var(--critical), var(--blood));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
+        }
+        
+        .spin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 45, 85, 0.5);
+        }
+        
+        .spin-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .roulette-result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--surface);
+            border: 2px solid var(--critical);
+            border-radius: 16px;
+            display: none;
+        }
+        
+        .roulette-result.show {
+            display: block;
+            animation: resultReveal 0.5s ease;
+        }
+        
+        @keyframes resultReveal {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .result-victim {
+            font-family: 'Creepster', cursive;
+            font-size: 2.5rem;
+            color: var(--critical);
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-verdict {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+        }
+        
+        .result-details {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* ==================== LEADERBOARD ==================== */
+        .leaderboard-container {
+            padding: 2rem 0;
+        }
+        
+        .leaderboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .leaderboard-title {
+            font-family: 'Creepster', cursive;
+            font-size: 2rem;
+            color: var(--critical);
+        }
+        
+        .leaderboard-filter {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--critical);
+            color: var(--text);
+        }
+        
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .leaderboard-table th {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: 0.1em;
+        }
+        
+        .leaderboard-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s ease;
+        }
+        
+        .leaderboard-table tr:hover td {
+            background: var(--surface-2);
+        }
+        
+        .rank {
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            width: 50px;
+        }
+        
+        .rank.death-row { color: var(--critical); }
+        .rank.critical { color: var(--warning); }
+        .rank.safe { color: var(--stable); }
+        
+        .company-name {
+            font-weight: 600;
+        }
+        
+        .company-industry {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+        
+        .isps-score {
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+        }
+        
+        .isps-score.terminal { color: var(--critical); }
+        .isps-score.warning { color: var(--warning); }
+        .isps-score.stable { color: var(--stable); }
+        
+        .death-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-badge.terminal {
+            background: rgba(255, 45, 85, 0.2);
+            color: var(--critical);
+        }
+        
+        .status-badge.critical {
+            background: rgba(255, 149, 0, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-badge.stable {
+            background: rgba(48, 209, 88, 0.2);
+            color: var(--stable);
+        }
+        
+        /* ==================== ORACLE ==================== */
+        .oracle-container {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .oracle-eye {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #444, #000);
+            border: 3px solid var(--critical);
+            position: relative;
+            box-shadow: 0 0 40px rgba(255, 45, 85, 0.3);
+            animation: eyePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes eyePulse {
+            0%, 100% { box-shadow: 0 0 40px rgba(255, 45, 85, 0.3); }
+            50% { box-shadow: 0 0 60px rgba(255, 45, 85, 0.6); }
+        }
+        
+        .oracle-pupil {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, var(--critical), var(--blood));
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pupilMove 5s ease-in-out infinite;
+        }
+        
+        @keyframes pupilMove {
+            0%, 100% { transform: translate(-50%, -50%); }
+            25% { transform: translate(-40%, -60%); }
+            50% { transform: translate(-60%, -50%); }
+            75% { transform: translate(-50%, -40%); }
+        }
+        
+        .oracle-title {
+            font-family: 'Creepster', cursive;
+            font-size: 2.5rem;
+            color: var(--critical);
+            margin-bottom: 0.5rem;
+        }
+        
+        .oracle-subtitle {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .oracle-input-container {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+        
+        .oracle-input {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1.1rem;
+            text-align: center;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .oracle-input:focus {
+            outline: none;
+            border-color: var(--critical);
+            box-shadow: 0 0 20px rgba(255, 45, 85, 0.2);
+        }
+        
+        .oracle-input::placeholder {
+            color: var(--text-dim);
+        }
+        
+        .oracle-btn {
+            padding: 1rem 3rem;
+            font-family: 'Creepster', cursive;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--critical), var(--blood));
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+        
+        .oracle-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.4);
+        }
+        
+        .oracle-response {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            padding: 2rem;
+            background: var(--surface);
+            border: 2px solid var(--critical);
+            border-radius: 16px;
+            display: none;
+            text-align: left;
+        }
+        
+        .oracle-response.show {
+            display: block;
+            animation: oracleReveal 0.8s ease;
+        }
+        
+        @keyframes oracleReveal {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .prophecy-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .prophecy-subject {
+            font-family: 'Creepster', cursive;
+            font-size: 1.8rem;
+            color: var(--critical);
+        }
+        
+        .prophecy-verdict {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        .prophecy-text {
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--text);
+            padding: 1rem;
+            background: rgba(255, 45, 85, 0.05);
+            border-left: 3px solid var(--critical);
+            margin-bottom: 1rem;
+        }
+        
+        .prophecy-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        .prophecy-stat {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+        
+        .prophecy-stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--critical);
+        }
+        
+        .prophecy-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.25rem;
+        }
+        
+        /* ==================== GRAVEYARD ==================== */
+        .graveyard-container {
+            padding: 2rem 0;
+        }
+        
+        .graveyard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .graveyard-title {
+            font-family: 'Creepster', cursive;
+            font-size: 3rem;
+            color: var(--decay);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 0.5rem;
+        }
+        
+        .graveyard-subtitle {
+            color: var(--text-dim);
+            font-style: italic;
+        }
+        
+        .graves {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .grave {
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 12px 12px 0 0;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .grave::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 20px;
+            background: #3a3a3a;
+            border-radius: 10px 10px 0 0;
+            border: 1px solid #444;
+            border-bottom: none;
+        }
+        
+        .grave::after {
+            content: '†';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #666;
+        }
+        
+        .grave-name {
+            font-family: 'Creepster', cursive;
+            font-size: 1.5rem;
+            color: var(--bone);
+            margin-bottom: 0.5rem;
+        }
+        
+        .grave-dates {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .grave-epitaph {
+            font-style: italic;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .grave-prediction {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+            font-size: 0.8rem;
+        }
+        
+        .prediction-item {
+            text-align: center;
+        }
+        
+        .prediction-label {
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .prediction-value {
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+        }
+        
+        .prediction-value.correct { color: var(--stable); }
+        .prediction-value.close { color: var(--warning); }
+        .prediction-value.wrong { color: var(--critical); }
+        
+        /* ==================== REQUIEM ==================== */
+        .requiem-container {
+            padding: 2rem 0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .requiem-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .requiem-title {
+            font-family: 'Creepster', cursive;
+            font-size: 2.5rem;
+            color: var(--critical);
+            margin-bottom: 0.5rem;
+        }
+        
+        .requiem-subtitle {
+            color: var(--text-dim);
+            font-style: italic;
+        }
+        
+        .requiem-form {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--void);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--critical);
+        }
+        
+        .requiem-btn {
+            width: 100%;
+            padding: 1.25rem;
+            font-family: 'Creepster', cursive;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--critical), var(--blood));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+        
+        .requiem-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.4);
+        }
+        
+        .eulogy-container {
+            display: none;
+            background: var(--surface);
+            border: 2px solid var(--decay);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .eulogy-container.show {
+            display: block;
+            animation: eulogyReveal 1s ease;
+        }
+        
+        @keyframes eulogyReveal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .eulogy-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .eulogy-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .eulogy-name {
+            font-family: 'Creepster', cursive;
+            font-size: 2rem;
+            color: var(--bone);
+        }
+        
+        .eulogy-dates {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        .eulogy-text {
+            font-style: italic;
+            line-height: 2;
+            color: var(--text);
+            margin-bottom: 2rem;
+        }
+        
+        .eulogy-text p {
+            margin-bottom: 1rem;
+            text-indent: 2rem;
+        }
+        
+        .eulogy-footer {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .eulogy-signature {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        
+        .share-eulogy {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .share-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--void);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .share-btn:hover {
+            border-color: var(--critical);
+            transform: translateY(-2px);
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--critical);
+        }
+        
+        .footer-tagline {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>THE DEATH SUITE</h1>
+            <p>TEMPORAL VALIDATION FRAMEWORK — MEMENTO MORI EDITION</p>
+        </header>
+        
+        <!-- NAVIGATION -->
+        <nav class="nav">
+            <button class="nav-btn active" data-section="roulette">
+                <span class="nav-icon">🎰</span> Roulette
+            </button>
+            <button class="nav-btn" data-section="leaderboard">
+                <span class="nav-icon">📊</span> Leaderboard
+            </button>
+            <button class="nav-btn" data-section="oracle">
+                <span class="nav-icon">🔮</span> Oracle
+            </button>
+            <button class="nav-btn" data-section="graveyard">
+                <span class="nav-icon">💀</span> Graveyard
+            </button>
+            <button class="nav-btn" data-section="requiem">
+                <span class="nav-icon">🎵</span> Requiem
+            </button>
+        </nav>
+        
+        <!-- ==================== ROULETTE ==================== -->
+        <section class="section active" id="roulette">
+            <div class="roulette-container">
+                <h2 style="font-family: 'Creepster', cursive; font-size: 2rem; color: var(--critical); margin-bottom: 0.5rem;">DEATH ROULETTE</h2>
+                <p style="color: var(--text-dim); margin-bottom: 2rem;">Spin the wheel. See who dies next.</p>
+                
+                <div class="roulette-wheel">
+                    <div class="roulette-pointer"></div>
+                    <div class="roulette-inner" id="rouletteWheel">
+                        <!-- Segments generated by JS -->
+                    </div>
+                </div>
+                
+                <button class="spin-btn" id="spinBtn" onclick="spinRoulette()">
+                    🎰 SPIN FOR DEATH
+                </button>
+                
+                <div class="roulette-result" id="rouletteResult">
+                    <div class="result-victim" id="resultVictim"></div>
+                    <div class="result-verdict" id="resultVerdict"></div>
+                    <div class="result-details" id="resultDetails"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ==================== LEADERBOARD ==================== -->
+        <section class="section" id="leaderboard">
+            <div class="leaderboard-container">
+                <div class="leaderboard-header">
+                    <h2 class="leaderboard-title">💀 DEATH WATCH LEADERBOARD</h2>
+                    <div class="leaderboard-filter">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="terminal">Terminal</button>
+                        <button class="filter-btn" data-filter="critical">Critical</button>
+                        <button class="filter-btn" data-filter="stable">Stable</button>
+                    </div>
+                </div>
+                
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>RANK</th>
+                            <th>COMPANY</th>
+                            <th>ISPS</th>
+                            <th>PROJECTED DEATH</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                        <!-- Generated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- ==================== ORACLE ==================== -->
+        <section class="section" id="oracle">
+            <div class="oracle-container">
+                <div class="oracle-eye">
+                    <div class="oracle-pupil"></div>
+                </div>
+                
+                <h2 class="oracle-title">THE ORACLE</h2>
+                <p class="oracle-subtitle">"Ask, and I shall reveal when it dies..."</p>
+                
+                <div class="oracle-input-container">
+                    <input type="text" class="oracle-input" id="oracleInput" placeholder="Enter a company, project, trend, or idea...">
+                </div>
+                
+                <button class="oracle-btn" onclick="consultOracle()">
+                    🔮 CONSULT THE ORACLE
+                </button>
+                
+                <div class="oracle-response" id="oracleResponse">
+                    <div class="prophecy-header">
+                        <div class="prophecy-subject" id="prophecySubject"></div>
+                        <div class="prophecy-verdict" id="prophecyVerdict"></div>
+                    </div>
+                    <div class="prophecy-text" id="prophecyText"></div>
+                    <div class="prophecy-stats">
+                        <div class="prophecy-stat">
+                            <div class="prophecy-stat-value" id="prophecyScore">--</div>
+                            <div class="prophecy-stat-label">DEATH SCORE</div>
+                        </div>
+                        <div class="prophecy-stat">
+                            <div class="prophecy-stat-value" id="prophecyYear">--</div>
+                            <div class="prophecy-stat-label">DEATH YEAR</div>
+                        </div>
+                        <div class="prophecy-stat">
+                            <div class="prophecy-stat-value" id="prophecySurvival">--</div>
+                            <div class="prophecy-stat-label">SURVIVAL %</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ==================== GRAVEYARD ==================== -->
+        <section class="section" id="graveyard">
+            <div class="graveyard-container">
+                <div class="graveyard-header">
+                    <h2 class="graveyard-title">⚰️ THE GRAVEYARD</h2>
+                    <p class="graveyard-subtitle">Here lie those who failed the test of time</p>
+                </div>
+                
+                <div class="graves" id="gravesContainer">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- ==================== REQUIEM ==================== -->
+        <section class="section" id="requiem">
+            <div class="requiem-container">
+                <div class="requiem-header">
+                    <h2 class="requiem-title">🎵 THE REQUIEM</h2>
+                    <p class="requiem-subtitle">Generate a eulogy for the soon-departed</p>
+                </div>
+                
+                <div class="requiem-form">
+                    <div class="form-group">
+                        <label class="form-label">Name of the Deceased</label>
+                        <input type="text" class="form-input" id="requiemName" placeholder="e.g., My Startup, That Project, Their Marriage">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Year of Birth (Founded/Started)</label>
+                        <input type="number" class="form-input" id="requiemBirth" placeholder="e.g., 2019">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Year of Death (Actual or Projected)</label>
+                        <input type="number" class="form-input" id="requiemDeath" placeholder="e.g., 2026">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Cause of Death</label>
+                        <select class="form-input" id="requiemCause">
+                            <option value="market">Market conditions</option>
+                            <option value="competition">Crushed by competition</option>
+                            <option value="funding">Ran out of funding</option>
+                            <option value="hubris">Hubris and overexpansion</option>
+                            <option value="irrelevance">Faded into irrelevance</option>
+                            <option value="scandal">Scandal and disgrace</option>
+                            <option value="pivot">Pivoted to death</option>
+                            <option value="founder">Founder drama</option>
+                            <option value="technology">Disrupted by technology</option>
+                            <option value="natural">Natural causes (time)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">What will be missed most?</label>
+                        <input type="text" class="form-input" id="requiemMissed" placeholder="e.g., The free snacks, The mission, The chaos">
+                    </div>
+                    
+                    <button class="requiem-btn" onclick="generateRequiem()">
+                        🎵 COMPOSE REQUIEM
+                    </button>
+                </div>
+                
+                <div class="eulogy-container" id="eulogyContainer">
+                    <div class="eulogy-header">
+                        <div class="eulogy-icon">⚰️</div>
+                        <div class="eulogy-name" id="eulogyName"></div>
+                        <div class="eulogy-dates" id="eulogyDates"></div>
+                    </div>
+                    
+                    <div class="eulogy-text" id="eulogyText">
+                        <!-- Generated by JS -->
+                    </div>
+                    
+                    <div class="eulogy-footer">
+                        <p class="eulogy-signature">— Generated by the Temporal Validation Framework</p>
+                        <p class="eulogy-signature" style="font-style: italic; margin-top: 0.5rem;">"Time audits everything"</p>
+                        
+                        <div class="share-eulogy">
+                            <button class="share-btn" onclick="copyEulogy()">📋 Copy Eulogy</button>
+                            <button class="share-btn" onclick="tweetEulogy()">🐦 Tweet Death</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="https://temporal-engine.netlify.app">Calculator</a>
+                <a href="https://temporal-engine.netlify.app/autopsy">Autopsy</a>
+                <a href="https://temporal-engine.netlify.app/death">Death Calculator</a>
+                <a href="#">Paper</a>
+            </div>
+            <p class="footer-tagline">💀 TEMPORAL VALIDATION FRAMEWORK — "Memento Mori" 💀</p>
+        </footer>
+    </div>
+    
+    <script>
+        // ==================== DATA ====================
+        const companies = [
+            { name: "WeWork", industry: "Real Estate", isps: 8.2, death: 2024, status: "terminal", epitaph: "We worked. We didn't work out." },
+            { name: "Peloton", industry: "Fitness", isps: 10.5, death: 2027, status: "terminal", epitaph: "The ride ends here." },
+            { name: "Robinhood", industry: "Fintech", isps: 15.7, death: 2028, status: "terminal", epitaph: "Stole from the poor, gave to no one." },
+            { name: "Snapchat", industry: "Social", isps: 18.3, death: 2029, status: "critical", epitaph: "Disappeared, like its messages." },
+            { name: "Beyond Meat", industry: "Food", isps: 12.3, death: 2027, status: "terminal", epitaph: "Beyond saving." },
+            { name: "Coinbase", industry: "Crypto", isps: 19.1, death: 2030, status: "critical", epitaph: "The base crumbled." },
+            { name: "Uber", industry: "Transport", isps: 35.2, death: 2035, status: "critical", epitaph: "The ride was never profitable." },
+            { name: "Netflix", industry: "Media", isps: 38.7, death: 2035, status: "critical", epitaph: "Binged on content, choked on competition." },
+            { name: "Meta", industry: "Social", isps: 42.3, death: 2040, status: "critical", epitaph: "The metaverse was empty." },
+            { name: "Tesla", industry: "Auto", isps: 48.9, death: 2038, status: "critical", epitaph: "Autopiloted into obsolescence." },
+            { name: "Apple", industry: "Tech", isps: 312, death: 2100, status: "stable", epitaph: "Think different. Die eventually." },
+            { name: "Microsoft", industry: "Tech", isps: 285, death: 2100, status: "stable", epitaph: "Blue screen of final death." },
+            { name: "Walmart", industry: "Retail", isps: 220, death: 2090, status: "stable", epitaph: "Always low prices. Eventually, zero." },
+            { name: "Coca-Cola", industry: "Beverage", isps: 340, death: 2150, status: "stable", epitaph: "The pause that refreshes no more." },
+        ];
+        
+        const deadCompanies = [
+            { name: "Theranos", birth: 2003, death: 2018, predicted: 2018, cause: "Fraud", epitaph: "Bad blood, worse science." },
+            { name: "Toys R Us", birth: 1948, death: 2018, predicted: 2020, cause: "Disruption", epitaph: "We were Toys R Us kids. Then we grew up." },
+            { name: "Blockbuster", birth: 1985, death: 2010, predicted: 2012, cause: "Technology", epitaph: "Be kind, rewind. Forever." },
+            { name: "MySpace", birth: 2003, death: 2011, predicted: 2013, cause: "Competition", epitaph: "Everyone left for Facebook." },
+            { name: "Vine", birth: 2012, death: 2017, predicted: 2018, cause: "Platform", epitaph: "6 seconds of fame." },
+            { name: "Quibi", birth: 2018, death: 2020, predicted: 2021, cause: "Hubris", epitaph: "Quick bites. Quick death." },
+            { name: "MoviePass", birth: 2011, death: 2019, predicted: 2019, cause: "Math", epitaph: "The math never mathed." },
+            { name: "Juicero", birth: 2013, death: 2017, predicted: 2018, cause: "Absurdity", epitaph: "You could just squeeze the bag." },
+            { name: "Kodak (Film)", birth: 1888, death: 2012, predicted: 2015, cause: "Denial", epitaph: "Invented digital. Denied digital." },
+            { name: "Lehman Brothers", birth: 1850, death: 2008, predicted: 2008, cause: "Hubris", epitaph: "158 years. Gone in a weekend." },
+            { name: "Enron", birth: 1985, death: 2001, predicted: 2002, cause: "Fraud", epitaph: "Ask why. Then ask how." },
+            { name: "Pan Am", birth: 1927, death: 1991, predicted: 1993, cause: "Competition", epitaph: "The end of an era in the air." },
+        ];
+        
+        const prophecies = [
+            "The Oracle sees flames in its future. Short, bright, then darkness.",
+            "It clings to relevance like a ghost to its grave. The haunting ends soon.",
+            "Numbers do not lie. Neither does time. Both condemn this one.",
+            "There is hope here, but hope is not a strategy. The trajectory is clear.",
+            "I see... pivots. Many pivots. None successful. The wheel stops turning.",
+            "Ambition exceeded foundation. The tower falls by its own weight.",
+            "The market has spoken. It said: 'No.'",
+            "Born too late. Died too soon. Remembered by none.",
+            "Its death will be celebrated by competitors. That is its only legacy.",
+            "The founders will write books. The books will not sell.",
+            "I see bankruptcy lawyers. They are smiling.",
+            "The pivot to AI will not save it. Nothing will.",
+        ];
+        
+        const causeTexts = {
+            market: "the cruel indifference of market forces",
+            competition: "being utterly crushed by superior competition",
+            funding: "the merciless depletion of venture capital",
+            hubris: "the intoxicating poison of unchecked hubris",
+            irrelevance: "the slow, agonizing fade into irrelevance",
+            scandal: "scandal and the shame that followed",
+            pivot: "pivoting until there was nothing left to pivot",
+            founder: "the inevitable implosion of founder drama",
+            technology: "being disrupted by the very technology it ignored",
+            natural: "the simple, inevitable passage of time"
+        };
+        
+        // ==================== NAVIGATION ====================
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.section).classList.add('active');
+            });
+        });
+        
+        // ==================== ROULETTE ====================
+        function initRoulette() {
+            const wheel = document.getElementById('rouletteWheel');
+            const colors = ['#ff2d55', '#8b0000', '#ff4500', '#4a0000', '#ff6347', '#660000', '#ff7f50', '#330000'];
+            const victims = companies.filter(c => c.status !== 'stable').slice(0, 8);
+            
+            wheel.innerHTML = '';
+            victims.forEach((company, i) => {
+                const segment = document.createElement('div');
+                segment.className = 'roulette-segment';
+                segment.style.transform = `rotate(${i * 45}deg) skewY(-45deg)`;
+                segment.style.background = colors[i % colors.length];
+                
+                const text = document.createElement('span');
+                text.style.transform = 'skewY(45deg) rotate(22.5deg)';
+                text.textContent = company.name;
+                segment.appendChild(text);
+                
+                wheel.appendChild(segment);
+            });
+        }
+        
+        function spinRoulette() {
+            const btn = document.getElementById('spinBtn');
+            const wheel = document.getElementById('rouletteWheel');
+            const result = document.getElementById('rouletteResult');
+            
+            btn.disabled = true;
+            result.classList.remove('show');
+            
+            const victims = companies.filter(c => c.status !== 'stable').slice(0, 8);
+            const winnerIndex = Math.floor(Math.random() * victims.length);
+            const winner = victims[winnerIndex];
+            
+            // Calculate rotation
+            const baseRotation = 1440; // 4 full spins
+            const segmentAngle = 360 / victims.length;
+            const winnerAngle = winnerIndex * segmentAngle + segmentAngle / 2;
+            const finalRotation = baseRotation + (360 - winnerAngle);
+            
+            wheel.style.transform = `rotate(${finalRotation}deg)`;
+            
+            setTimeout(() => {
+                document.getElementById('resultVictim').textContent = winner.name;
+                document.getElementById('resultVerdict').textContent = `ISPS: ${winner.isps} | Status: ${winner.status.toUpperCase()} | Death: ~${winner.death}`;
+                document.getElementById('resultDetails').textContent = `"${winner.epitaph}" — The ${winner.industry} sector claims another victim. Time of death: approximately ${winner.death}. Cause: Insufficient temporal validation.`;
+                result.classList.add('show');
+                btn.disabled = false;
+            }, 4500);
+        }
+        
+        // ==================== LEADERBOARD ====================
+        function initLeaderboard() {
+            renderLeaderboard('all');
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderLeaderboard(btn.dataset.filter);
+                });
+            });
+        }
+        
+        function renderLeaderboard(filter) {
+            const tbody = document.getElementById('leaderboardBody');
+            let filtered = [...companies];
+            
+            if (filter !== 'all') {
+                filtered = companies.filter(c => c.status === filter);
+            }
+            
+            filtered.sort((a, b) => a.isps - b.isps);
+            
+            tbody.innerHTML = filtered.map((company, i) => {
+                const rankClass = company.status === 'terminal' ? 'death-row' : company.status === 'critical' ? 'critical' : 'safe';
+                const scoreClass = company.isps < 20 ? 'terminal' : company.isps < 50 ? 'warning' : 'stable';
+                
+                return `
+                    <tr>
+                        <td class="rank ${rankClass}">#${i + 1}</td>
+                        <td>
+                            <div class="company-name">${company.name}</div>
+                            <div class="company-industry">${company.industry}</div>
+                        </td>
+                        <td class="isps-score ${scoreClass}">${company.isps}</td>
+                        <td class="death-date">~${company.death}</td>
+                        <td><span class="status-badge ${company.status}">${company.status.toUpperCase()}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // ==================== ORACLE ====================
+        function consultOracle() {
+            const input = document.getElementById('oracleInput').value.trim();
+            if (!input) {
+                alert('The Oracle requires a subject to divine...');
+                return;
+            }
+            
+            const response = document.getElementById('oracleResponse');
+            response.classList.remove('show');
+            
+            // Check if it's a known company
+            const known = companies.find(c => c.name.toLowerCase() === input.toLowerCase());
+            
+            let score, year, survival, prophecy;
+            
+            if (known) {
+                score = known.isps;
+                year = known.death;
+                survival = known.isps < 20 ? 5 : known.isps < 50 ? 35 : 85;
+                prophecy = known.epitaph + " " + prophecies[Math.floor(Math.random() * prophecies.length)];
+            } else {
+                // Generate random but deterministic-ish values based on input
+                const hash = input.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+                score = (hash % 80) + 5;
+                year = 2026 + (hash % 15);
+                survival = Math.max(5, Math.min(90, score));
+                prophecy = prophecies[hash % prophecies.length];
+            }
+            
+            const status = score < 20 ? 'TERMINAL' : score < 50 ? 'CRITICAL' : 'STABLE';
+            
+            setTimeout(() => {
+                document.getElementById('prophecySubject').textContent = input;
+                document.getElementById('prophecyVerdict').textContent = `THE ORACLE HAS SPOKEN: ${status}`;
+                document.getElementById('prophecyText').textContent = `"${prophecy}"`;
+                document.getElementById('prophecyScore').textContent = score.toFixed(1);
+                document.getElementById('prophecyYear').textContent = `~${year}`;
+                document.getElementById('prophecySurvival').textContent = `${survival}%`;
+                
+                response.classList.add('show');
+            }, 1000);
+        }
+        
+        // Enter key for oracle
+        document.getElementById('oracleInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') consultOracle();
+        });
+        
+        // ==================== GRAVEYARD ====================
+        function initGraveyard() {
+            const container = document.getElementById('gravesContainer');
+            
+            container.innerHTML = deadCompanies.map(company => {
+                const accuracy = Math.abs(company.death - company.predicted);
+                const accuracyClass = accuracy === 0 ? 'correct' : accuracy <= 2 ? 'close' : 'wrong';
+                const accuracyText = accuracy === 0 ? 'EXACT' : accuracy <= 2 ? `±${accuracy}yr` : `±${accuracy}yr`;
+                
+                return `
+                    <div class="grave">
+                        <div class="grave-name">${company.name}</div>
+                        <div class="grave-dates">${company.birth} — ${company.death}</div>
+                        <div class="grave-epitaph">"${company.epitaph}"</div>
+                        <div class="grave-prediction">
+                            <div class="prediction-item">
+                                <div class="prediction-label">PREDICTED</div>
+                                <div class="prediction-value">${company.predicted}</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">ACTUAL</div>
+                                <div class="prediction-value">${company.death}</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">ACCURACY</div>
+                                <div class="prediction-value ${accuracyClass}">${accuracyText}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ==================== REQUIEM ====================
+        let currentEulogy = '';
+        
+        function generateRequiem() {
+            const name = document.getElementById('requiemName').value || 'The Unnamed';
+            const birth = document.getElementById('requiemBirth').value || '20??';
+            const death = document.getElementById('requiemDeath').value || '20??';
+            const cause = document.getElementById('requiemCause').value;
+            const missed = document.getElementById('requiemMissed').value || 'its potential';
+            
+            const lifespan = death - birth;
+            const causeText = causeTexts[cause];
+            
+            const eulogies = [
+                `We gather here today not to mourn ${name}, but to acknowledge what time has already decided. For ${lifespan} years, it walked among us—ambitious, hopeful, perhaps even beloved. But time is not sentimental. Time does not negotiate.`,
+                
+                `${name} came into this world in ${birth}, full of promise and possibility. The founders spoke of revolution. The investors spoke of returns. The press spoke of disruption. But the universe spoke louder, and it said: "No."`,
+                
+                `It succumbed, as all things must, to ${causeText}. This was not a surprise to those who understood the mathematics of survival. The ISPS score foretold this end. We simply chose not to listen.`,
+                
+                `What will be missed most is ${missed}. That, and the naive belief that passion alone could defeat the laws of temporal validation. It cannot. It never could.`,
+                
+                `Let this be a lesson to those who remain: Time audits everything. Your burn rate, your market position, your product-market fit—all of it is subject to the cold calculus of D ≈ 1.7. You cannot escape the fractal dimension of survival.`,
+                
+                `Rest now, ${name}. Your journey from founding to failure is complete. You join the countless others in the graveyard of good intentions. May your pivot deck gather digital dust in peace.`,
+                
+                `Ashes to ashes. Equity to zero. ${name}, we release you to the void.`
+            ];
+            
+            currentEulogy = eulogies.join('\n\n');
+            
+            document.getElementById('eulogyName').textContent = name;
+            document.getElementById('eulogyDates').textContent = `${birth} — ${death}`;
+            document.getElementById('eulogyText').innerHTML = eulogies.map(p => `<p>${p}</p>`).join('');
+            document.getElementById('eulogyContainer').classList.add('show');
+        }
+        
+        function copyEulogy() {
+            navigator.clipboard.writeText(currentEulogy).then(() => {
+                alert('Eulogy copied. Share the grief.');
+            });
+        }
+        
+        function tweetEulogy() {
+            const name = document.getElementById('requiemName').value || 'The Unnamed';
+            const death = document.getElementById('requiemDeath').value || '20??';
+            
+            const text = encodeURIComponent(`⚰️ REST IN PEACE: ${name} (? — ${death})
+
+"Time audits everything."
+
+Generate your own eulogy at:`);
+            
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=https://temporal-engine.netlify.app/death-suite`, '_blank');
+        }
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            initRoulette();
+            initLeaderboard();
+            initGraveyard();
+        });
+    </script>
+</body>
+</html>

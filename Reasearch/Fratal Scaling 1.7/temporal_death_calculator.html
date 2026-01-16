@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💀 TEMPORAL DEATH CALCULATOR — When Will It Die?</title>
+    <meta name="description" content="Calculate when your company, startup, content, or project will die. Based on the Temporal Validation Index (TVI) framework — D ≈ 1.7 confirmed.">
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="💀 TEMPORAL DEATH CALCULATOR — When Will It Die?">
+    <meta property="og:description" content="Enter your company, project, or content. Find out when it dies. Based on scientific temporal validation framework.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://temporal-engine.netlify.app/death">
+    <meta property="og:image" content="https://temporal-engine.netlify.app/assets/death-calculator-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="💀 TEMPORAL DEATH CALCULATOR">
+    <meta name="twitter:description" content="Calculate when your company, startup, or project will die. Based on TVI framework.">
+    <meta name="twitter:image" content="https://temporal-engine.netlify.app/assets/death-calculator-og.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --critical: #ff2d55;
+            --warning: #ff9500;
+            --caution: #ffcc00;
+            --stable: #30d158;
+            --info: #5ac8fa;
+            --background: #000000;
+            --surface: #0a0a0a;
+            --surface-2: #141414;
+            --text: #ffffff;
+            --text-dim: #86868b;
+            --border: #2a2a2a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 2rem 0 3rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+        
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .tab:hover {
+            border-color: var(--text-dim);
+        }
+        
+        .tab.active {
+            border-color: var(--critical);
+            color: var(--text);
+            background: rgba(255, 45, 85, 0.1);
+        }
+        
+        .tab-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* FORM */
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--critical);
+        }
+        
+        .form-input::placeholder {
+            color: var(--text-dim);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .form-hint {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.25rem;
+        }
+        
+        /* SLIDER */
+        .slider-container {
+            position: relative;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--critical), var(--warning), var(--stable));
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .slider-value {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+        }
+        
+        /* BUTTON */
+        .calculate-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--critical);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 0.05em;
+            margin-top: 1rem;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.4);
+        }
+        
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* RESULTS */
+        .results {
+            display: none;
+            margin-top: 3rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* DEATH CERTIFICATE */
+        .death-certificate {
+            background: var(--surface);
+            border: 2px solid var(--critical);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .death-certificate::before {
+            content: 'TEMPORAL AUTOPSY REPORT';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--critical);
+            letter-spacing: 0.1em;
+        }
+        
+        .certificate-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .certificate-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subject-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subject-type {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        /* SCORE DISPLAY */
+        .score-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .score-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .score-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .score-value.critical { color: var(--critical); }
+        .score-value.warning { color: var(--warning); }
+        .score-value.caution { color: var(--caution); }
+        .score-value.stable { color: var(--stable); }
+        
+        .score-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* DIAGNOSIS */
+        .diagnosis-section {
+            background: rgba(255, 45, 85, 0.1);
+            border: 1px solid var(--critical);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .diagnosis-section.warning {
+            background: rgba(255, 149, 0, 0.1);
+            border-color: var(--warning);
+        }
+        
+        .diagnosis-section.stable {
+            background: rgba(48, 209, 88, 0.1);
+            border-color: var(--stable);
+        }
+        
+        .diagnosis-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--critical);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+        
+        .diagnosis-section.warning .diagnosis-title { color: var(--warning); }
+        .diagnosis-section.stable .diagnosis-title { color: var(--stable); }
+        
+        .diagnosis-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* TIMELINE */
+        .timeline-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--border);
+        }
+        
+        .timeline-item.past { border-left-color: var(--text-dim); }
+        .timeline-item.critical { border-left-color: var(--critical); }
+        .timeline-item.warning { border-left-color: var(--warning); }
+        .timeline-item.death { border-left-color: var(--critical); background: rgba(255, 45, 85, 0.1); }
+        
+        .timeline-year {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            min-width: 60px;
+        }
+        
+        .timeline-event {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-prob {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        
+        /* SURVIVAL CURVE */
+        .survival-curve {
+            margin-bottom: 1.5rem;
+        }
+        
+        .curve-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .curve-bar {
+            height: 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            background: var(--surface-2);
+        }
+        
+        .curve-fill {
+            height: 100%;
+            border-radius: 20px;
+            transition: width 1s ease;
+        }
+        
+        .curve-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+        
+        /* COMPARABLE */
+        .comparable-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .comparable-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .comparable-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .comparable-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .comparable-name {
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .comparable-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--critical);
+        }
+        
+        .comparable-status.alive {
+            color: var(--stable);
+        }
+        
+        /* CAUSE OF DEATH */
+        .cause-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cause-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .cause-primary {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--critical);
+            margin-bottom: 0.5rem;
+        }
+        
+        .cause-factors {
+            list-style: none;
+        }
+        
+        .cause-factors li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .cause-factors li:last-child {
+            border-bottom: none;
+        }
+        
+        .cause-factors li::before {
+            content: '→';
+            color: var(--critical);
+        }
+        
+        /* RECOMMENDATIONS */
+        .recommendations {
+            background: rgba(90, 200, 250, 0.1);
+            border: 1px solid var(--info);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .recommendations-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--info);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .recommendations-list {
+            list-style: none;
+        }
+        
+        .recommendations-list li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .recommendations-list li::before {
+            content: '💡';
+        }
+        
+        /* SHARE */
+        .share-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .share-btn:hover {
+            border-color: var(--text);
+            transform: translateY(-2px);
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        
+        .footer a {
+            color: var(--info);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>💀 TEMPORAL DEATH CALCULATOR</h1>
+            <p>Enter your company, project, or content. Find out when it dies.</p>
+        </header>
+        
+        <!-- CATEGORY TABS -->
+        <div class="tabs">
+            <div class="tab active" data-tab="company">
+                <span class="tab-icon">🏢</span>
+                Company
+            </div>
+            <div class="tab" data-tab="startup">
+                <span class="tab-icon">🚀</span>
+                Startup
+            </div>
+            <div class="tab" data-tab="content">
+                <span class="tab-icon">📱</span>
+                Content
+            </div>
+            <div class="tab" data-tab="project">
+                <span class="tab-icon">📁</span>
+                Project
+            </div>
+        </div>
+        
+        <!-- COMPANY FORM -->
+        <div class="form-section active" id="form-company">
+            <div class="form-group">
+                <label class="form-label">Company Name</label>
+                <input type="text" class="form-input" id="company-name" placeholder="e.g., Peloton, WeWork, Your Company">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Founded Year</label>
+                    <input type="number" class="form-input" id="company-founded" placeholder="e.g., 2012" min="1800" max="2026">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Industry</label>
+                    <select class="form-input" id="company-industry">
+                        <option value="tech">Tech / Software</option>
+                        <option value="fintech">Fintech</option>
+                        <option value="ecommerce">E-commerce</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="media">Media / Entertainment</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="retail">Retail</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="finance">Finance / Banking</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Brand Awareness (0-100%)</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="company-brand" min="0" max="100" value="50">
+                    <div class="slider-value"><span id="brand-value">50</span>%</div>
+                </div>
+                <p class="form-hint">How many people in your target market recognize your brand?</p>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Market Position (1-10)</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="company-position" min="1" max="10" value="5">
+                    <div class="slider-value"><span id="position-value">5</span>/10</div>
+                </div>
+                <p class="form-hint">1 = Struggling to compete, 10 = Market leader</p>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Crises Survived</label>
+                <select class="form-input" id="company-crises">
+                    <option value="0">None yet</option>
+                    <option value="1">1 minor crisis</option>
+                    <option value="2">2 crises</option>
+                    <option value="3">3+ crises (battle-tested)</option>
+                    <option value="4">Survived major recession</option>
+                    <option value="5">Multiple recessions + industry disruption</option>
+                </select>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Profitable?</label>
+                    <select class="form-input" id="company-profitable">
+                        <option value="no">No, burning cash</option>
+                        <option value="breakeven">Break-even</option>
+                        <option value="yes">Yes, profitable</option>
+                        <option value="very">Very profitable (>20% margin)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Single Leader Dependency?</label>
+                    <select class="form-input" id="company-leader">
+                        <option value="high">High (company = founder)</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low (strong team)</option>
+                        <option value="none">None (institutional)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateCompany()">💀 CALCULATE TIME OF DEATH</button>
+        </div>
+        
+        <!-- STARTUP FORM -->
+        <div class="form-section" id="form-startup">
+            <div class="form-group">
+                <label class="form-label">Startup Name</label>
+                <input type="text" class="form-input" id="startup-name" placeholder="e.g., Your Startup">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Founded Year</label>
+                    <input type="number" class="form-input" id="startup-founded" placeholder="e.g., 2023" min="2000" max="2026">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Funding Stage</label>
+                    <select class="form-input" id="startup-stage">
+                        <option value="pre">Pre-seed / Bootstrapped</option>
+                        <option value="seed">Seed</option>
+                        <option value="a">Series A</option>
+                        <option value="b">Series B</option>
+                        <option value="c">Series C+</option>
+                        <option value="public">Public</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Runway (months at current burn)</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="startup-runway" min="0" max="36" value="12">
+                    <div class="slider-value"><span id="runway-value">12</span> months</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Product-Market Fit</label>
+                <select class="form-input" id="startup-pmf">
+                    <option value="none">Still searching</option>
+                    <option value="early">Early signs</option>
+                    <option value="good">Good (retention + growth)</option>
+                    <option value="strong">Strong (organic growth)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Competition Level</label>
+                <select class="form-input" id="startup-competition">
+                    <option value="high">High (crowded market)</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low (differentiated)</option>
+                    <option value="none">Blue ocean (new category)</option>
+                </select>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateStartup()">💀 CALCULATE TIME OF DEATH</button>
+        </div>
+        
+        <!-- CONTENT FORM -->
+        <div class="form-section" id="form-content">
+            <div class="form-group">
+                <label class="form-label">Content Title / Description</label>
+                <input type="text" class="form-input" id="content-name" placeholder="e.g., My Viral Video, Blog Post, Meme">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Published Year</label>
+                    <input type="number" class="form-input" id="content-year" placeholder="e.g., 2024" min="1990" max="2026">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Platform</label>
+                    <select class="form-input" id="content-platform">
+                        <option value="tiktok">TikTok</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="twitter">Twitter/X</option>
+                        <option value="blog">Blog / Website</option>
+                        <option value="podcast">Podcast</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Total Views / Impressions</label>
+                <select class="form-input" id="content-views">
+                    <option value="1000">< 10K</option>
+                    <option value="50000">10K - 100K</option>
+                    <option value="500000">100K - 1M</option>
+                    <option value="5000000">1M - 10M</option>
+                    <option value="50000000">10M - 100M</option>
+                    <option value="500000000">100M+</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">How long has it been relevant?</label>
+                <select class="form-input" id="content-persistence">
+                    <option value="1">Less than a week</option>
+                    <option value="4">1-4 weeks</option>
+                    <option value="12">1-3 months</option>
+                    <option value="26">3-6 months</option>
+                    <option value="52">6-12 months</option>
+                    <option value="104">1-2 years</option>
+                    <option value="260">2-5 years</option>
+                    <option value="520">5+ years</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Does it get referenced / remixed / quoted?</label>
+                <select class="form-input" id="content-legacy">
+                    <option value="1">No, one-time consumption</option>
+                    <option value="1.5">Sometimes referenced</option>
+                    <option value="2">Often referenced / remixed</option>
+                    <option value="3">Cultural touchstone (everyone knows it)</option>
+                </select>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateContent()">💀 CALCULATE TIME OF DEATH</button>
+        </div>
+        
+        <!-- PROJECT FORM -->
+        <div class="form-section" id="form-project">
+            <div class="form-group">
+                <label class="form-label">Project Name</label>
+                <input type="text" class="form-input" id="project-name" placeholder="e.g., My Side Project, Open Source Tool">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Started Year</label>
+                    <input type="number" class="form-input" id="project-year" placeholder="e.g., 2023" min="1990" max="2026">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Project Type</label>
+                    <select class="form-input" id="project-type">
+                        <option value="side">Side project</option>
+                        <option value="oss">Open source</option>
+                        <option value="research">Research</option>
+                        <option value="creative">Creative work</option>
+                        <option value="business">Business venture</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Active Contributors</label>
+                <select class="form-input" id="project-contributors">
+                    <option value="1">Just me</option>
+                    <option value="2">2-3 people</option>
+                    <option value="5">4-10 people</option>
+                    <option value="20">10+ people</option>
+                    <option value="100">Large community</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Bus Factor (what if key person disappears?)</label>
+                <select class="form-input" id="project-bus">
+                    <option value="1">Dies immediately (just me)</option>
+                    <option value="2">Struggles but survives</option>
+                    <option value="3">Would continue fine</option>
+                    <option value="4">Fully institutionalized</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Documentation Quality</label>
+                <select class="form-input" id="project-docs">
+                    <option value="0">None</option>
+                    <option value="1">Minimal / outdated</option>
+                    <option value="2">Decent</option>
+                    <option value="3">Comprehensive</option>
+                </select>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateProject()">💀 CALCULATE TIME OF DEATH</button>
+        </div>
+        
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <div class="death-certificate" id="certificate">
+                <!-- Filled by JavaScript -->
+            </div>
+            
+            <div class="share-section">
+                <button class="share-btn" onclick="shareResults()">
+                    📋 Copy Results
+                </button>
+                <button class="share-btn" onclick="tweetResults()">
+                    🐦 Share on Twitter
+                </button>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div style="background: rgba(255, 45, 85, 0.1); border: 1px solid var(--critical); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; text-align: center;">
+                <h3 style="font-family: 'Space Mono', monospace; font-size: 1.2rem; margin-bottom: 1rem; color: var(--critical);">Want to understand the math?</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--text-dim);">This calculator uses the Temporal Validation Index (TVI) framework — a scientific method for measuring what actually lasts.</p>
+                <a href="https://temporal-engine.netlify.app" style="display: inline-block; padding: 1rem 2rem; background: var(--critical); color: white; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.2s;">
+                    Explore TVI Framework →
+                </a>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.85rem;">
+                Built with the <a href="https://temporal-engine.netlify.app" style="color: var(--info);">Temporal Validation Framework</a><br>
+                D ≈ 1.7 confirmed | Time audits everything.
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.form-section').forEach(f => f.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById('form-' + tab.dataset.tab).classList.add('active');
+                
+                document.getElementById('results').classList.remove('show');
+            });
+        });
+        
+        // Slider updates
+        document.querySelectorAll('.slider').forEach(slider => {
+            slider.addEventListener('input', () => {
+                const valueSpan = document.getElementById(slider.id.replace('company-', '').replace('startup-', '') + '-value');
+                if (valueSpan) valueSpan.textContent = slider.value;
+            });
+        });
+        
+        // Store results for sharing
+        let lastResults = {};
+        
+        // Calculate ISPS for company
+        function calculateCompany() {
+            const name = document.getElementById('company-name').value || 'Unnamed Company';
+            const founded = parseInt(document.getElementById('company-founded').value) || 2020;
+            const brand = parseInt(document.getElementById('company-brand').value) / 100;
+            const position = parseInt(document.getElementById('company-position').value);
+            const crises = parseInt(document.getElementById('company-crises').value);
+            const profitable = document.getElementById('company-profitable').value;
+            const leader = document.getElementById('company-leader').value;
+            
+            // Calculate ISPS
+            const age = 2026 - founded;
+            const ageFactor = Math.log10(age + 1);
+            const crisisFactor = 1 + crises * 0.5;
+            
+            let profitMod = 0.7;
+            if (profitable === 'breakeven') profitMod = 0.9;
+            if (profitable === 'yes') profitMod = 1.2;
+            if (profitable === 'very') profitMod = 1.5;
+            
+            let leaderMod = 0.6;
+            if (leader === 'medium') leaderMod = 0.8;
+            if (leader === 'low') leaderMod = 1.0;
+            if (leader === 'none') leaderMod = 1.2;
+            
+            const S = brand * position * 10 * profitMod * leaderMod;
+            const TVS = ageFactor * crisisFactor * 10;
+            
+            let SRC = 1.0;
+            if (founded < 1950) SRC = 2.0;
+            else if (founded < 1980) SRC = 1.5;
+            else if (founded < 2000) SRC = 1.2;
+            
+            const isps = S * Math.log10(TVS + 1) * SRC;
+            
+            // Generate report
+            generateReport('company', name, isps, {
+                founded, brand, position, crises, profitable, leader, age
+            });
+        }
+        
+        // Calculate for startup
+        function calculateStartup() {
+            const name = document.getElementById('startup-name').value || 'Unnamed Startup';
+            const founded = parseInt(document.getElementById('startup-founded').value) || 2023;
+            const stage = document.getElementById('startup-stage').value;
+            const runway = parseInt(document.getElementById('startup-runway').value);
+            const pmf = document.getElementById('startup-pmf').value;
+            const competition = document.getElementById('startup-competition').value;
+            
+            // Startups have lower base ISPS
+            let stageMod = 0.3;
+            if (stage === 'seed') stageMod = 0.5;
+            if (stage === 'a') stageMod = 0.7;
+            if (stage === 'b') stageMod = 0.9;
+            if (stage === 'c') stageMod = 1.1;
+            if (stage === 'public') stageMod = 1.3;
+            
+            let pmfMod = 0.3;
+            if (pmf === 'early') pmfMod = 0.6;
+            if (pmf === 'good') pmfMod = 1.0;
+            if (pmf === 'strong') pmfMod = 1.5;
+            
+            let compMod = 0.5;
+            if (competition === 'medium') compMod = 0.7;
+            if (competition === 'low') compMod = 1.0;
+            if (competition === 'none') compMod = 1.3;
+            
+            const runwayMod = Math.min(runway / 24, 1.5);
+            
+            const isps = 5 * stageMod * pmfMod * compMod * runwayMod * 10;
+            
+            generateReport('startup', name, isps, {
+                founded, stage, runway, pmf, competition
+            });
+        }
+        
+        // Calculate TVI for content
+        function calculateContent() {
+            const name = document.getElementById('content-name').value || 'Unnamed Content';
+            const year = parseInt(document.getElementById('content-year').value) || 2024;
+            const platform = document.getElementById('content-platform').value;
+            const views = parseInt(document.getElementById('content-views').value);
+            const persistence = parseInt(document.getElementById('content-persistence').value);
+            const legacy = parseFloat(document.getElementById('content-legacy').value);
+            
+            // Platform users (rough estimates)
+            const platformUsers = {
+                'tiktok': 1500000000,
+                'youtube': 2000000000,
+                'instagram': 2000000000,
+                'twitter': 400000000,
+                'blog': 100000000,
+                'podcast': 500000000,
+                'other': 500000000
+            };
+            
+            const users = platformUsers[platform];
+            
+            // Account factor
+            const age = 2026 - year;
+            let A = 1.0;
+            if (age < 1) A = 1.1;
+            else if (age < 3) A = 1.3;
+            else if (age < 5) A = 1.5;
+            else A = 2.0;
+            
+            // Saturation
+            const S = (views / A) / users * 2.0;
+            
+            // TVS
+            const P = Math.min(persistence, 180);
+            const TVS = P * 0.2 * legacy;
+            
+            // SRC
+            let SRC = 1.0;
+            if (year < 2005) SRC = 3.0;
+            else if (year < 2010) SRC = 2.5;
+            else if (year < 2015) SRC = 1.5;
+            
+            const tvi = S * Math.log10(TVS + 1) * SRC;
+            
+            generateReport('content', name, tvi, {
+                year, platform, views, persistence, legacy
+            }, true);
+        }
+        
+        // Calculate for project
+        function calculateProject() {
+            const name = document.getElementById('project-name').value || 'Unnamed Project';
+            const year = parseInt(document.getElementById('project-year').value) || 2023;
+            const type = document.getElementById('project-type').value;
+            const contributors = parseInt(document.getElementById('project-contributors').value);
+            const bus = parseInt(document.getElementById('project-bus').value);
+            const docs = parseInt(document.getElementById('project-docs').value);
+            
+            // Project durability score
+            const age = 2026 - year;
+            const ageFactor = Math.log10(age + 2);
+            
+            const contribMod = Math.log10(contributors + 1) * 0.5 + 0.5;
+            const busMod = bus * 0.3;
+            const docsMod = docs * 0.2 + 0.4;
+            
+            const score = ageFactor * contribMod * busMod * docsMod * 20;
+            
+            generateReport('project', name, score, {
+                year, type, contributors, bus, docs, age
+            });
+        }
+        
+        // Generate the report
+        function generateReport(type, name, score, data, isContent = false) {
+            const currentYear = 2026;
+            
+            // Determine status
+            let status, statusClass, deathYear, survivalProb, diagnosis, causes, recommendations;
+            
+            if (isContent) {
+                // TVI-based assessment
+                if (score < 0.5) {
+                    status = 'EPHEMERAL';
+                    statusClass = 'critical';
+                    deathYear = currentYear;
+                    survivalProb = 2;
+                    diagnosis = 'Already forgotten or will be within weeks. Zero foundation value.';
+                    causes = ['Algorithmic burial', 'Attention half-life < 2 weeks', 'No cultural resonance', 'Platform dependency'];
+                    recommendations = ['Accept impermanence', 'Create for process, not outcome', 'Build a body of work instead'];
+                } else if (score < 2) {
+                    status = 'VIRAL MOMENT';
+                    statusClass = 'critical';
+                    deathYear = currentYear + 1;
+                    survivalProb = 8;
+                    diagnosis = 'Temporary attention spike. Will fade within months.';
+                    causes = ['Trend-dependent', 'No resurfacing mechanism', 'Easily replaceable'];
+                    recommendations = ['Capitalize quickly', 'Build audience while hot', 'Create follow-up content'];
+                } else if (score < 10) {
+                    status = 'CULTURAL BLIP';
+                    statusClass = 'warning';
+                    deathYear = currentYear + 3;
+                    survivalProb = 25;
+                    diagnosis = 'Notable but not foundational. May be referenced occasionally.';
+                    causes = ['Limited cross-platform spread', 'Niche appeal', 'Time-bound relevance'];
+                    recommendations = ['Document the moment', 'Connect to larger narratives', 'Build on this foundation'];
+                } else if (score < 30) {
+                    status = 'CULTURAL EVENT';
+                    statusClass = 'caution';
+                    deathYear = currentYear + 10;
+                    survivalProb = 50;
+                    diagnosis = 'Significant cultural moment. Will be remembered for years.';
+                    causes = ['May become dated', 'Context dependency', 'Generational relevance'];
+                    recommendations = ['Archive properly', 'Let it compound', 'You made something real'];
+                } else {
+                    status = 'FOUNDATION';
+                    statusClass = 'stable';
+                    deathYear = currentYear + 50;
+                    survivalProb = 85;
+                    diagnosis = 'Cultural foundation. Will outlive its creator. Congratulations.';
+                    causes = ['Time decay (eventual)', 'Cultural shift', 'Platform death'];
+                    recommendations = ['Preserve it', 'Let others build on it', 'You won the game'];
+                }
+            } else {
+                // ISPS-based assessment
+                if (score < 10) {
+                    status = 'TERMINAL';
+                    statusClass = 'critical';
+                    deathYear = currentYear + 1;
+                    survivalProb = 5;
+                    diagnosis = 'Critical condition. Will not survive next market stress. Begin hospice planning.';
+                    causes = ['Insufficient temporal validation', 'No crisis resilience', 'Structural fragility', 'Market dependency'];
+                    recommendations = ['Pivot immediately', 'Sell if possible', 'Document learnings', 'Preserve relationships'];
+                } else if (score < 20) {
+                    status = 'HIGH RISK';
+                    statusClass = 'critical';
+                    deathYear = currentYear + 2;
+                    survivalProb = 15;
+                    diagnosis = 'Severe structural weakness. Next recession is likely fatal.';
+                    causes = ['Unproven crisis resilience', 'Cash burn vulnerability', 'Competitive moat weakness'];
+                    recommendations = ['Extend runway to 24+ months', 'Reduce burn rate 40%', 'Find sustainable unit economics'];
+                } else if (score < 35) {
+                    status = 'VULNERABLE';
+                    statusClass = 'warning';
+                    deathYear = currentYear + 5;
+                    survivalProb = 35;
+                    diagnosis = 'Survivable but fragile. Needs significant structural improvement.';
+                    causes = ['Limited crisis history', 'Moderate competitive position', 'Leadership dependency'];
+                    recommendations = ['Build cash reserves', 'Diversify revenue', 'Reduce key-person risk'];
+                } else if (score < 60) {
+                    status = 'UNCERTAIN';
+                    statusClass = 'caution';
+                    deathYear = currentYear + 10;
+                    survivalProb = 55;
+                    diagnosis = 'Could go either way. Survival depends on execution and luck.';
+                    causes = ['Market cyclicality', 'Competitive pressure', 'Innovation risk'];
+                    recommendations = ['Stay profitable', 'Build institutional knowledge', 'Prepare succession'];
+                } else if (score < 100) {
+                    status = 'STABLE';
+                    statusClass = 'stable';
+                    deathYear = currentYear + 25;
+                    survivalProb = 75;
+                    diagnosis = 'Good structural health. Should survive typical market stress.';
+                    causes = ['Long-term market shifts', 'Technological disruption', 'Complacency'];
+                    recommendations = ['Maintain discipline', 'Continue building resilience', 'Think longer-term'];
+                } else {
+                    status = 'FOUNDATION';
+                    statusClass = 'stable';
+                    deathYear = currentYear + 50;
+                    survivalProb = 90;
+                    diagnosis = 'Strong temporal foundation. Built to last generations.';
+                    causes = ['Civilizational collapse', 'Fundamental market extinction', 'Black swan'];
+                    recommendations = ['Preserve culture', 'Think in centuries', 'You\'ve built something real'];
+                }
+            }
+            
+            // Comparable entities
+            const comparables = getComparables(type, score);
+            
+            // Store for sharing
+            lastResults = {
+                type, name, score, status, deathYear, survivalProb, diagnosis
+            };
+            
+            // Build HTML
+            const scoreLabel = isContent ? 'TVI SCORE' : 'ISPS SCORE';
+            const icon = type === 'company' ? '🏢' : type === 'startup' ? '🚀' : type === 'content' ? '📱' : '📁';
+            
+            document.getElementById('certificate').innerHTML = `
+                <div class="certificate-header">
+                    <div class="certificate-icon">${icon}</div>
+                    <div class="subject-name">${escapeHtml(name)}</div>
+                    <div class="subject-type">${type.toUpperCase()} TEMPORAL ANALYSIS</div>
+                </div>
+                
+                <div class="score-section">
+                    <div class="score-box">
+                        <div class="score-value ${statusClass}">${score.toFixed(1)}</div>
+                        <div class="score-label">${scoreLabel}</div>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-value ${statusClass}">${status}</div>
+                        <div class="score-label">PROGNOSIS</div>
+                    </div>
+                </div>
+                
+                <div class="diagnosis-section ${statusClass}">
+                    <div class="diagnosis-title">📋 DIAGNOSIS</div>
+                    <div class="diagnosis-content">${diagnosis}</div>
+                </div>
+                
+                <div class="score-section">
+                    <div class="score-box">
+                        <div class="score-value ${statusClass}">~${deathYear}</div>
+                        <div class="score-label">PROJECTED END</div>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-value ${statusClass}">${survivalProb}%</div>
+                        <div class="score-label">10-YEAR SURVIVAL</div>
+                    </div>
+                </div>
+                
+                <div class="survival-curve">
+                    <div class="curve-title">SURVIVAL PROBABILITY CURVE</div>
+                    <div class="curve-bar">
+                        <div class="curve-fill" style="width: ${survivalProb}%; background: linear-gradient(90deg, ${statusClass === 'critical' ? 'var(--critical)' : statusClass === 'warning' ? 'var(--warning)' : statusClass === 'caution' ? 'var(--caution)' : 'var(--stable)'}, transparent);"></div>
+                    </div>
+                    <div class="curve-labels">
+                        <span>0% (Dead)</span>
+                        <span>50%</span>
+                        <span>100% (Immortal)</span>
+                    </div>
+                </div>
+                
+                <div class="cause-section">
+                    <div class="cause-title">💀 PROBABLE CAUSES OF DEATH</div>
+                    <div class="cause-primary">${causes[0]}</div>
+                    <ul class="cause-factors">
+                        ${causes.slice(1).map(c => `<li>${c}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="timeline-section">
+                    <div class="timeline-title">📅 PROJECTED TIMELINE</div>
+                    <div class="timeline">
+                        <div class="timeline-item past">
+                            <span class="timeline-year">${data.founded || data.year}</span>
+                            <span class="timeline-event">Founded / Created</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">2026</span>
+                            <span class="timeline-event">Current assessment</span>
+                            <span class="timeline-prob">${survivalProb}%</span>
+                        </div>
+                        ${score < 50 ? `
+                        <div class="timeline-item warning">
+                            <span class="timeline-year">${currentYear + 1}</span>
+                            <span class="timeline-event">First critical stress point</span>
+                            <span class="timeline-prob">${Math.max(5, survivalProb - 20)}%</span>
+                        </div>
+                        ` : ''}
+                        <div class="timeline-item ${statusClass === 'critical' ? 'death' : 'critical'}">
+                            <span class="timeline-year">~${deathYear}</span>
+                            <span class="timeline-event">${statusClass === 'stable' ? 'Long-term risk window' : 'Projected termination'}</span>
+                            <span class="timeline-prob">${statusClass === 'stable' ? '10%' : '<5%'}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparable-section">
+                    <div class="comparable-title">📊 COMPARABLE ENTITIES</div>
+                    <div class="comparable-grid">
+                        ${comparables.map(c => `
+                            <div class="comparable-item">
+                                <div class="comparable-name">${c.name}</div>
+                                <div class="comparable-status ${c.alive ? 'alive' : ''}">${c.status}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <div class="recommendations-title">SURVIVAL RECOMMENDATIONS</div>
+                    <ul class="recommendations-list">
+                        ${recommendations.map(r => `<li>${r}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getComparables(type, score) {
+            if (type === 'content') {
+                if (score < 1) return [
+                    { name: 'Average TikTok', status: 'DEAD (2 weeks)', alive: false },
+                    { name: 'Random Tweet', status: 'DEAD (hours)', alive: false },
+                    { name: 'Daily Meme', status: 'DEAD (days)', alive: false }
+                ];
+                if (score < 10) return [
+                    { name: 'Damn Daniel', status: 'FADED (2016)', alive: false },
+                    { name: 'Ice Bucket', status: 'REMEMBERED', alive: true },
+                    { name: 'Harlem Shake', status: 'NOSTALGIC', alive: false }
+                ];
+                return [
+                    { name: 'Charlie Bit My Finger', status: 'FOUNDATION', alive: true },
+                    { name: 'Numa Numa', status: 'IMMORTAL', alive: true },
+                    { name: 'Rickroll', status: 'TRANSCENDENT', alive: true }
+                ];
+            }
+            
+            if (score < 15) return [
+                { name: 'WeWork', status: 'COLLAPSED', alive: false },
+                { name: 'Peloton', status: 'DYING', alive: false },
+                { name: 'Theranos', status: 'DEAD', alive: false }
+            ];
+            if (score < 40) return [
+                { name: 'Snapchat', status: 'DECLINING', alive: true },
+                { name: 'Twitter/X', status: 'UNSTABLE', alive: true },
+                { name: 'Netflix', status: 'CHALLENGED', alive: true }
+            ];
+            return [
+                { name: 'Apple', status: 'FOUNDATION', alive: true },
+                { name: 'Microsoft', status: 'IMMORTAL', alive: true },
+                { name: 'Coca-Cola', status: 'TRANSCENDENT', alive: true }
+            ];
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function shareResults() {
+            const text = `💀 TEMPORAL DEATH CALCULATOR
+
+${lastResults.name}
+Score: ${lastResults.score.toFixed(1)}
+Status: ${lastResults.status}
+Projected End: ~${lastResults.deathYear}
+10-Year Survival: ${lastResults.survivalProb}%
+
+${lastResults.diagnosis}
+
+Calculate yours: temporal-engine.netlify.app/death`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+        
+        function tweetResults() {
+            const text = encodeURIComponent(`💀 I just calculated my ${lastResults.type}'s time of death:
+
+${lastResults.name}: ${lastResults.status}
+${lastResults.survivalProb}% chance of surviving 10 years
+
+Find out when yours dies:`);
+            
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=https://temporal-engine.netlify.app/death`, '_blank');
+        }
+    </script>
+</body>
+</html>

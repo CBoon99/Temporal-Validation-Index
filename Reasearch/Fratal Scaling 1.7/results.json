@@ -1,0 +1,14 @@
+{
+  "fractal_dimension": {
+    "D_dfa": 0.7678,
+    "D_variance": 1.6946,
+    "D_average": 1.2312,
+    "prediction": 1.7,
+    "deviation": 0.4688
+  },
+  "isps_accuracy": 54.54545454545454,
+  "power_law": {
+    "top_01_pct_share": 27.4,
+    "bottom_90_pct_share": 16.0
+  }
+}

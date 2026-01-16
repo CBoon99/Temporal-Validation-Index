@@ -128,6 +128,8 @@
       transition:transform 0.3s cubic-bezier(0.4,0,0.2,1),
                  transform-origin 0.1s ease;
       transform-origin:center center;
+      object-fit:contain;
+      background:var(--bg1);
     }
     .book-cover-container:hover img{
       transform:scale(2.0);
@@ -416,7 +418,7 @@
       
       <div class="hero-image">
         <div class="book-cover-container" id="book-cover" onclick="openLightbox()">
-          <img src="/assets/book-cover.jpg" alt="Book cover for 'TIME AS PROOF: The Mathematics of What Lasts'. Front: Title and author. Back: Provocative text about time as the ultimate validator of value, critiquing short-term metrics and introducing a framework for measuring what lasts." id="cover-img">
+          <img src="assets/book-cover.png" alt="Book cover for 'TIME AS PROOF: The Mathematics of What Lasts'. Front: Title and author. Back: Provocative text about time as the ultimate validator of value, critiquing short-term metrics and introducing a framework for measuring what lasts." id="cover-img" onerror="this.src='assets/book-cover-old.jpg'; this.onerror=null;">
           <div class="zoom-hint">Click to zoom</div>
         </div>
       </div>
@@ -720,7 +722,7 @@
   <!-- Lightbox Modal -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-    <img src="/assets/book-cover.jpg" alt="Book cover for 'TIME AS PROOF: The Mathematics of What Lasts'. Front: Title and author. Back: Provocative text about time as the ultimate validator of value, critiquing short-term metrics and introducing a framework for measuring what lasts.">
+    <img src="assets/book-cover.png" alt="Book cover for 'TIME AS PROOF: The Mathematics of What Lasts'. Front: Title and author. Back: Provocative text about time as the ultimate validator of value, critiquing short-term metrics and introducing a framework for measuring what lasts." onerror="this.src='assets/book-cover-old.jpg'; this.onerror=null;">
   </div>
   
   <script src="https://js.stripe.com/v3/"></script>
