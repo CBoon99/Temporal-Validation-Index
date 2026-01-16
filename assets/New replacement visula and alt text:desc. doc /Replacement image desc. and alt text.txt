@@ -1,0 +1,27 @@
+﻿1️⃣ TVI Methodology Diagram
+Suggested filename:
+ tvi-methodology-framework.png
+Alt text (use verbatim):
+Diagram showing the TVI (Temporal Validation Index) methodology. Three inputs—Cultural Saturation Index (CSI), Temporal Validation Score (TVS), and Structural Resistance Coefficient (SRC)—flow into a central formula, TVI = CSI × log10(TVS + 1) × SRC, producing the Temporal Validation Index as output along a short-term to long-term timeline.
+________________
+
+
+2️⃣ Structural Viability Over Time (Shock & Decay)
+Suggested filename:
+ tvi-structural-viability-over-time.png
+Alt text:
+Line chart illustrating structural viability over time after a shock event. Curves represent high, medium, and low structural resistance, showing that systems with higher resistance decline more slowly and retain recovery potential, while low-resistance systems enter irreversible decline as time acts as a stress multiplier.
+________________
+
+
+3️⃣ Attention Volume vs Temporal Persistence (Signal vs Noise)
+Suggested filename:
+ tvi-diagram-attention-vs-temporal-persistence.png
+Alt text:
+Scatter plot comparing short-term attention volume with long-term temporal persistence. A dense cluster of high-attention points labeled “Viral Noise” shows low persistence, while a smaller cluster labeled “Persistent Signal” shows higher long-term persistence, demonstrating that attention decays faster than structural relevance.
+________________
+
+
+4️⃣ (Optional caption-style alt text for academic reuse)
+If you ever need long-form alt text (for papers or accessibility audits), use this expanded version for Image 3:
+Scatter plot demonstrating the relationship between attention volume and temporal persistence within the TVI framework. Most data points cluster in a high-attention, low-persistence region labeled viral noise, while a smaller, distinct cluster shows that durable cultural or structural signals often persist despite lower initial attention.
