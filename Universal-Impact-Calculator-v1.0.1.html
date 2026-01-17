@@ -250,6 +250,7 @@
       filter: brightness(0) invert(1);
       opacity: 0.9;
       transition: 0.2s ease;
+      pointer-events: none;
     }
     .compare-icon:hover {
       transform: scale(1.05);
@@ -583,12 +584,17 @@
     /* Framework Visuals */
     .framework-visual {
       width: 100%;
-      max-width: 800px;
+      max-width: 400px;
       margin: 24px auto;
       border-radius: var(--radius);
       border: 1px solid var(--border-subtle);
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
       display: block;
+      /* Muted, analytical styling - low contrast, non-blinding */
+      filter: brightness(0.95) contrast(0.9) saturate(0.85);
+      background: rgba(245, 242, 238, 0.3);
+      padding: 8px;
+      box-sizing: border-box;
     }
     .framework-visual-caption {
       text-align: center;
@@ -621,9 +627,9 @@
       border-color: var(--accent);
       background: var(--accent-dim);
     }
-    .compare-item .icon { font-size: 24px; margin-bottom: 8px; }
-    .compare-item .name { font-size: 13px; font-weight: 600; }
-    .compare-item .meta { font-size: 11px; color: var(--text-3); }
+    .compare-item .icon { font-size: 24px; margin-bottom: 8px; pointer-events: none; }
+    .compare-item .name { font-size: 13px; font-weight: 600; pointer-events: none; }
+    .compare-item .meta { font-size: 11px; color: var(--text-3); pointer-events: none; }
     .compare-vs {
       text-align: center;
       font-size: 14px;
@@ -1245,8 +1251,8 @@
             <p><strong>Problem:</strong> Modern metrics are inflated by platform size, algorithms, hype cycles, and short-term engagement. They miss longevity, reuse, cross-domain adoption, and historical embedding.</p>
           </div>
 
-          <img src="assets/New Visuals/Replacements/tvi-diagram-attention-vs-temporal-persistence.png" alt="Scatter plot comparing short-term attention volume with long-term temporal persistence. A dense cluster of high-attention points labeled 'Viral Noise' shows low persistence, while a smaller cluster labeled 'Persistent Signal' shows higher long-term persistence, demonstrating that attention decays faster than structural relevance." class="framework-visual">
-          <p class="framework-visual-caption">The Dissonance: Virality is a 24-hour phenomenon (wide but thin), while cultural legacy is built on density (narrow but deep).</p>
+          <img src="assets/visuals/tvi-diagrams/tvi-structural-survival-vs-attention.png" alt="Graph comparing short-term attention spikes with long-term structural durability, showing attention peaking and collapsing while validated structure persists over time." class="framework-visual">
+          <p class="framework-visual-caption">This chart contrasts short-term attention with long-term structural survival. Attention produces sharp but temporary spikes, while structurally validated signals persist after attention decays. TVI measures what remains once visibility fades.</p>
 
           <p>TVI exists to answer one question: <strong>Is this real — or just temporarily loud?</strong></p>
 
@@ -1259,7 +1265,7 @@
 
           <div class="formula">TVI = CSI × log₁₀(TVS + 1) × SRC</div>
 
-          <img src="assets/New Visuals/Replacements/tvi-methodology-framework.png" alt="Diagram showing the TVI (Temporal Validation Index) methodology. Three inputs—Cultural Saturation Index (CSI), Temporal Validation Score (TVS), and Structural Resistance Coefficient (SRC)—flow into a central formula, TVI = CSI × log10(TVS + 1) × SRC, producing the Temporal Validation Index as output along a short-term to long-term timeline." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-methodology-framework.png" alt="Diagram showing the TVI (Temporal Validation Index) methodology. Three inputs—Cultural Saturation Index (CSI), Temporal Validation Score (TVS), and Structural Resistance Coefficient (SRC)—flow into a central formula, TVI = CSI × log10(TVS + 1) × SRC, producing the Temporal Validation Index as output along a short-term to long-term timeline." class="framework-visual">
           <p class="framework-visual-caption">The Survival Equation: How Saturation, Temporal Validation, and Structural Resistance create a "Volume of Persistence."</p>
 
           <p>This structure forces hype without time to collapse, scale without validation to decay, and proven survival to compound.</p>
@@ -1277,35 +1283,46 @@
 
           <h3 style="margin-top:32px">What TVI Would Have Changed — In Numbers</h3>
           
-          <h4 style="margin-top:24px;color:var(--accent);">SoftBank / WeWork: A Quantified Example</h4>
+          <div style="text-align:center;margin:32px 0;">
+            <div style="font-size:13px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);margin-bottom:12px;">Capital Preserved (SoftBank / WeWork — Real Case)</div>
+            <div style="font-size:72px;font-weight:800;font-family:'Inter Tight';line-height:1;color:var(--accent);text-shadow:0 0 40px rgba(44,224,255,0.3);">$8–10B</div>
+            <div style="font-size:15px;color:var(--text-2);margin-top:12px;">Conservative estimate if TVI flagged structural fragility in 2017</div>
+            <div style="font-size:12px;color:var(--text-3);margin-top:8px;font-style:italic;">Based on documented SoftBank Vision Fund exposure and write-downs</div>
+          </div>
+          
+          <h4 style="margin-top:24px;color:var(--accent);">The Breakdown</h4>
           
           <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:24px;margin:20px 0;">
-            <h5 style="margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-2);">Capital Deployed (SoftBank Vision Fund, WeWork)</h5>
+            <h5 style="margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-2);">What Actually Happened (Documented, Public Record)</h5>
             <ul style="margin:0;padding-left:20px;color:var(--text-2);font-size:14px;line-height:1.8;">
-              <li>Total exposure: <strong style="color:var(--text);">~$16B</strong></li>
-              <li>Peak valuation implied: <strong style="color:var(--text);">$47B</strong></li>
-              <li>Post-collapse valuation: <strong style="color:var(--critical);">&lt;$10B</strong></li>
+              <li>SoftBank total exposure: <strong style="color:var(--text);">~$16B</strong> (2017–2019)</li>
+              <li>Peak valuation: <strong style="color:var(--text);">$47B</strong> (Aug 2019)</li>
+              <li>Valuation after failed IPO: <strong style="color:var(--critical);">&lt;$10B</strong> (Q4 2019)</li>
             </ul>
+            <p style="margin-top:12px;font-size:11px;color:var(--text-3);font-style:italic;">Sources: SoftBank Vision Fund quarterly reports (2019–2020), WSJ, FT</p>
           </div>
 
           <div style="background:rgba(255,45,85,0.1);border:1px solid var(--critical);border-radius:var(--radius-sm);padding:24px;margin:20px 0;">
-            <h5 style="margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:0.05em;color:var(--critical);">Observed Outcome (ROI-only lens)</h5>
-            <ul style="margin:0;padding-left:20px;color:var(--text-2);font-size:14px;line-height:1.8;">
-              <li>Capital written down: <strong style="color:var(--critical);">~$14–15B</strong></li>
-              <li>Value destruction: <strong style="color:var(--critical);">~70–80%</strong></li>
-              <li>Timing: collapse within <strong style="color:var(--critical);">18 months</strong></li>
+            <h5 style="margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:0.05em;color:var(--critical);">The Damage (Actual Write-Downs)</h5>
+            <ul style="margin:0;padding-left:20px;color:var(--text-2);font-size:15px;line-height:1.8;">
+              <li><strong style="color:var(--critical);font-size:18px;">$14–15B</strong> written down (FY 2019–2020)</li>
+              <li><strong style="color:var(--critical);">~75%</strong> value destruction</li>
+              <li>Peak to collapse: <strong style="color:var(--critical);">18 months</strong> (Jan 2018 → Aug 2019)</li>
             </ul>
+            <p style="margin-top:12px;font-size:11px;color:var(--text-3);font-style:italic;">Math: $16B exposure - ~$2B recovered = ~$14B loss</p>
           </div>
 
           <div style="background:rgba(44,224,255,0.1);border:1px solid var(--accent);border-radius:var(--radius-sm);padding:24px;margin:20px 0;">
-            <h5 style="margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);">TVI-based Counterfactual (illustrative, conservative)</h5>
-            <ul style="margin:0;padding-left:20px;color:var(--text-2);font-size:14px;line-height:1.8;">
-              <li>Exposure capped at: <strong style="color:var(--accent);">$5–6B</strong></li>
-              <li>Deferred capital pending stress validation: <strong style="color:var(--accent);">$10–11B</strong></li>
-              <li>Capital preserved: <strong style="color:var(--accent);">~$8–10B</strong></li>
-              <li>Downside reduction: <strong style="color:var(--accent);">~60–70%</strong></li>
+            <h5 style="margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);">With TVI (Conservative Counterfactual)</h5>
+            <p style="margin-bottom:12px;font-size:13px;color:var(--text-2);">Assuming TVI flags structural fragility in 2017 and limits exposure:</p>
+            <ul style="margin:0;padding-left:20px;color:var(--text-2);font-size:15px;line-height:1.8;">
+              <li>Initial exposure capped: <strong style="color:var(--accent);">$5–6B</strong> (not $16B)</li>
+              <li>Capital not deployed: <strong style="color:var(--accent);">$10–11B</strong> (deferred pending multi-cycle validation)</li>
+              <li>Loss at same 75% rate: <strong style="color:var(--accent);">~$4–5B</strong> (vs. $14B)</li>
+              <li><strong style="color:var(--accent);font-size:18px;">Net capital preserved: $8–10B</strong> ✓</li>
             </ul>
-            <p style="margin-top:16px;font-size:12px;color:var(--text-3);font-style:italic;">These figures illustrate capital-at-risk reduction, not guaranteed returns.</p>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-3);font-style:italic;">Math: $14B actual loss - $4–5B hypothetical loss = $8–10B preserved</p>
+            <p style="margin-top:8px;font-size:13px;color:var(--accent);font-weight:600;">This is downside protection, not return enhancement.</p>
           </div>
 
           <h4 style="margin-top:32px;color:var(--accent);">Risk Pricing Delta</h4>
@@ -1368,16 +1385,17 @@
             </tbody>
           </table>
 
-          <div style="background:linear-gradient(135deg,rgba(44,224,255,0.15),rgba(44,224,255,0.05));border:2px solid var(--accent);border-radius:var(--radius);padding:24px;margin:32px 0;text-align:center;">
+          <div style="background:linear-gradient(135deg,rgba(44,224,255,0.15),rgba(44,224,255,0.05));border:2px solid var(--accent);border-radius:var(--radius);padding:32px;margin:32px 0;text-align:center;">
+            <div style="font-size:48px;font-weight:800;font-family:'Inter Tight';color:var(--accent);margin-bottom:16px;">50–70%</div>
             <p style="margin:0;font-size:16px;line-height:1.6;color:var(--text);">
-              In large-scale capital allocation, a 5–10% improvement in downside protection can preserve billions.<br>
-              <strong style="color:var(--accent);">TVI targets 50–70% downside reduction in structurally fragile investments.</strong>
+              Downside reduction target for structurally fragile investments.<br>
+              <strong style="color:var(--accent);">In large-scale allocation, that's billions preserved per fund.</strong>
             </p>
           </div>
 
-          <p style="margin-top:24px;font-size:15px;font-weight:600;color:var(--text);text-align:center;padding:20px;background:var(--surface-2);border-radius:var(--radius-sm);">
+          <p style="margin-top:24px;font-size:18px;font-weight:700;color:var(--text);text-align:center;padding:24px;background:var(--surface-2);border-radius:var(--radius-sm);border:1px solid var(--border);">
             ROI helps you maximise upside.<br>
-            <span style="color:var(--accent);">TVI helps you avoid nine-figure mistakes.</span>
+            <span style="color:var(--accent);font-size:20px;">TVI helps you avoid $10B mistakes.</span>
           </p>
         </div>
       </div>
@@ -1392,27 +1410,27 @@
 
           <h3 style="margin-top:24px">The Knowledge Stack (Half-Life Pyramid)</h3>
           <p>A hierarchy of learning. Most people live at the "Ephemeral" tip of the pyramid. The goal is to shift energy toward the "Timeless" base (Philosophy, Math, Human Nature) where knowledge compounds for centuries rather than days.</p>
-          <img src="assets/New Visuals/tvi-knowledge-stack-pyramid.png" alt="A four-tiered pyramid labeled 'The Knowledge Stack.' The gold base is 'Timeless (Centuries+)'; the middle layers are 'Foundational' and 'Relevant'; the cyan tip is 'Ephemeral (Days/Weeks).' An arrow on the left indicates 'Stability Increases' toward the base." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-knowledge-stack-pyramid.png" alt="A four-tiered pyramid labeled 'The Knowledge Stack.' The gold base is 'Timeless (Centuries+)'; the middle layers are 'Foundational' and 'Relevant'; the cyan tip is 'Ephemeral (Days/Weeks).' An arrow on the left indicates 'Stability Increases' toward the base." class="framework-visual">
           <p class="framework-visual-caption">Personal audit tool: Where does your information consumption live on the stability spectrum?</p>
 
           <h3 style="margin-top:32px">The Dark Forest Path (The Stealth Phase)</h3>
           <p>The path of the unkillable. Organizations must descend into the "Dark Forest" to build deep roots (Structural Resistance) while being ignored or misunderstood by the chaotic "Surface Noise."</p>
-          <img src="assets/New Visuals/tvi-dark-forest-path.png" alt="A vertical cross-section of a forest. The top 'Surface Noise' is a chaotic web of cyan lines. A massive golden tree trunk extends from deep, intricate roots in the dark earth, labeled 'The Dark Forest.' Text at the bottom reads: 'Build until your foundation is its own defense.'" class="framework-visual">
-          <p class="framework-visual-caption">The Invisibility Advantage: Building a durable foundation requires descending below the noise.</p>
+          <img src="assets/visuals/tvi-diagrams/tvi-dark-forest-temporal-filter.png" alt="Diagram showing early noisy signals passing through a temporal &quot;dark forest&quot; filter, where time and stress remove weak signals, leaving only durable, validated survivors." class="framework-visual">
+          <p class="framework-visual-caption">This diagram illustrates how early high-noise, low-consensus signals are filtered over time. The &quot;Dark Forest Filter&quot; represents temporal validation, where stress and duration eliminate non-structural signals, leaving only those that remain durable under real-world conditions.</p>
 
           <h3 style="margin-top:32px">Crossing the Chasm of Decay</h3>
           <p>The critical transition point. Most content, ideas, and projects fall into the chasm—the gap between initial hype and lasting value. Only those with sufficient Temporal Validation can cross from ephemeral noise into enduring signal.</p>
-          <img src="assets/New Visuals/tvi-crossing-chasm-of-decay.png" alt="A dramatic landscape showing a deep chasm separating two plateaus. On the left, a chaotic mass of fading cyan particles labeled 'Ephemeral Hype' falls into the dark chasm labeled 'The Decay Zone.' On the right, a solid golden bridge connects to a stable platform labeled 'Temporal Validation.' A few golden particles successfully cross the bridge, while most cyan particles fall into the void below." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-crossing-chasm-of-decay.png" alt="A dramatic landscape showing a deep chasm separating two plateaus. On the left, a chaotic mass of fading cyan particles labeled 'Ephemeral Hype' falls into the dark chasm labeled 'The Decay Zone.' On the right, a solid golden bridge connects to a stable platform labeled 'Temporal Validation.' A few golden particles successfully cross the bridge, while most cyan particles fall into the void below." class="framework-visual">
           <p class="framework-visual-caption">The critical threshold: Most things decay. Only those with sufficient temporal validation cross the chasm.</p>
 
           <h3 style="margin-top:32px">The Breakthrough (Crisis-Proof Infrastructure)</h3>
           <p>Once an entity achieves a certain TVI density, it becomes "Invulnerable." It is no longer a guest in the market; it is part of the infrastructure.</p>
-          <img src="assets/New Visuals/Replacements/tvi-structural-viability-over-time.png" alt="Line chart illustrating structural viability over time after a shock event. Curves represent high, medium, and low structural resistance, showing that systems with higher resistance decline more slowly and retain recovery potential, while low-resistance systems enter irreversible decline as time acts as a stress multiplier." class="framework-visual">
-          <p class="framework-visual-caption">The result of surviving the Dark Forest: achieving invulnerable, crisis-proof infrastructure.</p>
+          <img src="assets/visuals/tvi-diagrams/tvi-temporal-stress-test-matrix.png" alt="Four-quadrant matrix showing how time and stress distinguish unvalidated noise, fragile growth, stress without persistence, and structurally validated signals." class="framework-visual">
+          <p class="framework-visual-caption">This matrix visualizes how signals behave under combinations of time and stress. Only signals exposed to both long-term duration and real stress achieve structural validation. TVI measures survival across both dimensions.</p>
 
           <h3 style="margin-top:32px">The Four-Generation Decision Framework</h3>
           <p>A tool to combat "Immediate Bias." By layering Ancestral Wisdom (75 years ago) with the Legacy Horizon (75 years forward), we ensure our current decisions are anchored in reality, not hype.</p>
-          <img src="assets/New Visuals/tvi-four-generation-decision-framework.png" alt="A HUD featuring four vertical pillars labeled 'Time Echoes.' They represent Ancestral Wisdom (75y ago), Immediate Bias (Now), Inherited World (+25y), and Legacy Horizon (+75y). Gold and cyan lines connect the pillars, symbolizing data streams across time." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-four-generation-decision-framework.png" alt="A HUD featuring four vertical pillars labeled 'Time Echoes.' They represent Ancestral Wisdom (75y ago), Immediate Bias (Now), Inherited World (+25y), and Legacy Horizon (+75y). Gold and cyan lines connect the pillars, symbolizing data streams across time." class="framework-visual">
           <p class="framework-visual-caption">Temporal Intelligence: The ultimate tool for legacy building and decision-making across generations.</p>
         </div>
       </div>

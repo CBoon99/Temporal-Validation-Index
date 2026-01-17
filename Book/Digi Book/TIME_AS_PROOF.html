@@ -201,6 +201,15 @@
       background: var(--accent-dim);
       border-left: 3px solid var(--accent);
     }
+    
+    .toc-item.locked {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .toc-item.locked:hover {
+      background: var(--surface);
+    }
 
     .toc-item .chapter-num {
       font-family: 'Space Mono', monospace;
@@ -808,6 +817,56 @@
     .modal-overlay.visible {
       display: block;
     }
+    
+    .purchase-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg1);
+      border: 1px solid var(--accent);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+      z-index: 3000;
+      display: none;
+    }
+    
+    .purchase-modal.show {
+      display: block;
+    }
+    
+    .purchase-modal h2 {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-2);
+      font-size: 28px;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+    
+    .modal-close:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
 
     .note-popup textarea {
       width: 100%;
@@ -987,6 +1046,19 @@
   <!-- Toast notification -->
   <div class="toast" id="toast"></div>
   
+  <!-- Purchase Modal -->
+  <div class="modal-overlay" id="purchase-modal-overlay" onclick="closePurchaseModal()"></div>
+  <div class="purchase-modal" id="purchase-modal">
+    <button class="modal-close" onclick="closePurchaseModal()">&times;</button>
+    <h2>Unlock Full Book Access</h2>
+    <p style="margin:16px 0;color:var(--text-2);">You've read the cover and table of contents. To continue reading all chapters, purchase the full book.</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
+      <a href="/book.html#lottery-section" style="display:block;padding:14px 24px;background:var(--accent);color:#000;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;text-align:center;">🎁 Enter Lottery (10 FREE copies)</a>
+      <a href="/book.html" style="display:block;padding:14px 24px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;text-align:center;color:var(--text);">Purchase Digital Edition</a>
+    </div>
+    <p style="margin-top:20px;font-size:12px;color:var(--text-3);text-align:center;">Includes PDF, EPUB, and full flipbook access</p>
+  </div>
+
   <!-- Keyboard Shortcuts Modal -->
   <div class="modal-overlay" id="shortcuts-overlay"></div>
   <div class="shortcuts-modal" id="shortcuts-modal">
@@ -1220,13 +1292,43 @@
     let bookmarks = JSON.parse(localStorage.getItem('tvi-book-bookmarks') || '[]');
     let selectedText = '';
     let selectionRange = null;
+    
+    // Payment gating
+    const FREE_CHAPTERS = 1; // Cover + Index only (chapter 0)
+    function hasPurchased() {
+      // Check localStorage first
+      const purchaseStatus = localStorage.getItem('tvi-book-purchased');
+      if (purchaseStatus === 'true') return true;
+      
+      // Check session/API if needed
+      // For now, localStorage is sufficient
+      return false;
+    }
+    
+    function showPurchaseModal() {
+      document.getElementById('purchase-modal').classList.add('show');
+      document.getElementById('purchase-modal-overlay').classList.add('visible');
+    }
+    
+    function closePurchaseModal() {
+      document.getElementById('purchase-modal').classList.remove('show');
+      document.getElementById('purchase-modal-overlay').classList.remove('visible');
+    }
 
-    // Restore last position
+    // Restore last position (but respect payment gating)
     const lastPosition = JSON.parse(localStorage.getItem('tvi-book-position') || 'null');
     if (lastPosition) {
-      currentChapter = lastPosition.chapter;
-      currentSpread = lastPosition.spread;
-      bookOpened = lastPosition.opened;
+      // Only restore if they have access
+      if (hasPurchased() || lastPosition.chapter < FREE_CHAPTERS) {
+        currentChapter = lastPosition.chapter;
+        currentSpread = lastPosition.spread;
+        bookOpened = lastPosition.opened;
+      } else {
+        // Reset to cover if they lost access
+        currentChapter = 0;
+        currentSpread = 0;
+        bookOpened = false;
+      }
     }
 
     // Elements
@@ -1262,16 +1364,26 @@
     // Build TOC
     function buildTOC() {
       const tocList = document.getElementById('toc-list');
-      tocList.innerHTML = chapters.map((ch, i) => `
-        <div class="toc-item ${i === currentChapter ? 'active' : ''}" data-chapter="${i}">
+      const purchased = hasPurchased();
+      tocList.innerHTML = chapters.map((ch, i) => {
+        const isLocked = i >= FREE_CHAPTERS && !purchased;
+        return `
+        <div class="toc-item ${i === currentChapter ? 'active' : ''} ${isLocked ? 'locked' : ''}" data-chapter="${i}" style="display:flex;align-items:center;gap:8px;">
           ${ch.num ? `<span class="chapter-num">${ch.num}</span>` : ''}
-          <span class="chapter-title">${ch.title}</span>
+          <span class="chapter-title" style="flex:1;">${ch.title}</span>
+          ${isLocked ? '<span style="font-size:12px;color:var(--text-3);">🔒</span>' : ''}
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       tocList.querySelectorAll('.toc-item').forEach(item => {
         item.addEventListener('click', () => {
           const chapterIdx = parseInt(item.dataset.chapter);
+          if (chapterIdx >= FREE_CHAPTERS && !purchased) {
+            showPurchaseModal();
+            sidebar.classList.remove('open');
+            return;
+          }
           goToChapter(chapterIdx);
           sidebar.classList.remove('open');
         });
@@ -1376,6 +1488,16 @@
       }
 
       const chapter = chapters[currentChapter];
+      
+      // Check if trying to go past free content
+      if (currentChapter === FREE_CHAPTERS - 1 && currentSpread === chapter.spreads.length - 1) {
+        // Trying to go to next chapter (past free content)
+        if (!hasPurchased()) {
+          showPurchaseModal();
+          return;
+        }
+      }
+      
       if (currentSpread < chapter.spreads.length - 1) {
         rightPage.classList.add('flipping-right');
         setTimeout(() => {
@@ -1383,6 +1505,11 @@
           renderSpread();
         }, 600);
       } else if (currentChapter < chapters.length - 1) {
+        // Check purchase before moving to next chapter
+        if (currentChapter >= FREE_CHAPTERS - 1 && !hasPurchased()) {
+          showPurchaseModal();
+          return;
+        }
         rightPage.classList.add('flipping-right');
         setTimeout(() => {
           currentChapter++;
@@ -1413,6 +1540,13 @@
 
     function goToChapter(chapterIdx) {
       if (!bookOpened) openBook();
+      
+      // Block access to chapters beyond free content
+      if (chapterIdx >= FREE_CHAPTERS && !hasPurchased()) {
+        showPurchaseModal();
+        return;
+      }
+      
       currentChapter = chapterIdx;
       currentSpread = 0;
       setTimeout(renderSpread, bookOpened ? 0 : 500);
