@@ -1,0 +1,7 @@
+# Redirect old versioned URL to clean URL
+/universal-impact-calculator-v1.0.1 /universal-impact-calculator 301!
+/universal-impact-calculator-v1.0.1.html /universal-impact-calculator.html 301!
+
+# Redirect root to calculator
+/ /universal-impact-calculator.html 200
+
