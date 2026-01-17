@@ -581,20 +581,31 @@
     }
     .highlight-box p { margin: 0; }
 
-    /* Framework Visuals */
-    .framework-visual {
+    /* TVI Diagrams - Unified Series Styling */
+    .tvi-diagram {
       width: 100%;
-      max-width: 400px;
-      margin: 24px auto;
-      border-radius: var(--radius);
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      max-width: 900px;
+      height: auto;
       display: block;
-      /* Muted, analytical styling - low contrast, non-blinding */
-      filter: brightness(0.95) contrast(0.9) saturate(0.85);
-      background: rgba(245, 242, 238, 0.3);
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      /* Unified filter: subtle darken + neutralize beige tones */
+      filter: brightness(0.92) contrast(0.88) saturate(0.80);
+      background: rgba(245, 242, 238, 0.2);
       padding: 8px;
       box-sizing: border-box;
+    }
+    
+    /* Legacy class for any remaining references */
+    .framework-visual {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
     .framework-visual-caption {
       text-align: center;
@@ -1251,11 +1262,8 @@
             <p><strong>Problem:</strong> Modern metrics are inflated by platform size, algorithms, hype cycles, and short-term engagement. They miss longevity, reuse, cross-domain adoption, and historical embedding.</p>
           </div>
 
-          <img src="assets/visuals/tvi-diagrams/tvi-structural-survival-vs-attention.png" alt="Graph comparing short-term attention spikes with long-term structural durability, showing attention peaking and collapsing while validated structure persists over time." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-structural-survival-vs-attention.png" alt="Graph comparing short-term attention spikes with long-term structural durability, showing attention peaking and collapsing while validated structure persists over time." class="tvi-diagram">
           <p class="framework-visual-caption">This chart contrasts short-term attention with long-term structural survival. Attention produces sharp but temporary spikes, while structurally validated signals persist after attention decays. TVI measures what remains once visibility fades.</p>
-
-          <img src="assets/visuals/tvi-diagrams/tvi-dissonance-volume-vs-density.png" alt="Attention volume vs meaning density — why loud isn't lasting." class="framework-visual">
-          <p class="framework-visual-caption">High views can be noise. TVI measures density.</p>
 
           <p>TVI exists to answer one question: <strong>Is this real — or just temporarily loud?</strong></p>
 
@@ -1268,11 +1276,8 @@
 
           <div class="formula">TVI = CSI × log₁₀(TVS + 1) × SRC</div>
 
-          <img src="assets/visuals/tvi-diagrams/tvi-methodology-framework.png" alt="Diagram showing the TVI (Temporal Validation Index) methodology. Three inputs—Cultural Saturation Index (CSI), Temporal Validation Score (TVS), and Structural Resistance Coefficient (SRC)—flow into a central formula, TVI = CSI × log10(TVS + 1) × SRC, producing the Temporal Validation Index as output along a short-term to long-term timeline." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-methodology-framework.png" alt="Diagram showing the TVI methodology: CSI, TVS, and SRC feed into TVI = CSI × log10(TVS + 1) × SRC, producing the Temporal Validation Index over a short-term to long-term timeline." class="tvi-diagram">
           <p class="framework-visual-caption">The Survival Equation: How Saturation, Temporal Validation, and Structural Resistance create a "Volume of Persistence."</p>
-
-          <img src="assets/visuals/tvi-diagrams/tvi-survival-equation-engine.png" alt="TVI survival engine — how time, stress, and structure combine into survivability." class="framework-visual">
-          <p class="framework-visual-caption">TVI treats time like a stress test, not a timeline.</p>
 
           <p>This structure forces hype without time to collapse, scale without validation to decay, and proven survival to compound.</p>
 
@@ -1416,22 +1421,22 @@
 
           <h3 style="margin-top:24px">The Dark Forest Filter</h3>
           <p>Early signals enter a "dark forest" of temporal validation. Time and stress remove weak, non-structural signals. Only those with genuine durability survive the filter.</p>
-          <img src="assets/visuals/tvi-diagrams/tvi-dark-forest-temporal-filter.png" alt="Diagram showing early noisy signals passing through a temporal &quot;dark forest&quot; filter, where time and stress remove weak signals, leaving only durable, validated survivors." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-dark-forest-temporal-filter.png" alt="Diagram showing early noisy signals passing through a temporal dark forest filter where time and stress remove weak signals, leaving only durable validated survivors." class="tvi-diagram">
           <p class="framework-visual-caption">This diagram illustrates how early high-noise, low-consensus signals are filtered over time. The &quot;Dark Forest Filter&quot; represents temporal validation, where stress and duration eliminate non-structural signals, leaving only those that remain durable under real-world conditions.</p>
 
           <h3 style="margin-top:32px">Structural Viability After Stress</h3>
           <p>When a shock event occurs, systems with low structural resistance enter irreversible decline. High-resistance systems decline slowly and retain recovery potential. Time acts as a stress multiplier—the longer you survive under pressure, the more durable you prove to be.</p>
-          <img src="assets/visuals/tvi-diagrams/tvi-structural-viability-over-time.png" alt="Line chart illustrating structural viability over time after a shock event. Curves represent high, medium, and low structural resistance, showing that systems with higher resistance decline more slowly and retain recovery potential, while low-resistance systems enter irreversible decline as time acts as a stress multiplier." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-structural-viability-over-time.png" alt="Line chart illustrating structural viability over time after a shock event; high structural resistance declines slowly and retains recovery potential while low resistance collapses irreversibly." class="tvi-diagram">
           <p class="framework-visual-caption">Decay dynamics: Structural resistance determines whether you recover from crisis or collapse into it.</p>
 
           <h3 style="margin-top:32px">The Breakthrough (Crisis-Proof Infrastructure)</h3>
           <p>Once an entity achieves a certain TVI density, it becomes "Invulnerable." It is no longer a guest in the market; it is part of the infrastructure.</p>
-          <img src="assets/visuals/tvi-diagrams/tvi-temporal-stress-test-matrix.png" alt="Four-quadrant matrix showing how time and stress distinguish unvalidated noise, fragile growth, stress without persistence, and structurally validated signals." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-temporal-stress-test-matrix.png" alt="Four-quadrant matrix showing how time and stress distinguish unvalidated noise, fragile growth, stress without persistence, and structurally validated signals." class="tvi-diagram">
           <p class="framework-visual-caption">This matrix visualizes how signals behave under combinations of time and stress. Only signals exposed to both long-term duration and real stress achieve structural validation. TVI measures survival across both dimensions.</p>
 
           <h3 style="margin-top:32px">Attention vs. Temporal Persistence</h3>
           <p>Most signals cluster in high-attention, low-persistence space—viral noise that burns bright and vanishes. A small subset achieves the opposite: lower initial attention, but high long-term persistence. TVI measures what remains after visibility fades.</p>
-          <img src="assets/visuals/tvi-diagrams/tvi-diagram-attention-vs-temporal-persistence.png" alt="Scatter plot comparing short-term attention volume with long-term temporal persistence. A dense cluster of high-attention points labeled 'Viral Noise' shows low persistence, while a smaller cluster labeled 'Persistent Signal' shows higher long-term persistence, demonstrating that attention decays faster than structural relevance." class="framework-visual">
+          <img src="assets/visuals/tvi-diagrams/tvi-diagram-attention-vs-temporal-persistence.png" alt="Scatter plot comparing short-term attention volume with long-term temporal persistence; a dense cluster of viral noise contrasts with a smaller cluster of persistent signals, showing attention decays faster than structure." class="tvi-diagram">
           <p class="framework-visual-caption">The dissonance: Virality is a 24-hour phenomenon. Cultural legacy is built on density, not volume.</p>
         </div>
       </div>
