@@ -521,20 +521,22 @@
         </div>
       </div>
       
-      <form id="lottery-form" onsubmit="return handleLotteryEntry(event)">
+      <form id="lottery-form" name="book-lottery" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleLotteryEntry(event)">
+        <input type="hidden" name="form-name" value="book-lottery">
+        <p style="display:none"><label>Don't fill: <input name="bot-field"></label></p>
         <div class="form-group">
           <label for="lottery-name">Name</label>
-          <input type="text" id="lottery-name" placeholder="Your name" required>
+          <input type="text" id="lottery-name" name="name" placeholder="Your name" required>
         </div>
         
         <div class="form-group">
           <label for="lottery-email">Email</label>
-          <input type="email" id="lottery-email" placeholder="you@example.com" required>
+          <input type="email" id="lottery-email" name="email" placeholder="you@example.com" required>
         </div>
         
         <div class="form-group">
           <label for="lottery-why">Why are you interested in TIME AS PROOF? (Optional — but helps your chances)</label>
-          <textarea id="lottery-why" placeholder="I'm interested because..." rows="3"></textarea>
+          <textarea id="lottery-why" name="why" placeholder="I'm interested because..." rows="3"></textarea>
         </div>
         
         <button type="submit" class="btn-submit">Enter to Win (FREE)</button>
@@ -713,7 +715,7 @@
     
     <!-- Back Link -->
     <footer>
-      <p><a href="/Universal-Impact-Calculator-v1.0.1.html">← Back to TVI Platform</a></p>
+      <p><a href="/universal-impact-calculator.html">← Back to TVI Platform</a></p>
       <p style="margin-top:16px;">© 2026 BoonMind Analytics • <a href="/terms.html">Terms</a></p>
     </footer>
     

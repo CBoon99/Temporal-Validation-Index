@@ -2,7 +2,7 @@
   "name": "TVI Platform - Temporal Validation Index",
   "short_name": "TVI",
   "description": "Measure what will last. Quantify staying power across culture, data, and economics.",
-  "start_url": "/Universal-Impact-Calculator-v1.0.1.html",
+  "start_url": "/universal-impact-calculator.html",
   "display": "standalone",
   "background_color": "#05070d",
   "theme_color": "#2ce0ff",
@@ -26,7 +26,7 @@
   "shortcuts": [
     {
       "name": "Run TVI Calculator",
-      "url": "/Universal-Impact-Calculator-v1.0.1.html",
+      "url": "/universal-impact-calculator.html",
       "description": "Calculate temporal validation score"
     },
     {
