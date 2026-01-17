@@ -581,13 +581,14 @@
     }
     .highlight-box p { margin: 0; }
 
-    /* TVI Diagrams - Unified Series Styling */
-    .tvi-diagram {
+    /* TVI diagram hard size clamp */
+    .tvi-diagram,
+    .tvi-diagram img {
       width: 100%;
-      max-width: 900px;
+      max-width: 520px;
       height: auto;
       display: block;
-      margin: 20px auto;
+      margin: 24px auto;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
       /* Unified filter: subtle darken + neutralize beige tones */
@@ -753,6 +754,14 @@
     }
 
     /* Mobile */
+    @media (max-width: 768px) {
+      .tvi-diagram,
+      .tvi-diagram img {
+        max-width: 92vw;
+        margin: 20px auto;
+      }
+    }
+
     @media (max-width: 600px) {
       .domain-selector { grid-template-columns: repeat(2, 1fr); }
       .form-grid { grid-template-columns: 1fr; }
