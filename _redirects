@@ -18,7 +18,7 @@
 /.env 404
 
 # Redirect root to calculator
-/ /universal-impact-calculator.html 200
+/ /universal-impact-calculator.html 301
 
 
 
