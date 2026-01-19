@@ -1,8 +1,8 @@
 {
-  "status": "private",
-  "name": "Book Metrics API",
-  "message": "Programmatic access to book-level metrics is not publicly available.",
-  "docs": "/research",
-  "contact": "studio@boonmind.ai"
+  "ok": true,
+  "total_entries": 0,
+  "entries": 0,
+  "copies": 0,
+  "updated": "2026-01-19T00:00:00Z",
+  "note": "Placeholder counters. Update values when ready."
 }
-
