@@ -813,6 +813,7 @@
         <button class="btn btn-primary" onclick="document.getElementById('sec-calc').scrollIntoView({behavior:'smooth'})">Run a TVI</button>
         <button class="btn btn-secondary" style="padding:10px 12px;" onclick="document.getElementById('sec-about').scrollIntoView({behavior:'smooth'})">See how it works →</button>
       </div>
+      <p style="font-size:13px;color:var(--text-3);margin-top:8px;"><a href="#sec-contact" style="color:var(--accent);text-decoration:none;">Get the book drop + updates (no spam)</a></p>
       <div style="margin-top:6px;font-size:13px;color:var(--text-2);">
         TVI (Temporal Validation Index) quantifies whether something is becoming a foundation — or just passing through.
       </div>
@@ -1523,7 +1524,7 @@
     <!-- CONTACT -->
     <section class="section page-section" id="sec-contact">
       <div class="card">
-        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form class="contact-form" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact">
           <p style="display:none"><label>Don't fill: <input name="bot-field"></label></p>
           <h3>Get in Touch</h3>
@@ -1568,7 +1569,7 @@
       </p>
       
       <!-- Newsletter Signup (Netlify-friendly) -->
-      <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top:32px;max-width:500px;margin-left:auto;margin-right:auto;" onsubmit="return handleNewsletterSubmit(event)">
+      <form name="newsletter" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" style="margin-top:32px;max-width:500px;margin-left:auto;margin-right:auto;" onsubmit="return handleNewsletterSubmit(event)">
         <input type="hidden" name="form-name" value="newsletter">
         <p style="display:none"><label>Don't fill: <input name="bot-field"></label></p>
         <p style="font-size:13px;color:var(--text-2);margin-bottom:12px;">Get TVI insights, research updates, and staying power analysis:</p>

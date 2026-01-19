@@ -1,19 +1,6 @@
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://TVI-Framework.com/sitemap.xml
-
-# Crawl delay
-Crawl-delay: 1
-
-# Disallow private/admin routes
 Disallow: /api/
-Disallow: /dashboard.html
+Disallow: /.git/
 
-# Allow public content
-Allow: /research/
-Allow: /insights/
-Allow: /book.html
-Allow: /terms.html
-
+Sitemap: https://tvi-framework.com/sitemap.xml

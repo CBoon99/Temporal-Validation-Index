@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You • TVI Platform</title>
+  <meta name="description" content="Thank you for contacting us. We'll be in touch soon.">
+  <link rel="icon" href="/assets/icons/favicon.svg">
+  <style>
+    :root{
+      --bg0:#05070d;--bg1:#070b16;--bg2:#0a1024;
+      --text:#ffffff;--text-2:rgba(255,255,255,0.78);--text-3:rgba(255,255,255,0.52);
+      --accent:#2ce0ff;--accent-dim:rgba(44,224,255,0.10);
+      --radius:16px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:system-ui,sans-serif;
+      background:radial-gradient(1200px 800px at 20% -10%,rgba(44,224,255,0.10),transparent 60%),
+                  radial-gradient(900px 700px at 100% 10%,rgba(167,139,250,0.08),transparent 55%),
+                  linear-gradient(180deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .container{
+      max-width:600px;
+      text-align:center;
+      background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:var(--radius);
+      padding:48px 32px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.5);
+    }
+    h1{
+      font-size:clamp(28px,5vw,42px);
+      font-weight:800;
+      margin-bottom:16px;
+      letter-spacing:-0.02em;
+    }
+    p{
+      font-size:16px;
+      color:var(--text-2);
+      line-height:1.7;
+      margin-bottom:16px;
+    }
+    .btn{
+      display:inline-block;
+      padding:14px 32px;
+      background:linear-gradient(135deg,rgba(44,224,255,0.22),rgba(44,224,255,0.08));
+      border:1px solid rgba(44,224,255,0.35);
+      border-radius:12px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:700;
+      font-size:15px;
+      transition:0.2s;
+      margin-top:24px;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(44,224,255,0.6);
+      box-shadow:0 10px 30px rgba(44,224,255,0.15);
+    }
+    .icon{
+      font-size:56px;
+      margin-bottom:24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">✓</div>
+    <h1>Thank You</h1>
+    <p>Your message has been received. We'll be in touch soon.</p>
+    <p style="font-size:14px;color:var(--text-3);">Responses typically within 24 hours</p>
+    <a href="/universal-impact-calculator.html" class="btn">← Back to TVI Platform</a>
+  </div>
+</body>
+</html>
+

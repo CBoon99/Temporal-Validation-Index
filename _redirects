@@ -2,7 +2,19 @@
 /universal-impact-calculator-v1.0.1 /universal-impact-calculator 301!
 /universal-impact-calculator-v1.0.1.html /universal-impact-calculator.html 301!
 
+# API stub endpoints (return JSON, do not redirect)
+/api/tvi-run /api/tvi-run/index.json 200
+/api/book-stats /api/book-stats/index.json 200
+
+# Prevent bot probing noise
+/.git/* 404
+/wp-login.php 404
+/*.env 404
+/config.php 404
+/.env 404
+
 # Redirect root to calculator
 / /universal-impact-calculator.html 200
+
 
 
