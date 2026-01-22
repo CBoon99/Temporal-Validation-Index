@@ -3,7 +3,7 @@
   
   <!-- Main Calculator -->
   <url>
-    <loc>https://TVI-Framework.com/universal-impact-calculator.html</loc>
+    <loc>https://tvi-framework.com/universal-impact-calculator.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
   
   <!-- Dashboard -->
   <url>
-    <loc>https://TVI-Framework.com/dashboard.html</loc>
+    <loc>https://tvi-framework.com/dashboard.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -19,7 +19,7 @@
   
   <!-- Book Page -->
   <url>
-    <loc>https://TVI-Framework.com/book.html</loc>
+    <loc>https://tvi-framework.com/book.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -27,7 +27,7 @@
   
   <!-- Research Hub -->
   <url>
-    <loc>https://TVI-Framework.com/research/index.html</loc>
+    <loc>https://tvi-framework.com/research/index.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -35,7 +35,7 @@
   
   <!-- Research: Working Paper -->
   <url>
-    <loc>https://TVI-Framework.com/research/paper.html</loc>
+    <loc>https://tvi-framework.com/research/paper.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -43,7 +43,7 @@
   
   <!-- Research: Methodology -->
   <url>
-    <loc>https://TVI-Framework.com/research/method.html</loc>
+    <loc>https://tvi-framework.com/research/method.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -51,7 +51,7 @@
   
   <!-- Research: Validation -->
   <url>
-    <loc>https://TVI-Framework.com/research/validation.html</loc>
+    <loc>https://tvi-framework.com/research/validation.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -59,7 +59,7 @@
   
   <!-- Research: Applications -->
   <url>
-    <loc>https://TVI-Framework.com/research/applications.html</loc>
+    <loc>https://tvi-framework.com/research/applications.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -67,7 +67,7 @@
   
   <!-- Research: Collaborate -->
   <url>
-    <loc>https://TVI-Framework.com/research/collaborate.html</loc>
+    <loc>https://tvi-framework.com/research/collaborate.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -75,7 +75,7 @@
   
   <!-- Research: Speculative -->
   <url>
-    <loc>https://TVI-Framework.com/research/speculative.html</loc>
+    <loc>https://tvi-framework.com/research/speculative.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -83,7 +83,7 @@
   
   <!-- Terms -->
   <url>
-    <loc>https://TVI-Framework.com/terms.html</loc>
+    <loc>https://tvi-framework.com/terms.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -91,7 +91,7 @@
   
   <!-- API Documentation -->
   <url>
-    <loc>https://TVI-Framework.com/api/docs.html</loc>
+    <loc>https://tvi-framework.com/api/docs.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -99,7 +99,7 @@
   
   <!-- Insights Hub -->
   <url>
-    <loc>https://TVI-Framework.com/insights/index.html</loc>
+    <loc>https://tvi-framework.com/insights/index.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -107,7 +107,7 @@
   
   <!-- Blog: I Built a Calculator for Time -->
   <url>
-    <loc>https://TVI-Framework.com/insights/i-built-a-calculator-for-time.html</loc>
+    <loc>https://tvi-framework.com/insights/i-built-a-calculator-for-time.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -115,7 +115,7 @@
   
   <!-- Lexicon -->
   <url>
-    <loc>https://TVI-Framework.com/lexicon.html</loc>
+    <loc>https://tvi-framework.com/lexicon.html</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
