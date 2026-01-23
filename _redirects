@@ -1,24 +1,18 @@
-# Redirect old versioned URL to clean URL
+# Domain canonicalization: www → non-www
+https://www.tvi-framework.com/* https://tvi-framework.com/:splat 301!
+
+# Canonical route rewrites (serve content at clean URLs)
+# (these are rewrites, not redirects)
+/universal-impact-calculator /universal-impact-calculator.html 200
+/book /book.html 200
+/research /research/index.html 200
+
+# Redirect old URLs to canonical routes
+/universal-impact-calculator.html /universal-impact-calculator 301!
 /universal-impact-calculator-v1.0.1 /universal-impact-calculator 301!
-/universal-impact-calculator-v1.0.1.html /universal-impact-calculator.html 301!
-
-# Book page redirects
-/book /book.html 301
-/book/ /book.html 301
-
-# API stub endpoints (return JSON, do not redirect)
-/api/tvi-run /api/tvi-run/index.json 200
-/api/book-stats /api/book-stats/index.json 200
-
-# Prevent bot probing noise
-/.git/* 404
-/wp-login.php 404
-/*.env 404
-/config.php 404
-/.env 404
-
-# Redirect root to calculator
-/ /universal-impact-calculator.html 301
-
-
-
+/universal-impact-calculator-v1.0.1.html /universal-impact-calculator 301!
+/book.html /book 301!
+/research/index.html /research 301!
+/universal-impact-calculator/index.html /universal-impact-calculator 301!
+/book/index.html /book 301!
+/research/ /research 301!

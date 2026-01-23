@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TIME AS PROOF — The Mathematics of What Lasts</title>
   <meta name="description" content="TIME AS PROOF by Carl Boon. A journey through philosophy, foundational science, and the mathematics that govern reality.">
-  <link rel="canonical" href="https://tvi-framework.com/book.html">
+  <link rel="canonical" href="https://tvi-framework.com/book">
+  <meta property="og:url" content="https://tvi-framework.com/book">
+  <meta name="twitter:url" content="https://tvi-framework.com/book">
   
   <!-- Schema.org for Book -->
   <script type="application/ld+json">
@@ -716,7 +718,7 @@
     
     <!-- Back Link -->
     <footer>
-      <p><a href="/universal-impact-calculator.html">← Back to TVI Platform</a></p>
+      <p><a href="/universal-impact-calculator">← Back to TVI Platform</a></p>
       <p style="margin-top:16px;">© 2026 BoonMind Analytics • <a href="/terms.html">Terms</a></p>
     </footer>
     
@@ -845,7 +847,7 @@
           document.getElementById('entry-success').style.display = 'block';
           document.getElementById('user-entries').textContent = result.entries;
           document.getElementById('referral-link').value = 
-            `${window.location.origin}/book.html?ref=${result.referral_code}`;
+            `${window.location.origin}/book?ref=${result.referral_code}`;
           
           // Update stats
           if (result.stats) {
@@ -911,12 +913,12 @@
     // Social sharing for bonus entries
     function shareTwitter() {
       const text = encodeURIComponent("I just entered to win a FREE advance copy of TIME AS PROOF by @CarlBoon — a book about the mathematics of what actually lasts. 🔥");
-      const url = encodeURIComponent(window.location.origin + '/book.html');
+      const url = encodeURIComponent(window.location.origin + '/book');
       window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
     }
     
     function shareLinkedIn() {
-      const url = encodeURIComponent(window.location.origin + '/book.html');
+      const url = encodeURIComponent(window.location.origin + '/book');
       window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
     }
     
